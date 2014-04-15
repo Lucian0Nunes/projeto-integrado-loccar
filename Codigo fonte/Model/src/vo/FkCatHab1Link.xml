@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkCatHab1Link"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  EntityAssociation="eo.FkCatHab1Assoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewLinkDefEnd
+    Name="TbCatHabView"
+    Cardinality="1"
+    Owner="vo.TbCatHabView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TbCatHabView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="vo.TbCatHabView.IdCat"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="TbMotoristaView"
+    Cardinality="-1"
+    Owner="vo.TbMotoristaView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TbMotoristaView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="vo.TbMotoristaView.FkCatHab"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

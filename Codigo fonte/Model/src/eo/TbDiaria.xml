@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbDiaria"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_DIARIA"
+  AliasName="TbDiaria"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="IdDiaria"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_DIARIA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="HrChegada"
+    ColumnName="HR_CHEGADA"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="HrSaida"
+    ColumnName="HR_SAIDA"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="TIMESTAMP"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalHrExtDia"
+    Precision="15"
+    ColumnName="TOTAL_HR_EXT_DIA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkFranquia"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_FRANQUIA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkOrdemDeServico"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_ORDEM_DE_SERVICO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KmChegada"
+    Precision="15"
+    Scale="0"
+    ColumnName="KM_CHEGADA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KmSaida"
+    Precision="15"
+    Scale="0"
+    ColumnName="KM_SAIDA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalKmRodado"
+    Precision="15"
+    Scale="0"
+    ColumnName="TOTAL_KM_RODADO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbFranquia"
+    Association="eo.FkFranquia1Assoc"
+    AssociationEnd="eo.FkFranquia1Assoc.TbFranquia"
+    AssociationOtherEnd="eo.FkFranquia1Assoc.TbDiaria"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbOrdemDeServico"
+    Association="eo.FkOrdemDeServico1Assoc"
+    AssociationEnd="eo.FkOrdemDeServico1Assoc.TbOrdemDeServico"
+    AssociationOtherEnd="eo.FkOrdemDeServico1Assoc.TbDiaria"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="SysC0012567">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012567"/>
+      <Attr Name="_checkCondition" Value='"ID_DIARIA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.IdDiaria"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012568">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012568"/>
+      <Attr Name="_checkCondition" Value='"FK_FRANQUIA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkFranquia"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012569">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012569"/>
+      <Attr Name="_checkCondition" Value='"FK_ORDEM_DE_SERVICO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkOrdemDeServico"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbDiariaPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_DIARIA_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.IdDiaria"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkFranquia1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_FRANQUIA_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FRANQUIA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkFranquia"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkOrdemDeServico1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_ORDEM_DE_SERVICO_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_ORDEM_DE_SERVICO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkOrdemDeServico"/>
+    </AttrArray>
+  </Key>
+</Entity>

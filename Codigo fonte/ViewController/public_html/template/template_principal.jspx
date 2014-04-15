@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:panelSplitter id="pt_ps1" orientation="vertical" splitterPosition="93">
+      <f:facet name="first">
+        <af:panelStretchLayout id="pt_psl1" endWidth="200px" startWidth="220px">
+          <f:facet name="center">
+            <af:panelGroupLayout id="pt_pgl2" halign="center"
+                                 layout="vertical">
+              <af:outputText value="Locação de veículos" id="pt_ot100"
+                             inlineStyle="font-family:'Times New Roman', 'Arial Black', times, Serif; font-size:0.3in; font-weight:bold;"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="start"/>
+          <f:facet name="end"/>
+        </af:panelStretchLayout>
+      </f:facet>
+      <f:facet name="second">
+        <af:decorativeBox id="pt_db1">
+          <f:facet name="center">
+            <af:panelSplitter id="pt_ps2" orientation="vertical"
+                              splitterPosition="257">
+              <f:facet name="first">
+                <af:panelSplitter id="pt_ps3" splitterPosition="175">
+                  <f:facet name="first">
+                    <af:panelAccordion id="pt_pa1" discloseMany="true"
+                                       inlineStyle="margin-bottom:2.0px;">
+                      <af:showDetailItem text="Gerenciar Dados" id="pt_sdi1"
+                                         disclosed="true">
+                        <af:panelList id="pt_pl1">
+                          <af:goLink text="Clientes" id="pt_gl1"
+                                     destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=clientes&amp;adf.tfDoc=/WEB-INF/clientes/clientes.xml"/>
+                          <af:goLink text="Veículos" id="pt_gl2"
+                                     destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=veiculos&amp;adf.tfDoc=/WEB-INF/veiculos/veiculos.xml"/>
+                          <af:goLink id="pt_gl3" text="Motoristas"
+                                      destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=motoristas&amp;adf.tfDoc=/WEB-INF/motoristas/motoristas.xml"/>
+                        </af:panelList>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Serviços" id="pt_sdi3"
+                                         disclosed="true">
+                        <af:panelList id="pt_pl3">
+                          <af:goLink id="pt_gl4" text="Ordem de Serviço"/>
+                        </af:panelList>
+                      </af:showDetailItem>
+                      <af:showDetailItem text="Administrador" id="pt_sdi2"
+                                         disclosed="true">
+                        <af:panelList id="pt_pl2">
+                          <af:goLink id="pt_gl5" text="Funcionários"/>
+                        </af:panelList>
+                      </af:showDetailItem>
+                    </af:panelAccordion>
+                  </f:facet>
+                  <f:facet name="second">
+                    <af:facetRef facetName="corpo"/>
+                  </f:facet>
+                </af:panelSplitter>
+              </f:facet>
+              <f:facet name="second"/>
+            </af:panelSplitter>
+          </f:facet>
+        </af:decorativeBox>
+      </f:facet>
+    </af:panelSplitter>
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>template_principal</display-name>
+        <facet>
+          <facet-name>corpo</facet-name>
+        </facet>
+      </component>
+    </af:xmlContent>
+  </af:pageTemplateDef>
+</jsp:root>

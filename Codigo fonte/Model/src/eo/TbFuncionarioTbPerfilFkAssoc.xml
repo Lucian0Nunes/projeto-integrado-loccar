@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbFuncionarioTbPerfilFkAssoc"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="TbPerfil"
+    Cardinality="1"
+    Source="true"
+    Owner="eo.TbPerfil">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="TbPerfil"/>
+      <Attr Name="_foreignKey" Value="eo.TbPerfil.TbPerfilPk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbPerfil.IdPerfil"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="TbFuncionario"
+    Cardinality="-1"
+    Owner="eo.TbFuncionario">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="TbFuncionario"/>
+      <Attr Name="_foreignKey"
+        Value="eo.TbFuncionario.TbFuncionarioTbPerfilFk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.TbPerfilIdPerfil"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

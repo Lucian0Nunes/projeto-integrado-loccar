@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbFuncionarioView"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  SelectList="TbFuncionario.ID_FUNCIONARIO, 
+       TbFuncionario.NOME, 
+       TbFuncionario.CPF, 
+       TbFuncionario.TELEFONE, 
+       TbFuncionario.EMAIL, 
+       TbFuncionario.ENDERECO, 
+       TbFuncionario.SENHA, 
+       TbFuncionario.TB_PERFIL_ID_PERFIL"
+  FromList="TB_FUNCIONARIO TbFuncionario"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TbFuncionario"
+    Entity="eo.TbFuncionario"/>
+  <ViewAttribute
+    Name="IdFuncionario"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IdFuncionario"
+    EntityUsage="TbFuncionario"
+    AliasName="ID_FUNCIONARIO"/>
+  <ViewAttribute
+    Name="Nome"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Nome"
+    EntityUsage="TbFuncionario"
+    AliasName="NOME"/>
+  <ViewAttribute
+    Name="Cpf"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Cpf"
+    EntityUsage="TbFuncionario"
+    AliasName="CPF"/>
+  <ViewAttribute
+    Name="Telefone"
+    PrecisionRule="true"
+    EntityAttrName="Telefone"
+    EntityUsage="TbFuncionario"
+    AliasName="TELEFONE"/>
+  <ViewAttribute
+    Name="Email"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Email"
+    EntityUsage="TbFuncionario"
+    AliasName="EMAIL"/>
+  <ViewAttribute
+    Name="Endereco"
+    PrecisionRule="true"
+    EntityAttrName="Endereco"
+    EntityUsage="TbFuncionario"
+    AliasName="ENDERECO"/>
+  <ViewAttribute
+    Name="Senha"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Senha"
+    EntityUsage="TbFuncionario"
+    AliasName="SENHA"/>
+  <ViewAttribute
+    Name="TbPerfilIdPerfil"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TbPerfilIdPerfil"
+    EntityUsage="TbFuncionario"
+    AliasName="TB_PERFIL_ID_PERFIL"/>
+  <ViewLinkAccessor
+    Name="TbOrdemDeServicoView"
+    ViewLink="vo.FkFuncionario1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>
