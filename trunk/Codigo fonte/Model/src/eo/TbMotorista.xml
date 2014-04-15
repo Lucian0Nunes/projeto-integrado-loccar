@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbMotorista"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_MOTORISTA"
+  AliasName="TbMotorista"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="IdMotorista"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_MOTORISTA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_MOTORISTA"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Nome"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="NOME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Cpf"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="CPF"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Telefone"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="TELEFONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Email"
+    Precision="60"
+    ColumnName="EMAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Endereco"
+    Precision="80"
+    ColumnName="ENDERECO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkStatusMotorista"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_STATUS_MOTORISTA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkCatHab"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_CAT_HAB"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_MOTORISTA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbCatHab"
+    Association="eo.FkCatHab1Assoc"
+    AssociationEnd="eo.FkCatHab1Assoc.TbCatHab"
+    AssociationOtherEnd="eo.FkCatHab1Assoc.TbMotorista"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbOrdemDeServico"
+    Association="eo.FkMotorista1Assoc"
+    AssociationEnd="eo.FkMotorista1Assoc.TbOrdemDeServico"
+    AssociationOtherEnd="eo.FkMotorista1Assoc.TbMotorista"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TbStatusMotorista"
+    Association="eo.FkStatusMotorista1Assoc"
+    AssociationEnd="eo.FkStatusMotorista1Assoc.TbStatusMotorista"
+    AssociationOtherEnd="eo.FkStatusMotorista1Assoc.TbMotorista"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="SysC0012587">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012587"/>
+      <Attr Name="_checkCondition" Value='"ID_MOTORISTA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.IdMotorista"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012588">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012588"/>
+      <Attr Name="_checkCondition" Value='"NOME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.Nome"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012589">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012589"/>
+      <Attr Name="_checkCondition" Value='"CPF" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.Cpf"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012590">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012590"/>
+      <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.Telefone"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012591">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012591"/>
+      <Attr Name="_checkCondition" Value='"FK_STATUS_MOTORISTA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.FkStatusMotorista"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012592">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012592"/>
+      <Attr Name="_checkCondition" Value='"FK_CAT_HAB" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.FkCatHab"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbMotoristaPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_MOTORISTA_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.IdMotorista"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCatHab1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_CAT_HAB_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CAT_HAB"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.FkCatHab"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkStatusMotorista1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_STATUS_MOTORISTA_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_STATUS_MOTORISTA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbMotorista.FkStatusMotorista"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbVeiculo"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_VEICULO"
+  AliasName="TbVeiculo"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="eo.TbVeiculoImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="IdVeiculo"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_VEICULO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_VEICULO"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ano"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="ANO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_VEICULO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Placa"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="PLACA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_VEICULO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Proprietario"
+    Precision="60"
+    ColumnName="PROPRIETARIO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_VEICULO"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Telefone"
+    Precision="15"
+    ColumnName="TELEFONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_VEICULO"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkModelo"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_MODELO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_VEICULO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbOrdemDeServico"
+    Association="eo.FkVeiculo1Assoc"
+    AssociationEnd="eo.FkVeiculo1Assoc.TbOrdemDeServico"
+    AssociationOtherEnd="eo.FkVeiculo1Assoc.TbVeiculo"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC0012603">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012603"/>
+      <Attr Name="_checkCondition" Value='"ID_VEICULO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.IdVeiculo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012604">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012604"/>
+      <Attr Name="_checkCondition" Value='"ANO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Ano"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012605">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012605"/>
+      <Attr Name="_checkCondition" Value='"PLACA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Placa"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012606">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012606"/>
+      <Attr Name="_checkCondition" Value='"PROPRIETARIO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0012607">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012607"/>
+      <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0012608">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012608"/>
+      <Attr Name="_checkCondition" Value='"FK_MODELO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.FkModelo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbVeiculoPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_VEICULO_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.IdVeiculo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbVeiculoProprietarioCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TB_VEICULO_PROPRIETARIO_CHECK"/>
+      <Attr Name="_checkCondition" Value='"PROPRIETARIO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Proprietario"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbVeiculoTelefoneCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TB_VEICULO_TELEFONE_CHECK"/>
+      <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Telefone"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkModelo1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_MODELO_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MODELO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.FkModelo"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

@@ -1,0 +1,377 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+          <af:resource type="javascript"
+                   source="/js/mootools-core-1.3-full-nocompat.js"/>
+      <af:resource type="javascript" source="/js/mootools-more-1.3.0.1.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Fixed.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Extras.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Reverse.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Repeat.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Regexp.js"/>
+      <af:resource type="javascript" source="/js/applyMasks.js"/>
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+          <f:facet name="corpo">
+            <af:group id="g2">
+              <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                <f:facet name="bottom"/>
+                <f:facet name="center">
+                  <af:panelTabbed id="pt2">
+                    <af:showDetailItem text="Veículos Cadastrados" id="sdi1"
+                                       styleClass="AFStretchWidth"
+                                       stretchChildren="first">
+                      <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+                        <f:facet name="center">
+                          <af:panelSplitter id="ps1" splitterPosition="423">
+                            <f:facet name="first">
+                                <af:panelCollection id="pc1"
+                                                    styleClass="AFStretchWidth">
+                                  <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                      <af:commandToolbarButton text="Inserir novo"
+                                                               id="ctb1"
+                                                               partialSubmit="true">
+                                      <af:showPopupBehavior popupId="inserir"/>
+                                    </af:commandToolbarButton>
+                                      <af:commandToolbarButton text="Editar"
+                                                               id="ctb2"
+                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}">
+                                      <af:showPopupBehavior popupId="editar"/>
+                                    </af:commandToolbarButton>
+                                      <af:commandToolbarButton text="Excluir"
+                                                               id="ctb3"
+                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}">
+                                      <af:showPopupBehavior popupId="excluir"/>
+                                    </af:commandToolbarButton>
+                                    </af:toolbar>
+                                  </f:facet>
+                                  <af:popup id="inserir"                                         
+                                          contentDelivery="lazyUncached"
+                                          animate="false"
+                                       popupFetchListener="#{pageFlowScope.veiculoBean.chamadaPopupInclusao}"
+                                            binding="#{pageFlowScope.veiculoBean.popupInserir}">
+                                  <af:dialog id="d2"                                            
+                                             title="Inserir Novo"
+                                             closeIconVisible="false"
+                                             type="none">
+                                    <af:outputText value="(*) Campo obrigatório!"
+                                                   id="outputText2"/>
+                                    <af:panelFormLayout id="pfl2" rows="4"
+                                                        maxColumns="1">
+                                      <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
+                                                          label="#{bindings.ListarMarcaView1.label}"
+                                                          required="true"
+                                                          shortDesc="#{bindings.ListarMarcaView1.hints.tooltip}"
+                                                          id="soc1"
+                                                          autoSubmit="true"
+                                                          binding="#{pageFlowScope.veiculoBean.comboMarca}"
+                                                          valueChangeListener="#{pageFlowScope.veiculoBean.buscarModelos}">
+                                        <f:selectItems value="#{bindings.ListarMarcaView1.items}"
+                                                       id="si1"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s2"/>
+                                      <af:selectOneChoice value="#{bindings.ListarModeloView1.inputValue}"
+                                                          label="#{bindings.ListarModeloView1.label}"
+                                                          required="true"
+                                                          shortDesc="#{bindings.ListarModeloView1.hints.tooltip}"
+                                                          id="soc2"
+                                                          partialTriggers="soc1"
+                                                          binding="#{pageFlowScope.veiculoBean.comboModelo}">
+                                        <f:selectItems value="#{bindings.ListarModeloView1.items}"
+                                                       id="si2"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s3"/>
+                                      <af:selectOneChoice label="Ano"
+                                                          id="selectOneChoice1"
+                                                          unselectedLabel="Selecione"
+                                                          value="#{pageFlowScope.veiculoBean.vlAno}"
+                                                          required="true"
+                                                          requiredMessageDetail="Campo obrigatório">
+                                        <f:selectItems value="#{pageFlowScope.veiculoBean.comboAno}"
+                                                       id="selectItems1"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s4"/>
+                                      <af:inputText label="#{bindings.Placa.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Placa.hints.precision}"
+                                                    id="it1"
+                                                    value="#{pageFlowScope.veiculoBean.vlPlaca}"
+                                                    validator="#{pageFlowScope.veiculoBean.validarPlaca}"
+                                                    requiredMessageDetail="Campo obrigatório">
+                                        <f:validator binding="#{bindings.Placa.validator}"/>
+                                        <af:clientListener method="maskPlaca"
+                                                           type="keyPress"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s5"/>
+                                      <af:inputText value="#{pageFlowScope.veiculoBean.vlProprietario}"
+                                                    label="#{bindings.Proprietario.hints.label}"
+                                                    required="true"
+                                                    columns="30"
+                                                    maximumLength="60"
+                                                    id="it3"
+                                                    requiredMessageDetail="Campo obrigatório">
+                                        <f:validator binding="#{bindings.Proprietario.validator}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s6"/>
+                                      <af:inputText
+                                                    label="#{bindings.Telefone.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Telefone.hints.precision}"
+                                                    id="it2"
+                                                    value="#{pageFlowScope.veiculoBean.vlTelefone}"
+                                                    requiredMessageDetail="Campo obrigatório"
+                                                    validator="#{pageFlowScope.veiculoBean.validarTelefone}"
+                                                    shortDesc="Informe um telefone">
+                                        <f:validator binding="#{bindings.Telefone.validator}"/>
+                                        <af:clientListener method="applyMask"
+                                                           type="focus"/>
+                                        <af:clientAttribute name="meioMask"
+                                                            value="fixed.phone"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s1"/>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="t3">
+                                      <af:commandToolbarButton text="Gravar"
+                                                               id="ctb4"
+                                                               actionListener="#{pageFlowScope.veiculoBean.incluirNovoVeiculo}"/>
+                                      <af:commandToolbarButton text="Cancelar"
+                                                               id="ctb5"
+                                                               actionListener="#{pageFlowScope.veiculoBean.cancelarRegistro}"
+                                                               immediate="true"
+                                                               partialSubmit="true">
+                                        <af:resetActionListener/>
+                                      </af:commandToolbarButton>
+                                    </af:toolbar>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="excluir"
+                                          contentDelivery="lazyUncached"
+                                          animate="false">
+                                  <af:dialog id="d4"
+                                             affirmativeTextAndAccessKey="Sim"
+                                             cancelTextAndAccessKey="Não"
+                                             title="Confirmação"
+                                             inlineStyle="width:160px;" 
+                                             closeIconVisible="false"
+                                             dialogListener="#{pageFlowScope.veiculoBean.excluirVeiculo}">
+                                    <af:outputText value="Deseja realmente excluir?"
+                                                   id="outputText4"/>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="editar" animate="false"
+                                          contentDelivery="lazyUncached"
+                                          popupFetchListener="#{pageFlowScope.veiculoBean.chamadaPopupEdicao}"
+                                          binding="#{pageFlowScope.veiculoBean.popupEditar}">
+                                  <af:dialog id="d3" closeIconVisible="false"
+                                             title="Editar " type="none">
+                                    <af:panelFormLayout id="pfl3">
+                                      <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
+                                                          label="#{bindings.ListarMarcaView1.label}"
+                                                          required="true"
+                                                          shortDesc="#{bindings.ListarMarcaView1.hints.tooltip}"
+                                                          id="soc3"
+                                                          autoSubmit="true"
+                                                          valueChangeListener="#{pageFlowScope.veiculoBean.buscarModelos}">
+                                        <f:selectItems value="#{bindings.ListarMarcaView1.items}"
+                                                       id="si3"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s7"/>
+                                      <af:selectOneChoice value="#{bindings.ListarModeloView1.inputValue}"
+                                                          label="#{bindings.ListarModeloView1.label}"
+                                                          required="true"
+                                                          shortDesc="#{bindings.ListarModeloView1.hints.tooltip}"
+                                                          id="soc4"
+                                                          partialTriggers="soc3"
+                                                          autoSubmit="true">
+                                        <f:selectItems value="#{bindings.ListarModeloView1.items}"
+                                                       id="si4"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s8"/>
+                                      <af:selectOneChoice label="Ano" id="soc5"
+                                                          value="#{pageFlowScope.veiculoBean.vlAno}"
+                                                          required="true">
+                                        
+                                        <f:selectItems value="#{pageFlowScope.veiculoBean.comboAno}"
+                                                       id="si5"/>
+                                      </af:selectOneChoice>
+                                      <af:spacer width="10" height="10"
+                                                 id="s9"/>
+                                      <af:inputText value="#{pageFlowScope.veiculoBean.vlPlaca}"
+                                                    label="#{bindings.Placa.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Placa.hints.precision}"
+                                                    shortDesc="#{bindings.Placa.hints.tooltip}"
+                                                    id="it8">
+                                        <f:validator binding="#{bindings.Placa.validator}"/>
+                                        <af:clientListener method="maskPlaca"
+                                                           type="keyPress"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s10"/>
+                                      <af:inputText value="#{pageFlowScope.veiculoBean.vlProprietario}"
+                                                    label="#{bindings.Proprietario.hints.label}"
+                                                    required="true"
+                                                    columns="30"
+                                                    maximumLength="#{bindings.Proprietario.hints.precision}"
+                                                    shortDesc="#{bindings.Proprietario.hints.tooltip}"
+                                                    id="it6">
+                                        <f:validator binding="#{bindings.Proprietario.validator}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s11"/>
+                                      <af:inputText value="#{pageFlowScope.veiculoBean.vlTelefone}"
+                                                    label="#{bindings.Telefone.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Telefone.hints.precision}"
+                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    id="it5"
+                                                    validator="#{pageFlowScope.veiculoBean.validarTelefone}">
+                                        <f:validator binding="#{bindings.Telefone.validator}"/>
+                                             <af:clientListener method="applyMask"
+                                                           type="focus"/>
+                                        <af:clientAttribute name="meioMask"
+                                                            value="fixed.phone"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s12"/>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="t4">
+                                      <af:commandToolbarButton text="Gravar"
+                                                               id="ctb6"
+                                                               actionListener="#{pageFlowScope.veiculoBean.gravarEdicao}"/>
+                                      <af:commandToolbarButton text="Cancelar"
+                                                               id="ctb7"
+                                                               actionListener="#{pageFlowScope.veiculoBean.cancelarEdicao}"
+                                                               immediate="true"
+                                                               partialSubmit="true">
+                                        <af:resetActionListener/>
+                                      </af:commandToolbarButton>
+                                    </af:toolbar>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:table value="#{bindings.VeiculoMMView1.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.VeiculoMMView1.rangeSize}"
+                                          emptyText="#{bindings.VeiculoMMView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.VeiculoMMView1.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.VeiculoMMView1Query.queryDescriptor}"
+                                          queryListener="#{bindings.VeiculoMMView1Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.VeiculoMMView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.VeiculoMMView1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1"
+                                          binding="#{pageFlowScope.veiculoBean.gridVeiculo}">
+                                  <af:column sortProperty="Marca"
+                                             filterable="true" sortable="true"
+                                             headerText="#{bindings.VeiculoMMView1.hints.Marca.label}"
+                                             id="c3">
+                                    <af:outputText value="#{row.Marca}"
+                                                   id="ot2"/>
+                                  </af:column>
+                                  <af:column sortProperty="Modelo"
+                                             filterable="true" sortable="true"
+                                             headerText="#{bindings.VeiculoMMView1.hints.Modelo.label}"
+                                             id="c2">
+                                    <af:outputText value="#{row.Modelo}"
+                                                   id="ot3"/>
+                                  </af:column>
+                                  <af:column sortProperty="Ano"
+                                             filterable="true" sortable="true"
+                                             headerText="#{bindings.VeiculoMMView1.hints.Ano.label}"
+                                             id="c4">
+                                    <af:outputText value="#{row.Ano}" id="ot1"/>
+                                  </af:column>
+                                  <af:column sortProperty="Proprietario"
+                                             filterable="true" sortable="true"
+                                             headerText="#{bindings.VeiculoMMView1.hints.Proprietario.label}"
+                                             id="c1">
+                                    <af:outputText value="#{row.Proprietario}"
+                                                   id="ot4"/>
+                                  </af:column>
+                                </af:table>
+                              </af:panelCollection>                                                      
+                            </f:facet>
+                            <f:facet name="second">
+                              <af:decorativeBox id="db2">
+                                <f:facet name="center">
+                                  <af:panelGroupLayout layout="scroll"
+                                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                       id="pgl1">
+                                    <af:outputText value="Dados Gerais"
+                                                   id="outputText1"
+                                                   inlineStyle="text-align:center; vertical-align:bottom; font-size:xx-large;"/>
+                                    <af:panelFormLayout id="pfl1"
+                                                        partialTriggers="pc1:t1">
+                                      <af:panelLabelAndMessage label="#{bindings.Marca.hints.label}"
+                                                               id="plam3">
+                                        <af:outputText value="#{bindings.Marca.inputValue}"
+                                                       id="ot8"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Modelo.hints.label}"
+                                                               id="plam1">
+                                        <af:outputText value="#{bindings.Modelo.inputValue}"
+                                                       id="ot7"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Ano1.hints.label}"
+                                                               id="plam2">
+                                        <af:outputText value="#{bindings.Ano1.inputValue}"
+                                                       id="ot9"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Placa1.hints.label}"
+                                                               id="plam6">
+                                        <af:outputText value="#{bindings.Placa1.inputValue}"
+                                                       id="ot5"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Proprietario1.hints.label}"
+                                                               id="plam4">
+                                        <af:outputText value="#{bindings.Proprietario1.inputValue}"
+                                                       id="ot10"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Telefone1.hints.label}"
+                                                               id="plam5">
+                                        <af:outputText value="#{bindings.Telefone1.inputValue}"
+                                                       id="ot6"/>
+                                      </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                  </af:panelGroupLayout>
+                                </f:facet>
+                              </af:decorativeBox>
+                            </f:facet>
+                          </af:panelSplitter>
+                        </f:facet>
+                        <f:facet name="top"/>
+                      </af:decorativeBox>
+                    </af:showDetailItem>
+                  </af:panelTabbed>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="top"/>
+              </af:panelStretchLayout>
+            </af:group>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

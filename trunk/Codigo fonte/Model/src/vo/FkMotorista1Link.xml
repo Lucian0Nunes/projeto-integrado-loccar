@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkMotorista1Link"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  EntityAssociation="eo.FkMotorista1Assoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewLinkDefEnd
+    Name="TbMotoristaView"
+    Cardinality="1"
+    Owner="vo.TbMotoristaView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TbMotoristaView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="vo.TbMotoristaView.IdMotorista"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="TbOrdemDeServicoView"
+    Cardinality="-1"
+    Owner="vo.TbOrdemDeServicoView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TbOrdemDeServicoView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="vo.TbOrdemDeServicoView.FkMotorista"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

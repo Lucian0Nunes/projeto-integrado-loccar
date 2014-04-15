@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="veiculos">
+    <default-activity id="__1">veiculos1</default-activity>
+    <managed-bean id="__2">
+      <managed-bean-name id="__5">veiculoBean</managed-bean-name>
+      <managed-bean-class id="__3">br.com.locCar.bean.veiculo.VeiculoBean</managed-bean-class>
+      <managed-bean-scope id="__4">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="veiculos1">
+      <page>/paginas/veiculos/veiculos.jspx</page>
+    </view>
+  </task-flow-definition>
+</adfc-config>

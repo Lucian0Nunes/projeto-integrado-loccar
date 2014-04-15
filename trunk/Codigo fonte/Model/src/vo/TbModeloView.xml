@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbModeloView"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  SelectList="TbModelo.ID_MODELO, 
+       TbModelo.MODELO, 
+       TbModelo.FK_MARCA"
+  FromList="TB_MODELO TbModelo"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TbModelo"
+    Entity="eo.TbModelo"/>
+  <ViewAttribute
+    Name="IdModelo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IdModelo"
+    EntityUsage="TbModelo"
+    AliasName="ID_MODELO"/>
+  <ViewAttribute
+    Name="Modelo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Modelo"
+    EntityUsage="TbModelo"
+    AliasName="MODELO"/>
+  <ViewAttribute
+    Name="FkMarca"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkMarca"
+    EntityUsage="TbModelo"
+    AliasName="FK_MARCA"/>
+</ViewObject>

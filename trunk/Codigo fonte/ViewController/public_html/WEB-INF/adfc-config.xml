@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="template_principal">
+    <page>/template/template_principal.jspx</page>
+  </view>
+  <managed-bean id="__4">
+    <managed-bean-name id="__2">usuarioBean</managed-bean-name>
+    <managed-bean-class id="__3">br.com.locCar.user.InformacaoUsuarioBean</managed-bean-class>
+    <managed-bean-scope id="__1">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

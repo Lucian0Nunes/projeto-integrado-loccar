@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbCliente"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_CLIENTE"
+  AliasName="TbCliente"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="eo.TbClienteImpl"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="IdCliente"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_CLIENTE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_CLIENTE"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Nome"
+    Precision="60"
+    ColumnName="NOME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CLIENTE"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CpfCnpj"
+    Precision="20"
+    ColumnName="CPF_CNPJ"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CLIENTE"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Telefone"
+    Precision="15"
+    ColumnName="TELEFONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CLIENTE"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+    <validation:PreDefinedValidationBean
+      Name="Telefone_Rule_1"
+      ValName="Precision : (15)"
+      Subtype="PRECISION_SCALE"/>
+    <validation:LengthValidationBean
+      Name="Telefone_Rule_0"
+      ResId="eo.TbCliente.Telefone_Rule_1"
+      OnAttribute="Telefone"
+      CompareType="GREATERTHAN"
+      DataType="CHARACTER"
+      CompareLength="13"
+      Inverse="false"/>
+  </Attribute>
+  <Attribute
+    Name="Email"
+    Precision="60"
+    ColumnName="EMAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CLIENTE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Endereco"
+    Precision="100"
+    ColumnName="ENDERECO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CLIENTE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbOrdemDeServico"
+    Association="eo.FkCliente1Assoc"
+    AssociationEnd="eo.FkCliente1Assoc.TbOrdemDeServico"
+    AssociationOtherEnd="eo.FkCliente1Assoc.TbCliente"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC0012562">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012562"/>
+      <Attr Name="_checkCondition" Value='"ID_CLIENTE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCliente.IdCliente"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012563">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012563"/>
+      <Attr Name="_checkCondition" Value='"NOME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCliente.Nome"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012564">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012564"/>
+      <Attr Name="_checkCondition" Value='"CPF_CNPJ" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCliente.CpfCnpj"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012565">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012565"/>
+      <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCliente.Telefone"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbClientePk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_CLIENTE_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCliente.IdCliente"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

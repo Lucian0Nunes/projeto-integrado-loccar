@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbFuncionario"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_FUNCIONARIO"
+  AliasName="TbFuncionario"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="IdFuncionario"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_FUNCIONARIO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_FUNCIONARIO"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Nome"
+    IsNotNull="true"
+    Precision="60"
+    ColumnName="NOME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Cpf"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="CPF"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Telefone"
+    Precision="15"
+    ColumnName="TELEFONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Email"
+    IsNotNull="true"
+    Precision="80"
+    ColumnName="EMAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Endereco"
+    Precision="100"
+    ColumnName="ENDERECO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Senha"
+    IsNotNull="true"
+    Precision="15"
+    ColumnName="SENHA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TbPerfilIdPerfil"
+    IsNotNull="true"
+    ColumnName="TB_PERFIL_ID_PERFIL"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_FUNCIONARIO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbOrdemDeServico"
+    Association="eo.FkFuncionario1Assoc"
+    AssociationEnd="eo.FkFuncionario1Assoc.TbOrdemDeServico"
+    AssociationOtherEnd="eo.FkFuncionario1Assoc.TbFuncionario"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TbPerfil"
+    Association="eo.TbFuncionarioTbPerfilFkAssoc"
+    AssociationEnd="eo.TbFuncionarioTbPerfilFkAssoc.TbPerfil"
+    AssociationOtherEnd="eo.TbFuncionarioTbPerfilFkAssoc.TbFuncionario"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="SysC0012573">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012573"/>
+      <Attr Name="_checkCondition" Value='"ID_FUNCIONARIO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.IdFuncionario"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012574">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012574"/>
+      <Attr Name="_checkCondition" Value='"NOME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.Nome"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012575">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012575"/>
+      <Attr Name="_checkCondition" Value='"CPF" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.Cpf"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012576">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012576"/>
+      <Attr Name="_checkCondition" Value='"EMAIL" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.Email"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012577">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012577"/>
+      <Attr Name="_checkCondition" Value='"SENHA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.Senha"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012578">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012578"/>
+      <Attr Name="_checkCondition" Value='"TB_PERFIL_ID_PERFIL" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.TbPerfilIdPerfil"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbFuncionarioPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_FUNCIONARIO_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.IdFuncionario"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbFuncionarioTbPerfilFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_PERFIL_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TB_FUNCIONARIO_TB_PERFIL_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFuncionario.TbPerfilIdPerfil"/>
+    </AttrArray>
+  </Key>
+</Entity>

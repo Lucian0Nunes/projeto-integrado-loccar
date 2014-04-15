@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbMotoristaView"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  SelectList="TbMotorista.ID_MOTORISTA, 
+       TbMotorista.NOME, 
+       TbMotorista.CPF, 
+       TbMotorista.TELEFONE, 
+       TbMotorista.EMAIL, 
+       TbMotorista.ENDERECO, 
+       TbMotorista.FK_STATUS_MOTORISTA, 
+       TbMotorista.FK_CAT_HAB"
+  FromList="TB_MOTORISTA TbMotorista"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TbMotorista"
+    Entity="eo.TbMotorista"/>
+  <ViewAttribute
+    Name="IdMotorista"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IdMotorista"
+    EntityUsage="TbMotorista"
+    AliasName="ID_MOTORISTA"/>
+  <ViewAttribute
+    Name="Nome"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Nome"
+    EntityUsage="TbMotorista"
+    AliasName="NOME"/>
+  <ViewAttribute
+    Name="Cpf"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Cpf"
+    EntityUsage="TbMotorista"
+    AliasName="CPF"/>
+  <ViewAttribute
+    Name="Telefone"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Telefone"
+    EntityUsage="TbMotorista"
+    AliasName="TELEFONE"/>
+  <ViewAttribute
+    Name="Email"
+    PrecisionRule="true"
+    EntityAttrName="Email"
+    EntityUsage="TbMotorista"
+    AliasName="EMAIL"/>
+  <ViewAttribute
+    Name="Endereco"
+    PrecisionRule="true"
+    EntityAttrName="Endereco"
+    EntityUsage="TbMotorista"
+    AliasName="ENDERECO"/>
+  <ViewAttribute
+    Name="FkStatusMotorista"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkStatusMotorista"
+    EntityUsage="TbMotorista"
+    AliasName="FK_STATUS_MOTORISTA"/>
+  <ViewAttribute
+    Name="FkCatHab"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkCatHab"
+    EntityUsage="TbMotorista"
+    AliasName="FK_CAT_HAB"/>
+  <ViewLinkAccessor
+    Name="TbOrdemDeServicoView"
+    ViewLink="vo.FkMotorista1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

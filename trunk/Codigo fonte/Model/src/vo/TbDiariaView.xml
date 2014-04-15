@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbDiariaView"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  SelectList="TbDiaria.ID_DIARIA, 
+       TbDiaria.HR_CHEGADA, 
+       TbDiaria.HR_SAIDA, 
+       TbDiaria.TOTAL_HR_EXT_DIA, 
+       TbDiaria.FK_FRANQUIA, 
+       TbDiaria.FK_ORDEM_DE_SERVICO, 
+       TbDiaria.KM_CHEGADA, 
+       TbDiaria.KM_SAIDA, 
+       TbDiaria.TOTAL_KM_RODADO"
+  FromList="TB_DIARIA TbDiaria"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TbDiaria"
+    Entity="eo.TbDiaria"/>
+  <ViewAttribute
+    Name="IdDiaria"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IdDiaria"
+    EntityUsage="TbDiaria"
+    AliasName="ID_DIARIA"/>
+  <ViewAttribute
+    Name="HrChegada"
+    PrecisionRule="true"
+    EntityAttrName="HrChegada"
+    EntityUsage="TbDiaria"
+    AliasName="HR_CHEGADA"/>
+  <ViewAttribute
+    Name="HrSaida"
+    PrecisionRule="true"
+    EntityAttrName="HrSaida"
+    EntityUsage="TbDiaria"
+    AliasName="HR_SAIDA"/>
+  <ViewAttribute
+    Name="TotalHrExtDia"
+    PrecisionRule="true"
+    EntityAttrName="TotalHrExtDia"
+    EntityUsage="TbDiaria"
+    AliasName="TOTAL_HR_EXT_DIA"/>
+  <ViewAttribute
+    Name="FkFranquia"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkFranquia"
+    EntityUsage="TbDiaria"
+    AliasName="FK_FRANQUIA"/>
+  <ViewAttribute
+    Name="FkOrdemDeServico"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkOrdemDeServico"
+    EntityUsage="TbDiaria"
+    AliasName="FK_ORDEM_DE_SERVICO"/>
+  <ViewAttribute
+    Name="KmChegada"
+    PrecisionRule="true"
+    EntityAttrName="KmChegada"
+    EntityUsage="TbDiaria"
+    AliasName="KM_CHEGADA"/>
+  <ViewAttribute
+    Name="KmSaida"
+    PrecisionRule="true"
+    EntityAttrName="KmSaida"
+    EntityUsage="TbDiaria"
+    AliasName="KM_SAIDA"/>
+  <ViewAttribute
+    Name="TotalKmRodado"
+    PrecisionRule="true"
+    EntityAttrName="TotalKmRodado"
+    EntityUsage="TbDiaria"
+    AliasName="TOTAL_KM_RODADO"/>
+</ViewObject>

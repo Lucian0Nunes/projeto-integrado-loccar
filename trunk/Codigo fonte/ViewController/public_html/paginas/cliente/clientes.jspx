@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:resource type="javascript"
+                   source="/js/mootools-core-1.3-full-nocompat.js"/>
+      <af:resource type="javascript" source="/js/mootools-more-1.3.0.1.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Fixed.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Extras.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Reverse.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Repeat.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Regexp.js"/>
+      <af:resource type="javascript" source="/js/applyMasks.js"/>
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+          <f:facet name="corpo">
+            <af:group id="g1">
+              <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+                <f:facet name="bottom"/>
+                <f:facet name="center">
+                  <af:panelTabbed id="pt2">
+                    <af:showDetailItem text="Clientes cadastrados" id="sdi1"
+                                       stretchChildren="first"
+                                       styleClass="AFStretchWidth">
+                      <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+                        <f:facet name="center">
+                          <af:panelSplitter id="ps1" splitterPosition="386">
+                            <f:facet name="first">
+                              <af:panelCollection id="pc1"
+                                                  styleClass="AFStretchWidth">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                  <af:toolbar id="t2">
+                                    <af:commandToolbarButton text="Inserir novo"
+                                                             id="ctb1"
+                                                             partialSubmit="true"
+                                                             immediate="true">
+                                      <af:showPopupBehavior popupId="inserir"/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton text="Editar"
+                                                             id="ctb2"
+                                                             partialSubmit="true"
+                                                             immediate="true"
+                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}">
+                                      <af:showPopupBehavior popupId="editar"/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton text="Excluir"
+                                                             id="ctb3"
+                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}">
+                                      <af:showPopupBehavior popupId="excluir"/>
+                                    </af:commandToolbarButton>
+                                  </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.TbClienteView1.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.TbClienteView1.rangeSize}"
+                                          emptyText="#{bindings.TbClienteView1.viewable ? 'Sem registro!' : 'Acesso negado!'}"
+                                          fetchSize="#{bindings.TbClienteView1.rangeSize}"
+                                          rowBandingInterval="0"
+                                          filterModel="#{bindings.TbClienteView1Query.queryDescriptor}"
+                                          queryListener="#{bindings.TbClienteView1Query.processQuery}"
+                                          filterVisible="true" varStatus="vs"
+                                          selectedRowKeys="#{bindings.TbClienteView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.TbClienteView1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1"
+                                          binding="#{pageFlowScope.clienteBean.gridCliente}"
+                                          styleClass="AFStretchWidth">
+                                  <af:column sortProperty="Nome"
+                                             filterable="true" sortable="true"
+                                             headerText="Nome completo/Razão Social"
+                                             id="c5" width="220">
+                                    <af:outputText value="#{row.Nome}"
+                                                   id="ot2"/>
+                                  </af:column>
+                                  <af:column sortProperty="CpfCnpj"
+                                             filterable="true" sortable="true"
+                                             headerText="CPF/CNPJ"
+                                             id="c2" width="150">
+                                    <af:outputText value="#{row.CpfCnpj}"
+                                                   id="ot4"/>
+                                  </af:column>
+                                </af:table>
+                                <af:popup id="inserir"
+                                          popupFetchListener="#{pageFlowScope.clienteBean.chamadaPopupInclusao}"
+                                          contentDelivery="lazyUncached"
+                                          animate="false"
+                                          binding="#{pageFlowScope.clienteBean.popupInserir}">
+                                  <af:dialog id="d2"
+                                             title="Inserir Novo"
+                                             closeIconVisible="false"
+                                             type="none">
+                                    <af:outputText value="(*) Campo obrigatório!"
+                                                   id="ot3"/>
+                                    <af:panelFormLayout id="pfl1">
+                                      <af:spacer width="10" height="10"
+                                                 id="s6"/>
+                                      <af:selectOneRadio id="sor1"
+                                                         layout="horizontal"
+                                                         value="#{pageFlowScope.clienteBean.escolha}"
+                                                         valueChangeListener="#{pageFlowScope.clienteBean.setaMaskCpfCnpj}"
+                                                         autoSubmit="true"
+                                                         immediate="true">
+                                        <af:selectItem label="CPF" value="CPF"
+                                                       id="si1"/>
+                                        <af:selectItem label="CNPJ" value="CNPJ"
+                                                       id="si2"/>
+                                      </af:selectOneRadio>
+                                      <af:spacer width="10" height="10"
+                                                 id="s1"/>
+                                      <af:inputText value="#{pageFlowScope.clienteBean.vlCpfCnpj}"
+                                                    label="#{pageFlowScope.clienteBean.escolha}"
+                                                    required="true"
+                                                    maximumLength="#{bindings.CpfCnpj.hints.precision}"
+                                                    id="it2"
+                                                    columns="20"
+                                                    validator="#{pageFlowScope.clienteBean.validaCpfECnpj}">
+                                        <af:clientListener method="applyMask"
+                                                           type="focus"/>
+                                        <af:clientAttribute name="meioMask"
+                                                            value="#{pageFlowScope.clienteBean.mascara}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s2"/>
+                                      <af:inputText value="#{pageFlowScope.clienteBean.vlNome}"
+                                                    label="#{pageFlowScope.clienteBean.nome}"
+                                                    columns="50"
+                                                    maximumLength="60"
+                                                    id="it1"
+                                                    required="true"/>
+                                      <af:spacer width="10" height="10"
+                                                 id="s3"/>
+                                      <af:inputText value="#{pageFlowScope.clienteBean.vlTelefone}"
+                                                    label="#{bindings.Telefone.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Telefone.hints.precision}"
+                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    id="it3"
+                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}">
+                                        <f:validator binding="#{bindings.Telefone.validator}"/>
+                                        <af:clientListener method="applyMask"
+                                                           type="focus"/>
+                                        <af:clientAttribute name="meioMask"
+                                                            value="fixed.phone"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s4"/>
+                                      <af:inputText value="#{pageFlowScope.clienteBean.vlEmail}"
+                                                    label="#{bindings.Email.hints.label}"
+                                                    required="#{bindings.Email.hints.mandatory}"
+                                                    columns="50"
+                                                    maximumLength="60"
+                                                    shortDesc="#{bindings.Email.hints.tooltip}"
+                                                    validator="#{pageFlowScope.clienteBean.validarEmail}"
+                                                    id="it5"/>
+                                      <af:spacer width="10" height="10"
+                                                 id="s5"/>
+                                      <af:inputText value="#{pageFlowScope.clienteBean.vlEndereco}"
+                                                    label="#{bindings.Endereco.hints.label}"
+                                                    required="#{bindings.Endereco.hints.mandatory}"
+                                                    columns="50"
+                                                    maximumLength="100"
+                                                    shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                    id="it4" rows="2">
+                                        <f:validator binding="#{bindings.Endereco.validator}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s12"/>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="t3">
+                                      <af:commandToolbarButton text="Gravar"
+                                                               id="ctb4"
+                                                               actionListener="#{pageFlowScope.clienteBean.incluirNovo}"/>
+                                      <af:commandToolbarButton text="Cancelar"
+                                                               id="ctb5"
+                                                               actionListener="#{pageFlowScope.clienteBean.cancelarNovo}"
+                                                               partialSubmit="true"
+                                                               immediate="true">
+                                        <af:resetActionListener/>
+                                      </af:commandToolbarButton>
+                                    </af:toolbar>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="editar"
+                                          contentDelivery="lazyUncached"
+                                          animate="false"
+                                          popupFetchListener="#{pageFlowScope.clienteBean.chamadaPopupEditar}"
+                                          binding="#{pageFlowScope.clienteBean.popupEditar}">
+                                  <af:dialog id="d3"
+                                             title="Editar dados do Cliente"
+                                             closeIconVisible="false"
+                                             type="none">
+                                    <af:outputText value="(*) Campo obrigatório!"
+                                                   id="outputText1"/>
+                                    <af:panelFormLayout id="pfl2">
+                                      <af:spacer width="10" height="10"
+                                                 id="s7"/>
+                                      <af:inputText value="#{bindings.CpfCnpj.inputValue}"
+                                                    label="#{pageFlowScope.clienteBean.escolha}"
+                                                    required="#{bindings.CpfCnpj.hints.mandatory}"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.CpfCnpj.hints.precision}"
+                                                    shortDesc="#{bindings.CpfCnpj.hints.tooltip}"
+                                                    id="it6" readOnly="true">
+                                        <f:validator binding="#{bindings.CpfCnpj.validator}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s8"/>
+                                      <af:inputText value="#{bindings.Nome.inputValue}"
+                                                    label="#{pageFlowScope.clienteBean.nome}"
+                                                    required="true"
+                                                    columns="50"
+                                                    maximumLength="60"
+                                                    shortDesc="#{bindings.Nome.hints.tooltip}"
+                                                    id="it7">
+                                        <f:validator binding="#{bindings.Nome.validator}"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s9"/>
+                                      <af:inputText value="#{bindings.Telefone.inputValue}"
+                                                    label="#{bindings.Telefone.hints.label}"
+                                                    required="true"
+                                                    columns="20"
+                                                    maximumLength="#{bindings.Telefone.hints.precision}"
+                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    id="it9"
+                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}">
+                                        <f:validator binding="#{bindings.Telefone.validator}"/>
+                                         <af:clientListener method="applyMask"
+                                                           type="focus"/>
+                                        <af:clientAttribute name="meioMask"
+                                                            value="fixed.phone"/>
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s10"/>
+                                      <af:inputText value="#{bindings.Email.inputValue}"
+                                                    label="#{bindings.Email.hints.label}"
+                                                    required="#{bindings.Email.hints.mandatory}"
+                                                    columns="50"
+                                                    maximumLength="60"
+                                                    shortDesc="#{bindings.Email.hints.tooltip}"
+                                                    validator="#{pageFlowScope.clienteBean.validarEmail}"
+                                                    id="it10">                                        
+                                      </af:inputText>
+                                      <af:spacer width="10" height="10"
+                                                 id="s11"/>
+                                      <af:inputText value="#{bindings.Endereco.inputValue}"
+                                                    label="#{bindings.Endereco.hints.label}"
+                                                    required="#{bindings.Endereco.hints.mandatory}"
+                                                    columns="50"
+                                                    maximumLength="100"
+                                                    shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                    id="it8" rows="2">
+                                        <f:validator binding="#{bindings.Endereco.validator}"/>
+                                      </af:inputText>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="t4">
+                                      <af:commandToolbarButton text="Gravar"
+                                                               id="ctb6"
+                                                               actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"/>
+                                      <af:commandToolbarButton text="Cancelar"
+                                                               id="ctb7"
+                                                               actionListener="#{pageFlowScope.clienteBean.cancelarEdicao}"
+                                                               partialSubmit="true"
+                                                               immediate="true">
+                                        <af:resetActionListener/>
+                                      </af:commandToolbarButton>
+                                    </af:toolbar>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="excluir"
+                                          contentDelivery="lazyUncached"
+                                          animate="false">
+                                  <af:dialog id="d4"
+                                             affirmativeTextAndAccessKey="Sim"
+                                             cancelTextAndAccessKey="Não"
+                                             title="Confirmação"
+                                             inlineStyle="width:160px;"
+                                             dialogListener="#{pageFlowScope.clienteBean.excluirCliente}"
+                                             closeIconVisible="false">
+                                    <af:outputText value="Deseja realmente excluir?"
+                                                   id="ot7"/>
+                                  </af:dialog>
+                                </af:popup>
+                              </af:panelCollection>
+                            </f:facet>
+                            <f:facet name="second">
+                              <af:decorativeBox id="db2">
+                                <f:facet name="center">
+                                  <af:panelGroupLayout layout="scroll"
+                                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                       id="pgl1">
+                                    <af:outputText value="Dados Gerais" id="ot1"
+                                                   inlineStyle="text-align:center; vertical-align:bottom; font-size:xx-large;"/>
+                                    <af:panelFormLayout id="pfl3"
+                                                        partialTriggers="pc1:t1"
+                                                        inlineStyle="font-size:large; font-weight:lighter; color:Black;">
+                                      <af:panelLabelAndMessage label="CPF/CNPJ"
+                                                               id="plam3">
+                                        <af:outputText value="#{bindings.CpfCnpj.inputValue}"
+                                                       id="ot11"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
+                                                               id="plam1">
+                                        <af:outputText value="#{bindings.Nome.inputValue}"
+                                                       id="ot9"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
+                                                               id="plam5">
+                                        <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                       id="ot10"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
+                                                               id="plam2">
+                                        <af:outputText value="#{bindings.Email.inputValue}"
+                                                       id="ot6"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="#{bindings.Endereco.hints.label}"
+                                                               id="plam4">
+                                        <af:outputText value="#{bindings.Endereco.inputValue}"
+                                                       id="ot8"/>
+                                      </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                  </af:panelGroupLayout>
+                                </f:facet>
+                              </af:decorativeBox>
+                            </f:facet>
+                          </af:panelSplitter>
+                        </f:facet>
+                        <f:facet name="top"/>
+                      </af:decorativeBox>
+                    </af:showDetailItem>
+                  </af:panelTabbed>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="top"/>
+              </af:panelStretchLayout>
+            </af:group>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+          <f:facet name="corpo">
+            <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:panelTabbed id="pt2">
+                  <af:showDetailItem text="Motoristas" id="sdi1"
+                                     stretchChildren="first">
+                    <af:decorativeBox id="db1">
+                      <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl1">
+                          <af:panelBox text="Cadastrar Novo" id="pb1"
+                                       disclosed="false">
+                            <f:facet name="toolbar"/>
+                            <af:panelStretchLayout id="psl2"
+                                                   styleClass="AFStretchWidth">
+                              <f:facet name="center">
+                                <af:panelFormLayout id="pfl1">
+                                  <f:facet name="footer">
+                                    <af:toolbar id="t1">
+                                      <af:spacer id="s7" width="300"/>
+                                      <af:commandToolbarButton text="Salvar"
+                                                               id="ctb1"/>
+                                    </af:toolbar>
+                                  </f:facet>
+                                  <af:spacer height="20" id="s1"/>
+                                  <af:inputText label="Nome" id="it1"
+                                                columns="60"/>
+                                  <af:spacer height="10" id="s2"/>
+                                  <af:inputText label="Telefone" id="it2"
+                                                columns="25"/>
+                                  <af:spacer height="10" id="s3"/>
+                                  <af:inputText id="it3" columns="25"
+                                                label="CPF"/>
+                                  <af:spacer height="10" id="s5"/>
+                                  <af:inputText label="Endereço" id="it4"
+                                                columns="60"/>
+                                  <af:spacer height="10" id="s6"/>
+                                  <af:inputText label="Habilitação" id="it5"/>
+                                  <af:spacer width="20" height="10" id="s4"/>
+                                </af:panelFormLayout>
+                              </f:facet>
+                              <f:facet name="start"/>
+                              <f:facet name="end"/>
+                            </af:panelStretchLayout>
+                          </af:panelBox>
+                          <af:panelBox text="Motoristas Cadastrados" id="pb2"
+                                       disclosed="true">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1"
+                                                styleClass="AFStretchWidth">
+                              <f:facet name="menus"/>
+                              <f:facet name="toolbar"/>
+                              <f:facet name="statusbar"/>
+                            </af:panelCollection>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:decorativeBox>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </f:facet>
+              <f:facet name="start"/>
+              <f:facet name="top"/>
+            </af:panelStretchLayout>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

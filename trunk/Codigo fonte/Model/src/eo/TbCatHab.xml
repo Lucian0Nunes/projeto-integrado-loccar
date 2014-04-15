@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbCatHab"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_CAT_HAB"
+  AliasName="TbCatHab"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="IdCat"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_CAT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_CAT_HAB"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Categoria"
+    Precision="15"
+    ColumnName="CATEGORIA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_CAT_HAB">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbMotorista"
+    Association="eo.FkCatHab1Assoc"
+    AssociationEnd="eo.FkCatHab1Assoc.TbMotorista"
+    AssociationOtherEnd="eo.FkCatHab1Assoc.TbCatHab"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC0012560">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012560"/>
+      <Attr Name="_checkCondition" Value='"ID_CAT" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCatHab.IdCat"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbCatHabPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_CAT_HAB_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbCatHab.IdCat"/>
+    </AttrArray>
+  </Key>
+</Entity>

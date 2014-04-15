@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbOrdemDeServico"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="TB_ORDEM_DE_SERVICO"
+  AliasName="TbOrdemDeServico"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="IdOs"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_OS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DataDaOs"
+    ColumnName="DATA_DA_OS"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalHrsExtra"
+    Precision="15"
+    ColumnName="TOTAL_HRS_EXTRA"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TotalKmExtra"
+    Precision="15"
+    Scale="0"
+    ColumnName="TOTAL_KM_EXTRA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Observacao"
+    Precision="500"
+    ColumnName="OBSERVACAO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkVeiculo"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_VEICULO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkCliente"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_CLIENTE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkMotorista"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_MOTORISTA"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsuarioServ"
+    Precision="60"
+    ColumnName="USUARIO_SERV"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsuarioTel"
+    Precision="15"
+    ColumnName="USUARIO_TEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkFuncionario"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_FUNCIONARIO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TB_ORDEM_DE_SERVICO">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TbDiaria"
+    Association="eo.FkOrdemDeServico1Assoc"
+    AssociationEnd="eo.FkOrdemDeServico1Assoc.TbDiaria"
+    AssociationOtherEnd="eo.FkOrdemDeServico1Assoc.TbOrdemDeServico"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TbCliente"
+    Association="eo.FkCliente1Assoc"
+    AssociationEnd="eo.FkCliente1Assoc.TbCliente"
+    AssociationOtherEnd="eo.FkCliente1Assoc.TbOrdemDeServico"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbFuncionario"
+    Association="eo.FkFuncionario1Assoc"
+    AssociationEnd="eo.FkFuncionario1Assoc.TbFuncionario"
+    AssociationOtherEnd="eo.FkFuncionario1Assoc.TbOrdemDeServico"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbMotorista"
+    Association="eo.FkMotorista1Assoc"
+    AssociationEnd="eo.FkMotorista1Assoc.TbMotorista"
+    AssociationOtherEnd="eo.FkMotorista1Assoc.TbOrdemDeServico"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbVeiculo"
+    Association="eo.FkVeiculo1Assoc"
+    AssociationEnd="eo.FkVeiculo1Assoc.TbVeiculo"
+    AssociationOtherEnd="eo.FkVeiculo1Assoc.TbOrdemDeServico"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="SysC0012594">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012594"/>
+      <Attr Name="_checkCondition" Value='"ID_OS" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.IdOs"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012595">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012595"/>
+      <Attr Name="_checkCondition" Value='"FK_VEICULO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkVeiculo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012596">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012596"/>
+      <Attr Name="_checkCondition" Value='"FK_CLIENTE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkCliente"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0012597">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0012597"/>
+      <Attr Name="_checkCondition" Value='"FK_MOTORISTA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkMotorista"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbOrdemDeServicoPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TB_ORDEM_DE_SERVICO_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.IdOs"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkCliente1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_CLIENTE_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_CLIENTE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkCliente"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkFuncionario1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_FUNCIONARIO_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_FUNCIONARIO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkFuncionario"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkMotorista1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_MOTORISTA_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MOTORISTA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkMotorista"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkVeiculo1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_VEICULO_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_VEICULO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkVeiculo"/>
+    </AttrArray>
+  </Key>
+</Entity>

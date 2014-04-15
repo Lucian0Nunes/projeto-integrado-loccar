@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.61.92" id="veiculosPageDef"
+                Package="paginas.veiculos">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TbVeiculoView1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="TbVeiculoView1Iterator"/>
+    <iterator Binds="VeiculoMMView1" RangeSize="-1"
+              DataControl="AppModuleDataControl" id="VeiculoMMView1Iterator"/>
+    <searchRegion Binds="VeiculoMMView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="VeiculoMMView1Query"/>
+    <iterator id="ExistePlaca1Iterator" Binds="ExistePlaca1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="ListarMarcaView1" RangeSize="-1"
+              DataControl="AppModuleDataControl" id="ListarMarcaView1Iterator"/>
+    <iterator id="ListarModeloView1Iterator" Binds="ListarModeloView1"
+              DataControl="AppModuleDataControl" RangeSize="-1"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="TbVeiculoView1Iterator" id="Placa">
+      <AttrNames>
+        <Item Value="Placa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbVeiculoView1Iterator" id="Proprietario">
+      <AttrNames>
+        <Item Value="Proprietario"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbVeiculoView1Iterator" id="Telefone">
+      <AttrNames>
+        <Item Value="Telefone"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="TbVeiculoView1Iterator" id="CommitTbVeiculo"
+            InstanceName="AppModuleDataControl.TbVeiculoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action IterBinding="TbVeiculoView1Iterator" id="Rollback"
+            InstanceName="AppModuleDataControl.TbVeiculoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <tree IterBinding="VeiculoMMView1Iterator" id="VeiculoMMView1">
+      <nodeDefinition DefName="vo.VeiculoMMView" Name="VeiculoMMView10">
+        <AttrNames>
+          <Item Value="Marca"/>
+          <Item Value="Modelo"/>
+          <Item Value="Ano"/>
+          <Item Value="Proprietario"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Marca">
+      <AttrNames>
+        <Item Value="Marca"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Modelo">
+      <AttrNames>
+        <Item Value="Modelo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Ano1">
+      <AttrNames>
+        <Item Value="Ano"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Placa1">
+      <AttrNames>
+        <Item Value="Placa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Proprietario1">
+      <AttrNames>
+        <Item Value="Proprietario"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VeiculoMMView1Iterator" id="Telefone1">
+      <AttrNames>
+        <Item Value="Telefone"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ListarMarcaView1Iterator" ListOperMode="navigation"
+          ListIter="ListarMarcaView1Iterator" id="ListarMarcaView1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Marca"/>
+      </AttrNames>
+    </list>
+    <action IterBinding="TbVeiculoView1Iterator" id="Delete"
+            InstanceName="AppModuleDataControl.TbVeiculoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action IterBinding="ListarModeloView1Iterator" id="BuscarModelos"
+            InstanceName="AppModuleDataControl.ListarModeloView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="idMarca" NDValue="${pageFlowScope.veiculoBean.idMarca}"
+                 NDType="java.lang.String"/>
+    </action>
+    <list IterBinding="ListarModeloView1Iterator" ListOperMode="navigation"
+          ListIter="ListarModeloView1Iterator" id="ListarModeloView1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Modelo"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>
