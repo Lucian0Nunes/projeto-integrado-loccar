@@ -12,7 +12,6 @@
        TbMotorista.TELEFONE, 
        TbMotorista.EMAIL, 
        TbMotorista.ENDERECO, 
-       TbMotorista.FK_STATUS_MOTORISTA, 
        TbMotorista.FK_CAT_HAB"
   FromList="TB_MOTORISTA TbMotorista"
   BindingStyle="OracleName"
@@ -65,13 +64,6 @@
     EntityAttrName="Endereco"
     EntityUsage="TbMotorista"
     AliasName="ENDERECO"/>
-  <ViewAttribute
-    Name="FkStatusMotorista"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="FkStatusMotorista"
-    EntityUsage="TbMotorista"
-    AliasName="FK_STATUS_MOTORISTA"/>
   <ViewAttribute
     Name="FkCatHab"
     IsNotNull="true"

@@ -66,6 +66,8 @@
                                                    id="outputText2"/>
                                     <af:panelFormLayout id="pfl2" rows="4"
                                                         maxColumns="1">
+                                      <af:spacer width="10" height="10"
+                                                 id="s13"/>
                                       <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
                                                           label="#{bindings.ListarMarcaView1.label}"
                                                           required="true"
@@ -146,32 +148,20 @@
                                       <af:spacer width="10" height="10"
                                                  id="s1"/>
                                     </af:panelFormLayout>
-                                    <af:toolbar id="t3">
-                                      <af:commandToolbarButton text="Gravar"
-                                                               id="ctb4"
-                                                               actionListener="#{pageFlowScope.veiculoBean.incluirNovoVeiculo}"/>
-                                      <af:commandToolbarButton text="Cancelar"
-                                                               id="ctb5"
-                                                               actionListener="#{pageFlowScope.veiculoBean.cancelarRegistro}"
-                                                               immediate="true"
-                                                               partialSubmit="true">
-                                        <af:resetActionListener/>
-                                      </af:commandToolbarButton>
-                                    </af:toolbar>
-                                  </af:dialog>
-                                </af:popup>
-                                <af:popup id="excluir"
-                                          contentDelivery="lazyUncached"
-                                          animate="false">
-                                  <af:dialog id="d4"
-                                             affirmativeTextAndAccessKey="Sim"
-                                             cancelTextAndAccessKey="Não"
-                                             title="Confirmação"
-                                             inlineStyle="width:160px;" 
-                                             closeIconVisible="false"
-                                             dialogListener="#{pageFlowScope.veiculoBean.excluirVeiculo}">
-                                    <af:outputText value="Deseja realmente excluir?"
-                                                   id="outputText4"/>
+                                    <f:facet name="buttonBar">
+                                      <af:toolbar id="t3">
+                                        <af:commandToolbarButton text="Gravar"
+                                                                 id="ctb4"
+                                                                 actionListener="#{pageFlowScope.veiculoBean.incluirNovoVeiculo}"/>
+                                        <af:commandToolbarButton text="Cancelar"
+                                                                 id="ctb5"
+                                                                 actionListener="#{pageFlowScope.veiculoBean.cancelarRegistro}"
+                                                                 immediate="true"
+                                                                 partialSubmit="true">
+                                          <af:resetActionListener/>
+                                        </af:commandToolbarButton>
+                                      </af:toolbar>
+                                    </f:facet>
                                   </af:dialog>
                                 </af:popup>
                                 <af:popup id="editar" animate="false"
@@ -179,8 +169,12 @@
                                           popupFetchListener="#{pageFlowScope.veiculoBean.chamadaPopupEdicao}"
                                           binding="#{pageFlowScope.veiculoBean.popupEditar}">
                                   <af:dialog id="d3" closeIconVisible="false"
-                                             title="Editar " type="none">
+                                             title="Editar dados do Veículo" type="none">
+                                    <af:outputText value="(*) Campo Obrigatório!"
+                                                   id="ot11"/>
                                     <af:panelFormLayout id="pfl3">
+                                      <af:spacer width="10" height="10"
+                                                 id="s14"/>
                                       <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
                                                           label="#{bindings.ListarMarcaView1.label}"
                                                           required="true"
@@ -208,7 +202,6 @@
                                       <af:selectOneChoice label="Ano" id="soc5"
                                                           value="#{pageFlowScope.veiculoBean.vlAno}"
                                                           required="true">
-                                        
                                         <f:selectItems value="#{pageFlowScope.veiculoBean.comboAno}"
                                                        id="si5"/>
                                       </af:selectOneChoice>
@@ -216,8 +209,7 @@
                                                  id="s9"/>
                                       <af:inputText value="#{pageFlowScope.veiculoBean.vlPlaca}"
                                                     label="#{bindings.Placa.hints.label}"
-                                                    required="true"
-                                                    columns="20"
+                                                    required="true" columns="20"
                                                     maximumLength="#{bindings.Placa.hints.precision}"
                                                     shortDesc="#{bindings.Placa.hints.tooltip}"
                                                     id="it8">
@@ -229,8 +221,7 @@
                                                  id="s10"/>
                                       <af:inputText value="#{pageFlowScope.veiculoBean.vlProprietario}"
                                                     label="#{bindings.Proprietario.hints.label}"
-                                                    required="true"
-                                                    columns="30"
+                                                    required="true" columns="30"
                                                     maximumLength="#{bindings.Proprietario.hints.precision}"
                                                     shortDesc="#{bindings.Proprietario.hints.tooltip}"
                                                     id="it6">
@@ -240,14 +231,13 @@
                                                  id="s11"/>
                                       <af:inputText value="#{pageFlowScope.veiculoBean.vlTelefone}"
                                                     label="#{bindings.Telefone.hints.label}"
-                                                    required="true"
-                                                    columns="20"
+                                                    required="true" columns="20"
                                                     maximumLength="#{bindings.Telefone.hints.precision}"
                                                     shortDesc="#{bindings.Telefone.hints.tooltip}"
                                                     id="it5"
                                                     validator="#{pageFlowScope.veiculoBean.validarTelefone}">
                                         <f:validator binding="#{bindings.Telefone.validator}"/>
-                                             <af:clientListener method="applyMask"
+                                        <af:clientListener method="applyMask"
                                                            type="focus"/>
                                         <af:clientAttribute name="meioMask"
                                                             value="fixed.phone"/>
@@ -255,18 +245,34 @@
                                       <af:spacer width="10" height="10"
                                                  id="s12"/>
                                     </af:panelFormLayout>
-                                    <af:toolbar id="t4">
-                                      <af:commandToolbarButton text="Gravar"
-                                                               id="ctb6"
-                                                               actionListener="#{pageFlowScope.veiculoBean.gravarEdicao}"/>
-                                      <af:commandToolbarButton text="Cancelar"
-                                                               id="ctb7"
-                                                               actionListener="#{pageFlowScope.veiculoBean.cancelarEdicao}"
-                                                               immediate="true"
-                                                               partialSubmit="true">
-                                        <af:resetActionListener/>
-                                      </af:commandToolbarButton>
-                                    </af:toolbar>
+                                    <f:facet name="buttonBar">
+                                      <af:toolbar id="t4">
+                                        <af:commandToolbarButton text="Gravar"
+                                                                 id="ctb6"
+                                                                 actionListener="#{pageFlowScope.veiculoBean.gravarEdicao}"/>
+                                        <af:commandToolbarButton text="Cancelar"
+                                                                 id="ctb7"
+                                                                 actionListener="#{pageFlowScope.veiculoBean.cancelarEdicao}"
+                                                                 immediate="true"
+                                                                 partialSubmit="true">
+                                          <af:resetActionListener/>
+                                        </af:commandToolbarButton>
+                                      </af:toolbar>
+                                    </f:facet>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="excluir"
+                                          contentDelivery="lazyUncached"
+                                          animate="false">
+                                  <af:dialog id="d4"
+                                             affirmativeTextAndAccessKey="Sim"
+                                             cancelTextAndAccessKey="Não"
+                                             title="Confirmação"
+                                             inlineStyle="width:160px;" 
+                                             closeIconVisible="false"
+                                             dialogListener="#{pageFlowScope.veiculoBean.excluirVeiculo}">
+                                    <af:outputText value="Deseja realmente excluir?"
+                                                   id="outputText4"/>
                                   </af:dialog>
                                 </af:popup>
                                 <af:table value="#{bindings.VeiculoMMView1.collectionModel}"

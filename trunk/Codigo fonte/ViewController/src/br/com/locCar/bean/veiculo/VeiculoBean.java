@@ -181,9 +181,9 @@ public class VeiculoBean extends ValidaCampos {
 
             RowSetIterator iteratorModelos =
                 ADFUtils.findIterator("ListarModeloView1Iterator").getRowSetIterator();
-            Row rowMOdelo = iteratorModelos.getCurrentRow();
+            Row rowModelo = iteratorModelos.getCurrentRow();
 
-            row.setAttribute("FkModelo", rowMOdelo.getAttribute("IdModelo"));
+            row.setAttribute("FkModelo", rowModelo.getAttribute("IdModelo"));
 
 
             ADFUtils.executeBindingOperation("CommitTbVeiculo");

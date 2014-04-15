@@ -106,7 +106,8 @@
                                                          value="#{pageFlowScope.clienteBean.escolha}"
                                                          valueChangeListener="#{pageFlowScope.clienteBean.setaMaskCpfCnpj}"
                                                          autoSubmit="true"
-                                                         immediate="true">
+                                                         immediate="true"
+                                                         label="Escolha">
                                         <af:selectItem label="CPF" value="CPF"
                                                        id="si1"/>
                                         <af:selectItem label="CNPJ" value="CNPJ"
@@ -174,18 +175,20 @@
                                       <af:spacer width="10" height="10"
                                                  id="s12"/>
                                     </af:panelFormLayout>
-                                    <af:toolbar id="t3">
-                                      <af:commandToolbarButton text="Gravar"
-                                                               id="ctb4"
-                                                               actionListener="#{pageFlowScope.clienteBean.incluirNovo}"/>
-                                      <af:commandToolbarButton text="Cancelar"
-                                                               id="ctb5"
-                                                               actionListener="#{pageFlowScope.clienteBean.cancelarNovo}"
-                                                               partialSubmit="true"
-                                                               immediate="true">
-                                        <af:resetActionListener/>
-                                      </af:commandToolbarButton>
-                                    </af:toolbar>
+                                    <f:facet name="buttonBar">
+                                      <af:toolbar id="t3">
+                                        <af:commandToolbarButton text="Gravar"
+                                                                 id="ctb4"
+                                                                 actionListener="#{pageFlowScope.clienteBean.incluirNovo}"/>
+                                        <af:commandToolbarButton text="Cancelar"
+                                                                 id="ctb5"
+                                                                 actionListener="#{pageFlowScope.clienteBean.cancelarNovo}"
+                                                                 partialSubmit="true"
+                                                                 immediate="true">
+                                          <af:resetActionListener/>
+                                        </af:commandToolbarButton>
+                                      </af:toolbar>
+                                    </f:facet>
                                   </af:dialog>
                                 </af:popup>
                                 <af:popup id="editar"
@@ -261,18 +264,20 @@
                                         <f:validator binding="#{bindings.Endereco.validator}"/>
                                       </af:inputText>
                                     </af:panelFormLayout>
-                                    <af:toolbar id="t4">
-                                      <af:commandToolbarButton text="Gravar"
-                                                               id="ctb6"
-                                                               actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"/>
-                                      <af:commandToolbarButton text="Cancelar"
-                                                               id="ctb7"
-                                                               actionListener="#{pageFlowScope.clienteBean.cancelarEdicao}"
-                                                               partialSubmit="true"
-                                                               immediate="true">
-                                        <af:resetActionListener/>
-                                      </af:commandToolbarButton>
-                                    </af:toolbar>
+                                    <f:facet name="buttonBar">
+                                      <af:toolbar id="t4">
+                                        <af:commandToolbarButton text="Gravar"
+                                                                 id="ctb6"
+                                                                 actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"/>
+                                        <af:commandToolbarButton text="Cancelar"
+                                                                 id="ctb7"
+                                                                 actionListener="#{pageFlowScope.clienteBean.cancelarEdicao}"
+                                                                 partialSubmit="true"
+                                                                 immediate="true">
+                                          <af:resetActionListener/>
+                                        </af:commandToolbarButton>
+                                      </af:toolbar>
+                                    </f:facet>
                                   </af:dialog>
                                 </af:popup>
                                 <af:popup id="excluir"

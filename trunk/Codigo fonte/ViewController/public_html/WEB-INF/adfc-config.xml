@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <view id="template_principal">
-    <page>/template/template_principal.jspx</page>
+  <view id="view1">
+    <page>/paginaInicial.jspx</page>
   </view>
   <managed-bean id="__4">
     <managed-bean-name id="__2">usuarioBean</managed-bean-name>
