@@ -159,7 +159,9 @@
                                                                actionListener="#{pageFlowScope.motoristaBean.inserirNovoMotorista}"/>
                                       <af:commandToolbarButton text="Cancelar"
                                                                id="ctb5"
-                                                               actionListener="#{pageFlowScope.motoristaBean.cancelarRegistro}">
+                                                               actionListener="#{pageFlowScope.motoristaBean.cancelarRegistro}"
+                                                               partialSubmit="true"
+                                                               immediate="true">
                                         <af:resetActionListener/>
                                       </af:commandToolbarButton>
                                     </af:toolbar>
