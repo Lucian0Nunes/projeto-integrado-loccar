@@ -3,18 +3,18 @@
    <OverallProperties
       id="OverallProperties1"/>
    <View
-      id="View3">
+      id="View4">
       <property
-         name="activityId">template_principal</property>
+         name="activityId">view1</property>
       <property
-         name="page">/template/template_principal.jspx</property>
+         name="page">/paginaInicial.jspx</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>template_principal&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>view1&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">169.79883</property>
+         name="y">281.84473</property>
       <property
-         name="x">194.69434</property>
+         name="x">71.0</property>
    </View>
 </SDM>

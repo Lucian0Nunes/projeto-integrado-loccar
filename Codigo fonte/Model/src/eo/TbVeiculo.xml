@@ -106,6 +106,13 @@
     AssociationOtherEnd="eo.FkVeiculo1Assoc.TbVeiculo"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TbModelo"
+    Association="eo.FkModelo1Assoc"
+    AssociationEnd="eo.FkModelo1Assoc.TbModelo"
+    AssociationOtherEnd="eo.FkModelo1Assoc.TbVeiculo"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
   <Key
     Name="SysC0012603">
     <DesignTime>
@@ -146,7 +153,9 @@
       <Attr Name="_checkCondition" Value='"PROPRIETARIO" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
-    <AttrArray Name="Attributes"/>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Proprietario"/>
+    </AttrArray>
   </Key>
   <Key
     Name="SysC0012607">
@@ -155,7 +164,9 @@
       <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
-    <AttrArray Name="Attributes"/>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbVeiculo.Telefone"/>
+    </AttrArray>
   </Key>
   <Key
     Name="SysC0012608">
@@ -176,30 +187,6 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbVeiculo.IdVeiculo"/>
-    </AttrArray>
-  </Key>
-  <Key
-    Name="TbVeiculoProprietarioCheck">
-    <DesignTime>
-      <Attr Name="_isNotNull" Value="true"/>
-      <Attr Name="_DBObjectName" Value="TB_VEICULO_PROPRIETARIO_CHECK"/>
-      <Attr Name="_checkCondition" Value='"PROPRIETARIO" IS NOT NULL'/>
-      <Attr Name="_isCheck" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbVeiculo.Proprietario"/>
-    </AttrArray>
-  </Key>
-  <Key
-    Name="TbVeiculoTelefoneCheck">
-    <DesignTime>
-      <Attr Name="_isNotNull" Value="true"/>
-      <Attr Name="_DBObjectName" Value="TB_VEICULO_TELEFONE_CHECK"/>
-      <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
-      <Attr Name="_isCheck" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbVeiculo.Telefone"/>
     </AttrArray>
   </Key>
   <Key

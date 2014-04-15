@@ -6,10 +6,14 @@
     <page path="/paginas/cliente/clientes.jspx" usageId="view_clientesPageDef"/>
     <page path="/paginas/veiculos/veiculos.jspx"
           usageId="view_veiculosPageDef"/>
+    <page path="/paginas/motoristas/motoristas.jspx"
+          usageId="view_motoristasPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="view_clientesPageDef" path="paginas.cliente.clientesPageDef"/>
     <page id="view_veiculosPageDef" path="paginas.veiculos.veiculosPageDef"/>
+    <page id="view_motoristasPageDef"
+          path="paginas.motoristas.motoristasPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="am"

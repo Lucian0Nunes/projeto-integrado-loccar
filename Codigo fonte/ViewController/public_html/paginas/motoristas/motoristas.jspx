@@ -6,6 +6,7 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <f:view>
     <af:document id="d1">
+      <af:messages id="m1"/>
       <af:form id="f1">
         <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
           <f:facet name="corpo">
@@ -13,65 +14,176 @@
               <f:facet name="bottom"/>
               <f:facet name="center">
                 <af:panelTabbed id="pt2">
-                  <af:showDetailItem text="Motoristas" id="sdi1"
-                                     stretchChildren="first">
-                    <af:decorativeBox id="db1">
+                  <af:showDetailItem text="Motoristas cadastrados" id="sdi1"
+                                     stretchChildren="first"
+                                     styleClass="AFStretchWidth">
+                    <af:decorativeBox id="db1" styleClass="AFStretchWidth">
                       <f:facet name="center">
-                        <af:panelGroupLayout layout="scroll"
-                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                             id="pgl1">
-                          <af:panelBox text="Cadastrar Novo" id="pb1"
-                                       disclosed="false">
-                            <f:facet name="toolbar"/>
-                            <af:panelStretchLayout id="psl2"
-                                                   styleClass="AFStretchWidth">
-                              <f:facet name="center">
-                                <af:panelFormLayout id="pfl1">
-                                  <f:facet name="footer">
-                                    <af:toolbar id="t1">
-                                      <af:spacer id="s7" width="300"/>
-                                      <af:commandToolbarButton text="Salvar"
-                                                               id="ctb1"/>
+                        <af:panelSplitter id="ps1" splitterPosition="304">
+                          <f:facet name="first">
+                            <af:panelGroupLayout layout="scroll"
+                                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                 id="pgl2">
+                              <af:panelCollection id="pc1"
+                                                  styleClass="AFStretchWidth">
+                                <f:facet name="toolbar">
+                                  <af:toolbar id="t1">
+                                    <af:commandToolbarButton text="Inserir novo"
+                                                             id="ctb1">
+                                      <af:showPopupBehavior popupId="::inserir"/>
+                                    </af:commandToolbarButton>
+                                    <af:commandToolbarButton text="Editar"
+                                                             id="ctb3"/>
+                                    <af:commandToolbarButton text="Excluir"
+                                                             id="ctb2"/>
+                                  </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.TbMotoristaView1.collectionModel}"
+                                          var="row"
+                                          rows="#{bindings.TbMotoristaView1.rangeSize}"
+                                          emptyText="#{bindings.TbMotoristaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.TbMotoristaView1.rangeSize}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.TbMotoristaView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.TbMotoristaView1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t2">
+                                  <af:column sortProperty="Nome" sortable="true"
+                                             headerText="#{bindings.TbMotoristaView1.hints.Nome.label}"
+                                             id="c4">
+                                    <af:outputText value="#{row.Nome}"
+                                                   id="ot2"/>
+                                  </af:column>
+                                  <af:column sortProperty="Cpf" sortable="true"
+                                             headerText="#{bindings.TbMotoristaView1.hints.Cpf.label}"
+                                             id="c5">
+                                    <af:outputText value="#{row.Cpf}" id="ot5"/>
+                                  </af:column>
+                                  <af:column sortProperty="Telefone"
+                                             sortable="true"
+                                             headerText="#{bindings.TbMotoristaView1.hints.Telefone.label}"
+                                             id="c2">
+                                    <af:outputText value="#{row.Telefone}"
+                                                   id="ot3"/>
+                                  </af:column>
+                                  <af:column sortProperty="Email"
+                                             sortable="true"
+                                             headerText="#{bindings.TbMotoristaView1.hints.Email.label}"
+                                             id="c1">
+                                    <af:outputText value="#{row.Email}"
+                                                   id="ot1"/>
+                                  </af:column>
+                                  <af:column sortProperty="FkCatHab"
+                                             sortable="true"
+                                             headerText="#{bindings.TbMotoristaView1.hints.FkCatHab.label}"
+                                             id="c3">
+                                    <af:outputText value="#{row.FkCatHab}"
+                                                   id="ot4">
+                                      <af:convertNumber groupingUsed="false"
+                                                        pattern="#{bindings.TbMotoristaView1.hints.FkCatHab.format}"/>
+                                    </af:outputText>
+                                  </af:column>
+                                </af:table>
+                              </af:panelCollection>
+                              <af:popup id="inserir" contentDelivery="lazyUncached"
+                                        popupFetchListener="#{pageFlowScope.motoristaBean.chamadaPopupInclusao}"
+                                        binding="#{pageFlowScope.motoristaBean.popupInserir}"
+                                        animate="false">
+                                <af:dialog id="d2" type="none"
+                                           closeIconVisible="false">
+                                  <af:panelFormLayout id="pfl1">
+                                    <af:inputText value="#{pageFlowScope.motoristaBean.vlNome}"
+                                                  label="#{bindings.Nome.hints.label}"
+                                                  required="#{bindings.Nome.hints.mandatory}"
+                                                  columns="#{bindings.Nome.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Nome.hints.precision}"
+                                                  shortDesc="#{bindings.Nome.hints.tooltip}"
+                                                  id="it5">
+                                      <f:validator binding="#{bindings.Nome.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:inputText value="#{pageFlowScope.motoristaBean.vlCpf}"
+                                                  label="CPF"
+                                                  required="#{bindings.Cpf.hints.mandatory}"
+                                                  columns="#{bindings.Cpf.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Cpf.hints.precision}"
+                                                  shortDesc="#{bindings.Cpf.hints.tooltip}"
+                                                  id="it7">
+                                      <f:validator binding="#{bindings.Cpf.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:inputText value="#{pageFlowScope.motoristaBean.vlTelefone}"
+                                                  label="#{bindings.Telefone.hints.label}"
+                                                  required="#{bindings.Telefone.hints.mandatory}"
+                                                  columns="#{bindings.Telefone.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Telefone.hints.precision}"
+                                                  shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                  id="it3">
+                                      <f:validator binding="#{bindings.Telefone.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:inputText value="#{pageFlowScope.motoristaBean.vlEmail}"
+                                                  label="#{bindings.Email.hints.label}"
+                                                  required="#{bindings.Email.hints.mandatory}"
+                                                  columns="#{bindings.Email.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Email.hints.precision}"
+                                                  shortDesc="#{bindings.Email.hints.tooltip}"
+                                                  id="it6">
+                                      <f:validator binding="#{bindings.Email.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                    <af:inputText value="#{pageFlowScope.motoristaBean.vlEndereco}"
+                                                  label="#{bindings.Endereco.hints.label}"
+                                                  required="#{bindings.Endereco.hints.mandatory}"
+                                                  columns="#{bindings.Endereco.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Endereco.hints.precision}"
+                                                  shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                  id="it4">
+                                      <f:validator binding="#{bindings.Endereco.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s5"/>
+                                    <af:selectOneChoice value="#{bindings.TbCatHabView1.inputValue}"
+                                                        label="#{bindings.TbCatHabView1.label}"
+                                                        required="#{bindings.TbCatHabView1.hints.mandatory}"
+                                                        shortDesc="#{bindings.TbCatHabView1.hints.tooltip}"
+                                                        id="soc1"
+                                                        binding="#{pageFlowScope.motoristaBean.comboCategoria}">
+                                      <f:selectItems value="#{bindings.TbCatHabView1.items}"
+                                                     id="si1"/>
+                                    </af:selectOneChoice>
+                                  </af:panelFormLayout>
+                                  <f:facet name="buttonBar">
+                                    <af:toolbar id="t3">
+                                      <af:commandToolbarButton text="Gravar"
+                                                               id="ctb4"
+                                                               actionListener="#{pageFlowScope.motoristaBean.inserirNovoMotorista}"/>
+                                      <af:commandToolbarButton text="Cancelar"
+                                                               id="ctb5"
+                                                               actionListener="#{pageFlowScope.motoristaBean.cancelarRegistro}">
+                                        <af:resetActionListener/>
+                                      </af:commandToolbarButton>
                                     </af:toolbar>
                                   </f:facet>
-                                  <af:spacer height="20" id="s1"/>
-                                  <af:inputText label="Nome" id="it1"
-                                                columns="60"/>
-                                  <af:spacer height="10" id="s2"/>
-                                  <af:inputText label="Telefone" id="it2"
-                                                columns="25"/>
-                                  <af:spacer height="10" id="s3"/>
-                                  <af:inputText id="it3" columns="25"
-                                                label="CPF"/>
-                                  <af:spacer height="10" id="s5"/>
-                                  <af:inputText label="Endereço" id="it4"
-                                                columns="60"/>
-                                  <af:spacer height="10" id="s6"/>
-                                  <af:inputText label="Habilitação" id="it5"/>
-                                  <af:spacer width="20" height="10" id="s4"/>
-                                </af:panelFormLayout>
+                                </af:dialog>
+                              </af:popup>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                          <f:facet name="second">
+                            <af:decorativeBox id="db2">
+                              <f:facet name="center">
+                                <af:panelGroupLayout id="pgl1"/>
                               </f:facet>
-                              <f:facet name="start"/>
-                              <f:facet name="end"/>
-                            </af:panelStretchLayout>
-                          </af:panelBox>
-                          <af:panelBox text="Motoristas Cadastrados" id="pb2"
-                                       disclosed="true">
-                            <f:facet name="toolbar"/>
-                            <af:panelCollection id="pc1"
-                                                styleClass="AFStretchWidth">
-                              <f:facet name="menus"/>
-                              <f:facet name="toolbar"/>
-                              <f:facet name="statusbar"/>
-                            </af:panelCollection>
-                          </af:panelBox>
-                        </af:panelGroupLayout>
+                            </af:decorativeBox>
+                          </f:facet>
+                        </af:panelSplitter>
                       </f:facet>
+                      <f:facet name="top"/>
                     </af:decorativeBox>
                   </af:showDetailItem>
                 </af:panelTabbed>
               </f:facet>
               <f:facet name="start"/>
+              <f:facet name="end"/>
               <f:facet name="top"/>
             </af:panelStretchLayout>
           </f:facet>

@@ -10,10 +10,12 @@
   DBObjectName="TB_MOTORISTA"
   AliasName="TbMotorista"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="eo.TbMotoristaImpl">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Attribute
     Name="IdMotorista"
@@ -94,20 +96,6 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="FkStatusMotorista"
-    IsNotNull="true"
-    Precision="15"
-    Scale="0"
-    ColumnName="FK_STATUS_MOTORISTA"
-    SQLType="NUMERIC"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    TableName="TB_MOTORISTA">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="16"/>
-    </DesignTime>
-  </Attribute>
-  <Attribute
     Name="FkCatHab"
     IsNotNull="true"
     Precision="15"
@@ -135,13 +123,6 @@
     AssociationOtherEnd="eo.FkMotorista1Assoc.TbMotorista"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
-  <AccessorAttribute
-    Name="TbStatusMotorista"
-    Association="eo.FkStatusMotorista1Assoc"
-    AssociationEnd="eo.FkStatusMotorista1Assoc.TbStatusMotorista"
-    AssociationOtherEnd="eo.FkStatusMotorista1Assoc.TbMotorista"
-    Type="oracle.jbo.server.EntityImpl"
-    IsUpdateable="true"/>
   <Key
     Name="SysC0012587">
     <DesignTime>
@@ -187,17 +168,6 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012591">
-    <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012591"/>
-      <Attr Name="_checkCondition" Value='"FK_STATUS_MOTORISTA" IS NOT NULL'/>
-      <Attr Name="_isCheck" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbMotorista.FkStatusMotorista"/>
-    </AttrArray>
-  </Key>
-  <Key
     Name="SysC0012592">
     <DesignTime>
       <Attr Name="_DBObjectName" Value="SYS_C0012592"/>
@@ -227,17 +197,6 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbMotorista.FkCatHab"/>
-    </AttrArray>
-  </Key>
-  <Key
-    Name="FkStatusMotorista1">
-    <DesignTime>
-      <Attr Name="_referencedKey" Value="TB_STATUS_MOTORISTA_PK"/>
-      <Attr Name="_isForeign" Value="true"/>
-      <Attr Name="_DBObjectName" Value="FK_STATUS_MOTORISTA"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbMotorista.FkStatusMotorista"/>
     </AttrArray>
   </Key>
 </Entity>

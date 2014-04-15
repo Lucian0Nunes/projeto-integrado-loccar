@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+          <f:facet name="corpo">
+            <af:panelStretchLayout id="psl1">
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:decorativeBox id="db1">
+                  <f:facet name="center">
+                    <af:panelGroupLayout
+                                         xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                         id="pgl1" layout="vertical"
+                                         valign="middle" halign="center">
+                      <p>
+                         
+                      </p>
+                      <p>
+                         
+                      </p>
+                      <p>
+                         
+                      </p>
+                      <p>
+                        <af:outputText value="Pacheco" id="ot1"
+                                       inlineStyle="font-size:xx-large; font-family:Pristina; font-weight:bold; border-color:Gray;">
+                          <p>
+                             
+                          </p>
+                          <p>
+                             
+                          </p>
+                        </af:outputText><af:activeOutputText value="LocCar"
+                                                                                                                                                          id="aot1"
+                                                                                                                                                          inlineStyle="font-size:xx-large; color:Red; font-weight:bold; font-family:'Courier New', Courier, monospace;"/><af:outputText value="Locadora de veículos"
+                                                                                                                                                                                                                                                                                        id="ot2"
+                                                                                                                                                                                                                                                                                        inlineStyle="font-size:xx-large; font-family:'Courier New', Courier, monospace; font-weight:bold; font-style:normal; text-decoration:underline;"/>
+                      </p>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:decorativeBox>
+              </f:facet>
+              <f:facet name="start"/>
+              <f:facet name="end"/>
+              <f:facet name="top"/>
+            </af:panelStretchLayout>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

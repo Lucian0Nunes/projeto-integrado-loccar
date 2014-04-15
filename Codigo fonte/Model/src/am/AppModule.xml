@@ -35,9 +35,6 @@
     Name="TbPerfilView1"
     ViewObjectName="vo.TbPerfilView"/>
   <ViewUsage
-    Name="TbStatusMotoristaView1"
-    ViewObjectName="vo.TbStatusMotoristaView"/>
-  <ViewUsage
     Name="TbDiariaView2"
     ViewObjectName="vo.TbDiariaView"/>
   <ViewUsage
@@ -58,9 +55,6 @@
   <ViewUsage
     Name="TbFuncionarioView2"
     ViewObjectName="vo.TbFuncionarioView"/>
-  <ViewUsage
-    Name="TbMotoristaView3"
-    ViewObjectName="vo.TbMotoristaView"/>
   <ViewUsage
     Name="ExisteCpfOuCnjp1"
     ViewObjectName="vo.ExisteCpfOuCnjp"/>
@@ -123,12 +117,6 @@
     ViewLinkObjectName="vo.TbFuncionarioTbPerfilFkLink"
     SrcViewUsageName="am.AppModule.TbPerfilView1"
     DstViewUsageName="am.AppModule.TbFuncionarioView2"
-    Reversed="false"/>
-  <ViewLinkUsage
-    Name="FkStatusMotorista1Link1"
-    ViewLinkObjectName="vo.FkStatusMotorista1Link"
-    SrcViewUsageName="am.AppModule.TbStatusMotoristaView1"
-    DstViewUsageName="am.AppModule.TbMotoristaView3"
     Reversed="false"/>
   <ViewLinkUsage
     Name="FkVeiculo1Link1"
