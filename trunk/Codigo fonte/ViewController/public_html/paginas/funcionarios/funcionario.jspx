@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+          <f:facet name="corpo">
+            <af:panelTabbed id="pt2">
+              <af:showDetailItem text="Funcionários cadastrados" id="sdi1"
+                                 stretchChildren="first">
+                <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+                  <f:facet name="center">
+                    <af:panelSplitter id="ps1" splitterPosition="329">
+                      <f:facet name="first">
+                        <af:panelCollection id="pc1"
+                                            styleClass="AFStretchWidth">
+                          <f:facet name="menus"/>
+                          <f:facet name="toolbar">
+                            <af:toolbar id="t1">
+                              <af:commandToolbarButton text="Inserir novo"
+                                                       id="ctb1"/>
+                              <af:commandToolbarButton text="Editar"
+                                                       id="ctb2"/>
+                              <af:commandToolbarButton text="Excluir"
+                                                       id="ctb3"/>
+                            </af:toolbar>
+                          </f:facet>
+                          <f:facet name="statusbar"/>
+                        </af:panelCollection>
+                      </f:facet>
+                      <f:facet name="second"/>
+                    </af:panelSplitter>
+                  </f:facet>
+                  <f:facet name="top"/>
+                </af:decorativeBox>
+              </af:showDetailItem>
+            </af:panelTabbed>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

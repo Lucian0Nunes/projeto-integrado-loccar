@@ -10,10 +10,12 @@
   DBObjectName="TB_FUNCIONARIO"
   AliasName="TbFuncionario"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="eo.TbFuncionarioImpl">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Attribute
     Name="IdFuncionario"
