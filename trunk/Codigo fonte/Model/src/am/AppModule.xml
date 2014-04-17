@@ -76,6 +76,12 @@
   <ViewUsage
     Name="ListarModeloView1"
     ViewObjectName="vo.ListarModeloView"/>
+  <ViewUsage
+    Name="MotoristaCategoriaView1"
+    ViewObjectName="vo.MotoristaCategoriaView"/>
+  <ViewUsage
+    Name="ExisteCpfTbMot1"
+    ViewObjectName="vo.ExisteCpfTbMot"/>
   <ViewLinkUsage
     Name="FkFranquia1Link1"
     ViewLinkObjectName="vo.FkFranquia1Link"

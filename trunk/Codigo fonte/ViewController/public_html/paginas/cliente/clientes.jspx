@@ -30,7 +30,7 @@
                                        styleClass="AFStretchWidth">
                       <af:decorativeBox id="db1" styleClass="AFStretchWidth">
                         <f:facet name="center">
-                          <af:panelSplitter id="ps1" splitterPosition="386">
+                          <af:panelSplitter id="ps1" splitterPosition="382">
                             <f:facet name="first">
                               <af:panelCollection id="pc1"
                                                   styleClass="AFStretchWidth">
@@ -40,19 +40,22 @@
                                     <af:commandToolbarButton text="Inserir novo"
                                                              id="ctb1"
                                                              partialSubmit="true"
-                                                             immediate="true">
+                                                             immediate="true"
+                                                             icon="/imagens/user_add.png">
                                       <af:showPopupBehavior popupId="inserir"/>
                                     </af:commandToolbarButton>
                                     <af:commandToolbarButton text="Editar"
                                                              id="ctb2"
                                                              partialSubmit="true"
                                                              immediate="true"
-                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}">
+                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}"
+                                                             icon="/imagens/user_edit.png">
                                       <af:showPopupBehavior popupId="editar"/>
                                     </af:commandToolbarButton>
                                     <af:commandToolbarButton text="Excluir"
                                                              id="ctb3"
-                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}">
+                                                             disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}"
+                                                             icon="/imagens/user_delete.png">
                                       <af:showPopupBehavior popupId="excluir"/>
                                     </af:commandToolbarButton>
                                   </af:toolbar>
@@ -75,14 +78,17 @@
                                   <af:column sortProperty="Nome"
                                              filterable="true" sortable="true"
                                              headerText="Nome completo/Razão Social"
-                                             id="c5" width="220">
+                                             id="c5" width="220" align="center"
+                                             inlineStyle="text-align:left;">
                                     <af:outputText value="#{row.Nome}"
                                                    id="ot2"/>
                                   </af:column>
                                   <af:column sortProperty="CpfCnpj"
                                              filterable="true" sortable="true"
                                              headerText="CPF/CNPJ"
-                                             id="c2" width="150">
+                                             id="c2" width="150"
+                                             inlineStyle="text-align:left;"
+                                             align="center">
                                     <af:outputText value="#{row.CpfCnpj}"
                                                    id="ot4"/>
                                   </af:column>
@@ -179,12 +185,14 @@
                                       <af:toolbar id="t3">
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb4"
-                                                                 actionListener="#{pageFlowScope.clienteBean.incluirNovo}"/>
+                                                                 actionListener="#{pageFlowScope.clienteBean.incluirNovo}"
+                                                                 icon="/imagens/accept.png"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb5"
                                                                  actionListener="#{pageFlowScope.clienteBean.cancelarNovo}"
                                                                  partialSubmit="true"
-                                                                 immediate="true">
+                                                                 immediate="true"
+                                                                 icon="/imagens/cancel.png">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>
@@ -268,12 +276,14 @@
                                       <af:toolbar id="t4">
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb6"
-                                                                 actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"/>
+                                                                 actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"
+                                                                 icon="/imagens/accept.png"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb7"
                                                                  actionListener="#{pageFlowScope.clienteBean.cancelarEdicao}"
                                                                  partialSubmit="true"
-                                                                 immediate="true">
+                                                                 immediate="true"
+                                                                 icon="/imagens/cancel.png">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>

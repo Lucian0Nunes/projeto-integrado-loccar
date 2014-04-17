@@ -7,10 +7,33 @@
     <variableIterator id="variables"/>
     <iterator Binds="TbMotoristaView1" RangeSize="25"
               DataControl="AppModuleDataControl" id="TbMotoristaView1Iterator"/>
+    <iterator Binds="MotoristaCategoriaView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MotoristaCategoriaView1Iterator"/>
+    <searchRegion Binds="MotoristaCategoriaView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MotoristaCategoriaView1Query"/>
+    <iterator id="ExisteCpfTbMot1Iterator" Binds="ExisteCpfTbMot1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator Binds="TbCatHabView1" RangeSize="25"
               DataControl="AppModuleDataControl" id="TbCatHabView1Iterator"/>
   </executables>
   <bindings>
+    <action IterBinding="TbMotoristaView1Iterator" id="CommitTbMotorista"
+            InstanceName="AppModuleDataControl.TbMotoristaView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <tree IterBinding="MotoristaCategoriaView1Iterator"
+          id="MotoristaCategoriaView1">
+      <nodeDefinition DefName="vo.MotoristaCategoriaView"
+                      Name="MotoristaCategoriaView10">
+        <AttrNames>
+          <Item Value="Nome"/>
+          <Item Value="Cpf"/>
+          <Item Value="Categoria"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
     <attributeValues IterBinding="TbMotoristaView1Iterator" id="Nome">
       <AttrNames>
         <Item Value="Nome"/>
@@ -36,17 +59,6 @@
         <Item Value="Endereco"/>
       </AttrNames>
     </attributeValues>
-    <tree IterBinding="TbMotoristaView1Iterator" id="TbMotoristaView1">
-      <nodeDefinition DefName="vo.TbMotoristaView" Name="TbMotoristaView10">
-        <AttrNames>
-          <Item Value="Nome"/>
-          <Item Value="Cpf"/>
-          <Item Value="Telefone"/>
-          <Item Value="Email"/>
-          <Item Value="FkCatHab"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <list IterBinding="TbCatHabView1Iterator" ListOperMode="navigation"
           ListIter="TbCatHabView1Iterator" id="TbCatHabView1"
           DTSupportsMRU="true">
@@ -54,9 +66,42 @@
         <Item Value="Categoria"/>
       </AttrNames>
     </list>
-    <action IterBinding="TbMotoristaView1Iterator" id="CommitTbMotorista"
+    <action IterBinding="TbMotoristaView1Iterator" id="Delete"
             InstanceName="AppModuleDataControl.TbMotoristaView1"
-            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
-            Action="commitTransaction"/>
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator" id="Nome1">
+      <AttrNames>
+        <Item Value="Nome"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator" id="Cpf1">
+      <AttrNames>
+        <Item Value="Cpf"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator"
+                     id="Telefone1">
+      <AttrNames>
+        <Item Value="Telefone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator" id="Email1">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator"
+                     id="Endereco1">
+      <AttrNames>
+        <Item Value="Endereco"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MotoristaCategoriaView1Iterator"
+                     id="Categoria">
+      <AttrNames>
+        <Item Value="Categoria"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
