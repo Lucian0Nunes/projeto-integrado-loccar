@@ -138,6 +138,8 @@ public class TbMotoristaImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int IDMOTORISTA = AttributesEnum.IdMotorista.index();
     public static final int NOME = AttributesEnum.Nome.index();
     public static final int CPF = AttributesEnum.Cpf.index();
@@ -152,6 +154,17 @@ public class TbMotoristaImpl extends EntityImpl {
      * This is the default constructor (do not remove).
      */
     public TbMotoristaImpl() {
+    }
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        if (mDefinitionObject == null) {
+            mDefinitionObject = EntityDefImpl.findDefObject("eo.TbMotorista");
+        }
+        return mDefinitionObject;
     }
 
     /**
@@ -320,6 +333,7 @@ public class TbMotoristaImpl extends EntityImpl {
         return (RowIterator)getAttributeInternal(TBORDEMDESERVICO);
     }
 
+
     /**
      * @param idMotorista key constituent
 
@@ -329,16 +343,6 @@ public class TbMotoristaImpl extends EntityImpl {
         return new Key(new Object[]{idMotorista});
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        if (mDefinitionObject == null) {
-            mDefinitionObject = EntityDefImpl.findDefObject("eo.TbMotorista");
-        }
-        return mDefinitionObject;
-    }
-    
     protected void create(AttributeList attributeList) {
         super.create(attributeList);
         //Sequence

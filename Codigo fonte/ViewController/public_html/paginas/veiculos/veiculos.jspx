@@ -38,17 +38,20 @@
                                     <af:toolbar id="t2">
                                       <af:commandToolbarButton text="Inserir novo"
                                                                id="ctb1"
-                                                               partialSubmit="true">
+                                                               partialSubmit="true"
+                                                               icon="/imagens/car_add.png">
                                       <af:showPopupBehavior popupId="inserir"/>
                                     </af:commandToolbarButton>
                                       <af:commandToolbarButton text="Editar"
                                                                id="ctb2"
-                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}">
+                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}"
+                                                               icon="/imagens/car_edit.png">
                                       <af:showPopupBehavior popupId="editar"/>
                                     </af:commandToolbarButton>
                                       <af:commandToolbarButton text="Excluir"
                                                                id="ctb3"
-                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}">
+                                                               disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}"
+                                                               icon="/imagens/car_delete.png">
                                       <af:showPopupBehavior popupId="excluir"/>
                                     </af:commandToolbarButton>
                                     </af:toolbar>
@@ -152,12 +155,14 @@
                                       <af:toolbar id="t3">
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb4"
-                                                                 actionListener="#{pageFlowScope.veiculoBean.incluirNovoVeiculo}"/>
+                                                                 actionListener="#{pageFlowScope.veiculoBean.incluirNovoVeiculo}"
+                                                                 icon="/imagens/accept.png"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb5"
                                                                  actionListener="#{pageFlowScope.veiculoBean.cancelarRegistro}"
                                                                  immediate="true"
-                                                                 partialSubmit="true">
+                                                                 partialSubmit="true"
+                                                                 icon="/imagens/cancel.png">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>
@@ -249,12 +254,14 @@
                                       <af:toolbar id="t4">
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb6"
-                                                                 actionListener="#{pageFlowScope.veiculoBean.gravarEdicao}"/>
+                                                                 actionListener="#{pageFlowScope.veiculoBean.gravarEdicao}"
+                                                                 icon="/imagens/accept.png"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb7"
                                                                  actionListener="#{pageFlowScope.veiculoBean.cancelarEdicao}"
                                                                  immediate="true"
-                                                                 partialSubmit="true">
+                                                                 partialSubmit="true"
+                                                                 icon="/imagens/cancel.png">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>
@@ -291,27 +298,31 @@
                                   <af:column sortProperty="Marca"
                                              filterable="true" sortable="true"
                                              headerText="#{bindings.VeiculoMMView1.hints.Marca.label}"
-                                             id="c3">
+                                             id="c3" align="center"
+                                             inlineStyle="text-align:left;">
                                     <af:outputText value="#{row.Marca}"
                                                    id="ot2"/>
                                   </af:column>
                                   <af:column sortProperty="Modelo"
                                              filterable="true" sortable="true"
                                              headerText="#{bindings.VeiculoMMView1.hints.Modelo.label}"
-                                             id="c2">
+                                             id="c2" align="center"
+                                             inlineStyle="text-align:left;">
                                     <af:outputText value="#{row.Modelo}"
                                                    id="ot3"/>
                                   </af:column>
                                   <af:column sortProperty="Ano"
                                              filterable="true" sortable="true"
                                              headerText="#{bindings.VeiculoMMView1.hints.Ano.label}"
-                                             id="c4">
+                                             id="c4" align="center"
+                                             inlineStyle="text-align:left;">
                                     <af:outputText value="#{row.Ano}" id="ot1"/>
                                   </af:column>
                                   <af:column sortProperty="Proprietario"
                                              filterable="true" sortable="true"
                                              headerText="#{bindings.VeiculoMMView1.hints.Proprietario.label}"
-                                             id="c1">
+                                             id="c1" align="center"
+                                             inlineStyle="text-align:left;">
                                     <af:outputText value="#{row.Proprietario}"
                                                    id="ot4"/>
                                   </af:column>
