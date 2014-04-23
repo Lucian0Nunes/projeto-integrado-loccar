@@ -47,6 +47,21 @@ public abstract class ValidaCampos {
             }
        
     }
+    
+    public void validarNome(FacesContext facesContext,
+                               UIComponent uIComponent, Object object) {       
+        
+        String opcao = (String)object;
+        opcao = opcao.replaceAll(" ", "");
+        if(opcao.length()<3){
+            FacesMessage msg =
+                new FacesMessage("Menor que 3 caracteres", "Informe o nome completo!");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+            
+            }
+       
+    }
 
     public static boolean validaCnpj(String cnpj) {
 

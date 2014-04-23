@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.61.92" id="funcionarioPageDef"
+                Package="paginas.funcionarios">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="TbFuncionarioView1" RangeSize="-1"
+              DataControl="AppModuleDataControl"
+              id="TbFuncionarioView1Iterator"/>
+    <searchRegion Binds="TbFuncionarioView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="TbFuncionarioView1Query"/>
+    <iterator id="ExisteCpfTbFuncionario1Iterator"
+              Binds="ExisteCpfTbFuncionario1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <action IterBinding="TbFuncionarioView1Iterator" id="CommitTbFuncionario"
+            InstanceName="AppModuleDataControl.TbFuncionarioView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action IterBinding="TbFuncionarioView1Iterator" id="Delete"
+            InstanceName="AppModuleDataControl.TbFuncionarioView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator" id="Nome">
+      <AttrNames>
+        <Item Value="Nome"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator" id="Cpf">
+      <AttrNames>
+        <Item Value="Cpf"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator" id="Telefone">
+      <AttrNames>
+        <Item Value="Telefone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator" id="Endereco">
+      <AttrNames>
+        <Item Value="Endereco"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="TbFuncionarioView1Iterator" id="TbFuncionarioView1">
+      <nodeDefinition DefName="vo.TbFuncionarioView" Name="TbFuncionarioView10">
+        <AttrNames>
+          <Item Value="Nome"/>
+          <Item Value="Telefone"/>
+          <Item Value="TbPerfilIdPerfil"/>
+          <Item Value="Cpf"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="TbFuncionarioView1Iterator"
+                     id="TbPerfilIdPerfil">
+      <AttrNames>
+        <Item Value="TbPerfilIdPerfil"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

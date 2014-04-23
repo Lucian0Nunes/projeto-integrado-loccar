@@ -16,7 +16,16 @@
             </af:panelGroupLayout>
           </f:facet>
           <f:facet name="start"/>
-          <f:facet name="end"/>
+          <f:facet name="end">
+            <af:panelGroupLayout layout="scroll"
+                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                 id="pt_pgl1">
+              <af:spacer width="10" height="10" id="pt_s1"/>
+              <af:panelBox text="Usuário" id="pt_pb1" showDisclosure="false">
+                <f:facet name="toolbar"/>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </f:facet>
         </af:panelStretchLayout>
       </f:facet>
       <f:facet name="second">
@@ -49,7 +58,8 @@
                       <af:showDetailItem text="Administrador" id="pt_sdi2"
                                          disclosed="true">
                         <af:panelList id="pt_pl2">
-                          <af:goLink id="pt_gl5" text="Funcionários"/>
+                          <af:goLink id="pt_gl5" text="Funcionários"
+                                     destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=funcionarios&amp;adf.tfDoc=/WEB-INF/funcionarios/funcionarios.xml"/>
                         </af:panelList>
                       </af:showDetailItem>
                     </af:panelAccordion>

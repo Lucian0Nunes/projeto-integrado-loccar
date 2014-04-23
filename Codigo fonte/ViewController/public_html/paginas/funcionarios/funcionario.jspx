@@ -6,6 +6,17 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <f:view>
     <af:document id="d1">
+      <af:resource type="javascript"
+                   source="/js/mootools-core-1.3-full-nocompat.js"/>
+      <af:resource type="javascript" source="/js/mootools-more-1.3.0.1.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Fixed.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Extras.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Reverse.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Repeat.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Regexp.js"/>
+      <af:resource type="javascript" source="/js/applyMasks.js"/>
+      <af:messages id="m1"/>
       <af:form id="f1">
         <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
           <f:facet name="corpo">
@@ -14,25 +25,353 @@
                                  stretchChildren="first">
                 <af:decorativeBox id="db1" styleClass="AFStretchWidth">
                   <f:facet name="center">
-                    <af:panelSplitter id="ps1" splitterPosition="329">
+                    <af:panelSplitter id="ps1" splitterPosition="417">
                       <f:facet name="first">
                         <af:panelCollection id="pc1"
                                             styleClass="AFStretchWidth">
-                          <f:facet name="menus"/>
                           <f:facet name="toolbar">
-                            <af:toolbar id="t1">
+                            <af:toolbar id="t2">
                               <af:commandToolbarButton text="Inserir novo"
-                                                       id="ctb1"/>
-                              <af:commandToolbarButton text="Editar"
-                                                       id="ctb2"/>
-                              <af:commandToolbarButton text="Excluir"
-                                                       id="ctb3"/>
+                                                       id="ctb1"
+                                                       icon="/imagens/user_add.png">
+                                <af:showPopupBehavior popupId="inserir"/>
+                              </af:commandToolbarButton>
+                              <af:commandToolbarButton text="Editar" id="ctb2"
+                                                       disabled="#{not pageFlowScope.FuncionarioBean.habilitaBotoes}"
+                                                       icon="/imagens/user_edit.png">
+                                <af:showPopupBehavior popupId="editar"/>
+                              </af:commandToolbarButton>
+                              <af:commandToolbarButton text="Excluir" id="ctb3"
+                                                       disabled="#{not pageFlowScope.FuncionarioBean.habilitaBotoes}"
+                                                       icon="/imagens/user_delete.png">
+                                <af:showPopupBehavior popupId="excluir"/>
+                              </af:commandToolbarButton>
                             </af:toolbar>
                           </f:facet>
                           <f:facet name="statusbar"/>
+                          <af:popup id="inserir" contentDelivery="lazyUncached"
+                                    animate="false"
+                                    popupFetchListener="#{pageFlowScope.FuncionarioBean.chamadaPopupInclusao}"
+                                    binding="#{pageFlowScope.FuncionarioBean.popupInserir}">
+                            <af:dialog id="d2" closeIconVisible="false"
+                                       type="none" title="Inserir novo">
+                              <f:facet name="buttonBar">
+                                <af:toolbar id="t3">
+                                  <af:commandToolbarButton text="Gravar"
+                                                           id="ctb4"
+                                                           actionListener="#{pageFlowScope.FuncionarioBean.inserirNovoFuncionario}"
+                                                           icon="/imagens/accept.png"/>
+                                  <af:commandToolbarButton text="Cancelar"
+                                                           id="ctb5"
+                                                           actionListener="#{pageFlowScope.FuncionarioBean.cancelarRegistro}"
+                                                           partialSubmit="true"
+                                                           immediate="true"
+                                                           icon="/imagens/cancel.png">
+                                    <af:resetActionListener/>
+                                  </af:commandToolbarButton>
+                                </af:toolbar>
+                              </f:facet>
+                              <af:outputText value="(*) Campo obrigatório"
+                                             id="ot4"/>
+                              <af:panelFormLayout id="pfl1">
+                                <af:spacer width="10" height="10" id="s7"/>
+                                <af:selectOneRadio label="Perfil de acesso"
+                                                   id="sor1" layout="horizontal"
+                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}">
+                                  <af:selectItem label="Funcionário" value="2"
+                                                 id="si2"/>
+                                  <af:selectItem label="Administrador" value="1"
+                                                 id="si1"/>
+                                </af:selectOneRadio>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:inputText value="#{pageFlowScope.FuncionarioBean.vlNome}"
+                                              label="Nome completo"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="60"
+                                              shortDesc="#{bindings.Nome.hints.tooltip}"
+                                              id="it3"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}">
+                                  <f:validator binding="#{bindings.Nome.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:inputText value="#{pageFlowScope.FuncionarioBean.vlCpf}"
+                                              label="CPF"
+                                              required="true"
+                                              columns="20"
+                                              maximumLength="#{bindings.Cpf.hints.precision}"
+                                              shortDesc="#{bindings.Cpf.hints.tooltip}"
+                                              id="it5"
+                                              validator="#{pageFlowScope.FuncionarioBean.verficarValidarCpf}">
+                                  <af:clientListener method="applyMask"
+                                                     type="focus"/>
+                                  <af:clientAttribute name="meioMask"
+                                                      value="fixed.cpf"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:inputText value="#{pageFlowScope.FuncionarioBean.vlTelefone}"
+                                              label="#{bindings.Telefone.hints.label}"
+                                              required="true"
+                                              columns="20"
+                                              maximumLength="#{bindings.Telefone.hints.precision}"
+                                              shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                              id="it1"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}">
+                                  <af:clientListener method="applyMask"
+                                                     type="focus"/>
+                                  <af:clientAttribute name="meioMask"
+                                                      value="fixed.phone"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:inputText value="#{pageFlowScope.FuncionarioBean.vlEmail}"
+                                              label="#{bindings.Email.hints.label}"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="#{bindings.Email.hints.precision}"
+                                              shortDesc="#{bindings.Email.hints.tooltip}"
+                                              id="it2"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}">
+                                  <f:validator binding="#{bindings.Email.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s5"/>
+                                <af:inputText value="#{pageFlowScope.FuncionarioBean.vlEndereco}"
+                                              label="#{bindings.Endereco.hints.label}"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="#{bindings.Endereco.hints.precision}"
+                                              shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                              id="it4" rows="2">
+                                  <f:validator binding="#{bindings.Endereco.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s6"/>
+                              </af:panelFormLayout>
+                            </af:dialog>
+                          </af:popup>
+                          <af:popup id="editar" contentDelivery="lazyUncached"
+                                    animate="false"
+                                    binding="#{pageFlowScope.FuncionarioBean.popupEditar}"
+                                    popupFetchListener="#{pageFlowScope.FuncionarioBean.chamadaPopupEditar}">
+                            <af:dialog id="d3" closeIconVisible="false"
+                                       title="Editar " type="none">
+                              <af:outputText value="(*) Campo obrigatório"
+                                             id="ot5"/>
+                              <af:panelFormLayout id="pfl2">
+                                <af:spacer width="10" height="10" id="s8"/>
+                                <af:selectOneRadio label="Perfil de acesso"
+                                                   id="sor2" layout="horizontal"
+                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}">
+                                  <af:selectItem label="Funcionário" value="2"
+                                                 id="si4"/>
+                                  <af:selectItem label="Administrador" value="1"
+                                                 id="si3"/>
+                                </af:selectOneRadio>
+                                <af:spacer width="10" height="10" id="s9"/>
+                                <af:inputText value="#{bindings.Nome.inputValue}"
+                                              label="Nome completo"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="#{bindings.Nome.hints.precision}"
+                                              shortDesc="#{bindings.Nome.hints.tooltip}"
+                                              id="it8"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}">
+                                  <f:validator binding="#{bindings.Nome.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s10"/>
+                                <af:inputText value="#{bindings.Cpf.inputValue}"
+                                              label="CPF"
+                                              required="true"
+                                              columns="20"
+                                              maximumLength="#{bindings.Cpf.hints.precision}"
+                                              shortDesc="#{bindings.Cpf.hints.tooltip}"
+                                              id="it9" readOnly="true">
+                                  <af:clientListener method="applyMask"
+                                                     type="focus"/>
+                                  <af:clientAttribute name="meioMask"
+                                                      value="fixed.cpf"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s11"/>
+                                <af:inputText value="#{bindings.Telefone.inputValue}"
+                                              label="#{bindings.Telefone.hints.label}"
+                                              required="true"
+                                              columns="20"
+                                              maximumLength="#{bindings.Telefone.hints.precision}"
+                                              shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                              id="it7"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}">
+                                  <af:clientListener method="applyMask"
+                                                     type="focus"/>
+                                  <af:clientAttribute name="meioMask"
+                                                      value="fixed.phone"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s12"/>
+                                <af:inputText value="#{bindings.Email.inputValue}"
+                                              label="#{bindings.Email.hints.label}"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="#{bindings.Email.hints.precision}"
+                                              shortDesc="#{bindings.Email.hints.tooltip}"
+                                              id="it6"
+                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}">
+                                  <f:validator binding="#{bindings.Email.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s13"/>
+                                <af:inputText value="#{bindings.Endereco.inputValue}"
+                                              label="#{bindings.Endereco.hints.label}"
+                                              required="true"
+                                              columns="60"
+                                              maximumLength="#{bindings.Endereco.hints.precision}"
+                                              shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                              id="it10" rows="2">
+                                  <f:validator binding="#{bindings.Endereco.validator}"/>
+                                </af:inputText>
+                                <af:spacer width="10" height="10" id="s14"/>
+                              </af:panelFormLayout>
+                              <f:facet name="buttonBar">
+                                <af:toolbar id="t4">
+                                  <af:commandToolbarButton text="Gravar"
+                                                           id="ctb6"
+                                                           actionListener="#{pageFlowScope.FuncionarioBean.gravarEdicao}"
+                                                           icon="/imagens/accept.png"/>
+                                  <af:commandToolbarButton text="Cancelar"
+                                                           id="ctb7"
+                                                           partialSubmit="true"
+                                                           immediate="true"
+                                                           actionListener="#{pageFlowScope.FuncionarioBean.cancelarEdicao}"
+                                                           icon="/imagens/cancel.png">
+                                    <af:resetActionListener/>
+                                  </af:commandToolbarButton>
+                                </af:toolbar>
+                              </f:facet>
+                            </af:dialog>
+                          </af:popup>
+                          <af:popup id="excluir" contentDelivery="lazyUncached"
+                                    animate="false">
+                            <af:dialog id="d4" affirmativeTextAndAccessKey="Sim"
+                                       cancelTextAndAccessKey="Não"
+                                       title="Confirmação"
+                                       inlineStyle="width:160px;"
+                                       closeIconVisible="false"
+                                       dialogListener="#{pageFlowScope.FuncionarioBean.excluirFuncionario}">
+                              <af:outputText value="Deseja realmente excluir?"
+                                             id="outputText4"/>
+                            </af:dialog>
+                          </af:popup>
+                          <af:table value="#{bindings.TbFuncionarioView1.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.TbFuncionarioView1.rangeSize}"
+                                    emptyText="#{bindings.TbFuncionarioView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.TbFuncionarioView1.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.TbFuncionarioView1Query.queryDescriptor}"
+                                    queryListener="#{bindings.TbFuncionarioView1Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.TbFuncionarioView1.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.TbFuncionarioView1.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t1"
+                                    binding="#{pageFlowScope.FuncionarioBean.gridFuncionarios}">
+                            <af:column sortProperty="Nome" filterable="true"
+                                       sortable="true"
+                                       headerText="Nome completo"
+                                       id="c3" width="200" align="center"
+                                       inlineStyle="text-align:left;">
+                              <af:outputText value="#{row.Nome}" id="ot1"/>
+                            </af:column>
+                            <af:column headerText="CPF"
+                                       id="c2" filterable="true"
+                                       sortable="true" sortProperty="Cpf"
+                                       align="center"
+                                       inlineStyle="text-align:left;">
+                              <af:outputText value="#{row.Cpf}" id="ot11"/>
+                            </af:column>
+                            <af:column sortProperty="TbPerfilIdPerfil"
+                                       filterable="true" sortable="true"
+                                       headerText="Perfil de acesso"
+                                       id="c1" width="100"
+                                       inlineStyle="text-align:left;"
+                                       align="center">
+                              <af:outputText value="#{row.TbPerfilIdPerfil == '1'? 'Adminstrador':'Funcionário'}"
+                                             id="ot3">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.TbFuncionarioView1.hints.TbPerfilIdPerfil.format}"/>
+                              </af:outputText>
+                            </af:column>
+                          </af:table>
                         </af:panelCollection>
                       </f:facet>
-                      <f:facet name="second"/>
+                      <f:facet name="second">
+                        <af:panelGroupLayout id="pgl1">
+                          <af:panelStretchLayout id="psl1"
+                                                 styleClass="AFStretchWidth"
+                                                 inlineStyle="height:530px;"
+                                                 topHeight="90px">
+                            <f:facet name="bottom"/>
+                            <f:facet name="center">
+                              <af:panelGroupLayout layout="scroll"
+                                                   xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                   id="pgl4" halign="center">
+                                <af:panelFormLayout id="pfl3"
+                                                    partialTriggers="pc1:t1"
+                                                    inlineStyle="font-size:x-large; font-family:Verdana;">
+                                  <af:panelLabelAndMessage label="Perfil de acesso"
+                                                           id="plam3"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.TbPerfilIdPerfil.inputValue =='1'? 'Administrador':'Funcionário'}"
+                                                   id="ot9"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s16"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
+                                                           id="plam2"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.Nome.inputValue}"
+                                                   id="ot2"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s17"/>
+                                  <af:panelLabelAndMessage label="CPF"
+                                                           id="plam1"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.Cpf.inputValue}"
+                                                   id="ot7"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s18"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
+                                                           id="plam4"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                   id="ot6"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s19"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
+                                                           id="plam6"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.Email.inputValue}"
+                                                   id="ot10"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s20"/>
+                                  <af:panelLabelAndMessage label="Endereço"
+                                                           id="plam5"
+                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                    <af:outputText value="#{bindings.Endereco.inputValue}"
+                                                   id="ot8"/>
+                                  </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                              </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="start"/>
+                            <f:facet name="end"/>
+                            <f:facet name="top">
+                              <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                   id="pgl2" layout="vertical"
+                                                   halign="center"
+                                                   valign="middle">
+                                <af:spacer width="10" height="10" id="s15"/>
+                                <af:outputText value="Dados Gerais"
+                                               id="outputText1"
+                                               inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
+                              </af:panelGroupLayout>
+                            </f:facet>
+                          </af:panelStretchLayout>
+                        </af:panelGroupLayout>
+                      </f:facet>
                     </af:panelSplitter>
                   </f:facet>
                   <f:facet name="top"/>
