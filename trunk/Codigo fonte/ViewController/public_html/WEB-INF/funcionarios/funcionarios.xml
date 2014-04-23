@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
-  <task-flow-definition id="funcionarios"/>
+  <task-flow-definition id="funcionarios">
+    <default-activity id="__1">funcionario</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__2">FuncionarioBean</managed-bean-name>
+      <managed-bean-class id="__4">br.com.locCar.bean.funcionario.FuncionarioBean</managed-bean-class>
+      <managed-bean-scope id="__3">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="funcionario">
+      <page>/paginas/funcionarios/funcionario.jspx</page>
+    </view>
+  </task-flow-definition>
 </adfc-config>

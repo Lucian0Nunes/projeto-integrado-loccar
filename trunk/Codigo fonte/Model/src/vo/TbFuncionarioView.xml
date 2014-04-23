@@ -18,9 +18,11 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  OrderBy="TbFuncionario.NOME"
+  ComponentClass="vo.TbFuncionarioViewImpl">
   <DesignTime>
-    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
   </DesignTime>
   <EntityUsage
     Name="TbFuncionario"

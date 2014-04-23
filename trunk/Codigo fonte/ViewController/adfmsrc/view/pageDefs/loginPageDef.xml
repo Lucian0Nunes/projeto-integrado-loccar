@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.61.92" id="loginPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="TbFuncionarioView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="TbFuncionarioView1Iterator"/>
+    <variableIterator id="variables">
+      <variable Type="int" Name="autenticarUsuario_return" IsQueriable="false"
+                IsUpdateable="0"
+                DefaultValue="${bindings.autenticarUsuario.result}"/>
+      <variable Type="java.lang.String" Name="autenticarUsuario_userid"
+                IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="autenticarUsuario_pass"
+                IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <methodAction id="autenticarUsuario" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="autenticarUsuario"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.autenticarUsuario_AppModuleDataControl_dataProvider_autenticarUsuario_result">
+      <NamedData NDName="userid" NDType="java.lang.String"
+                 NDValue="${bindings.autenticarUsuario_userid}"/>
+      <NamedData NDName="pass" NDType="java.lang.String"
+                 NDValue="${bindings.autenticarUsuario_pass}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="userid">
+      <AttrNames>
+        <Item Value="autenticarUsuario_userid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="pass">
+      <AttrNames>
+        <Item Value="autenticarUsuario_pass"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
