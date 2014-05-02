@@ -89,6 +89,9 @@
   <ViewUsage
     Name="ExisteCpfTbFuncionario1"
     ViewObjectName="vo.ExisteCpfTbFuncionario"/>
+  <ViewUsage
+    Name="OsDadosView1"
+    ViewObjectName="vo.OsDadosView"/>
   <ViewLinkUsage
     Name="FkFranquia1Link1"
     ViewLinkObjectName="vo.FkFranquia1Link"
@@ -137,6 +140,19 @@
     SrcViewUsageName="am.AppModule.TbVeiculoView1"
     DstViewUsageName="am.AppModule.TbOrdemDeServicoView5"
     Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ClientInterface>
     <Method
       Name="autenticarUsuario">

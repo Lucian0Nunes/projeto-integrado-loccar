@@ -10,10 +10,12 @@
   DBObjectName="TB_ORDEM_DE_SERVICO"
   AliasName="TbOrdemDeServico"
   BindingStyle="OracleName"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  RowClass="eo.TbOrdemDeServicoImpl">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access"/>
     <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
   <Attribute
     Name="IdOs"
@@ -108,7 +110,6 @@
   </Attribute>
   <Attribute
     Name="FkMotorista"
-    IsNotNull="true"
     Precision="15"
     Scale="0"
     ColumnName="FK_MOTORISTA"
@@ -223,17 +224,6 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbOrdemDeServico.FkCliente"/>
-    </AttrArray>
-  </Key>
-  <Key
-    Name="SysC0012597">
-    <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012597"/>
-      <Attr Name="_checkCondition" Value='"FK_MOTORISTA" IS NOT NULL'/>
-      <Attr Name="_isCheck" Value="true"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbOrdemDeServico.FkMotorista"/>
     </AttrArray>
   </Key>
   <Key

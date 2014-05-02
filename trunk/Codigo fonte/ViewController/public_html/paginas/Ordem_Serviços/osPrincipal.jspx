@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx"
+                         value="#{bindings.pageTemplateBinding}" id="pt1">
+          <f:facet name="corpo">
+            <af:panelTabbed id="pt2">
+              <af:showDetailItem text="OS's Cadastradas" id="sdi1"
+                                 stretchChildren="first">
+                <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+                  <f:facet name="center">
+                    <af:panelSplitter id="ps1" splitterPosition="288">
+                      <f:facet name="first">
+                        <af:panelCollection id="pc1"
+                                            styleClass="AFStretchWidth">
+                          <f:facet name="menus"/>
+                          <f:facet name="toolbar">
+                            <af:toolbar id="t1">
+                              <af:commandToolbarButton text="Nova Os"
+                                                       id="ctb1"
+                                                       immediate="true"
+                                                       partialSubmit="true">
+                                <af:showPopupBehavior popupId="inserirDadosOS"/>
+                              </af:commandToolbarButton>
+                              <af:commandToolbarButton
+                                                       id="ctb2" text="Editar"/>
+                              <af:commandToolbarButton text="Excluir"
+                                                       id="ctb3"/>
+                            </af:toolbar>
+                          </f:facet>
+                          <f:facet name="statusbar"/>
+                          <af:table value="#{bindings.OsDadosView1.collectionModel}"
+                                    var="row"
+                                    rows="#{bindings.OsDadosView1.rangeSize}"
+                                    emptyText="#{bindings.OsDadosView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.OsDadosView1.rangeSize}"
+                                    rowBandingInterval="0"
+                                    filterModel="#{bindings.OsDadosView1Query.queryDescriptor}"
+                                    queryListener="#{bindings.OsDadosView1Query.processQuery}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.OsDadosView1.collectionModel.selectedRow}"
+                                    selectionListener="#{bindings.OsDadosView1.collectionModel.makeCurrent}"
+                                    rowSelection="single" id="t2"
+                                    binding="#{pageFlowScope.os.bindGridPrincipal}">
+                            <af:column sortProperty="IdOs" filterable="true"
+                                       sortable="true" headerText="Nr da Os"
+                                       id="c9" width="50" align="center"
+                                       inlineStyle="text-align:center;">
+                              <af:outputText value="#{row.IdOs}" id="ot1">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.OsDadosView1.hints.IdOs.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column headerText="Data"
+                                        sortProperty="DataDaOs"
+                                       id="c1" filterable="true"
+                                       sortable="true" align="center"
+                                       width="70">
+                              <af:outputText value="#{row.DataDaOs}" id="ot3">
+                                <af:convertDateTime pattern="#{bindings.OsDadosView1.hints.DataDaOs.format}"/>
+                              </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="Nome" filterable="true"
+                                       sortable="true"
+                                       headerText="Nome do Cliente" id="c8"
+                                       width="150" align="center"
+                                       inlineStyle="text-align:left;">
+                              <af:outputText value="#{row.Nome}" id="ot8"/>
+                            </af:column>
+                          </af:table>
+                          <af:popup id="inserirDadosOS"
+                                    contentDelivery="lazyUncached"
+                                    animate="false"
+                                    popupFetchListener="#{pageFlowScope.os.chamadaPopupInclusao}"
+                                    binding="#{pageFlowScope.os.popupInserir}">
+                            <af:dialog id="d2" closeIconVisible="false"
+                                       type="none"
+                                       title="Dados para Confecção da OS">
+                              <af:panelTabbed id="pt3"
+                                              inlineStyle="width:404px; height:236px;">
+                                <af:showDetailItem text="Cliente"
+                                                   id="sdi3">
+                                  <af:spacer width="10" height="10" id="s1"/>
+                                  <af:panelGroupLayout id="pgl1"
+                                                       layout="horizontal">
+                                    <af:inputText label="Nome" id="it3"
+                                                  value="#{pageFlowScope.os.nomeCliPesq}"
+                                                  autoSubmit="true"/>
+                                    <af:toolbar id="t7">
+                                      <af:commandToolbarButton text="Pesquisar"
+                                                               id="ctb6"
+                                                               actionListener="#{pageFlowScope.os.pesquisarCliente}"/>
+                                      <af:commandToolbarButton text="Limpar"
+                                                               id="ctb7"
+                                                               actionListener="#{pageFlowScope.os.limparCliente}"/>
+                                    </af:toolbar>
+                                  </af:panelGroupLayout>
+                                  <af:spacer width="10" height="10" id="s2"/>
+                                  <af:table var="row" rowBandingInterval="1"
+                                            id="t3" inlineStyle="height:150px;"
+                                            value="#{pageFlowScope.os.cliente}"
+                                            rowSelection="single" width="380"
+                                            columnStretching="column:c3"
+                                            binding="#{pageFlowScope.os.bindGridClientes}"
+                                            selectionListener="#{pageFlowScope.os.selectionListenerCliente}">
+                                    <af:column sortable="false"
+                                               headerText="Nome Completo"
+                                               id="c3" align="center"
+                                               inlineStyle="text-align:left;">
+                                      <af:outputText value="#{row.nomeCli}"
+                                                     id="ot2"/>
+                                    </af:column>
+                                    <af:column sortable="false"
+                                               headerText="CPF/CNPJ" id="c2"
+                                               align="center">
+                                      <af:outputText value="#{row.docCli}"
+                                                     id="ot4"/>
+                                    </af:column>
+                                  </af:table>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Veículo"
+                                                   id="sdi4">
+                                  <af:spacer width="10" height="10" id="s3"/>
+                                  <af:panelGroupLayout id="pgl2"
+                                                       layout="horizontal">
+                                    <af:inputText label="Modelo" id="it4"
+                                                  value="#{pageFlowScope.os.modeloPesq}"
+                                                  autoSubmit="true"/>
+                                    <af:toolbar id="t10">
+                                      <af:commandToolbarButton text="Pesquisar"
+                                                               id="ctb13"
+                                                               actionListener="#{pageFlowScope.os.pesquisarVeiculo}"/>
+                                      <af:commandToolbarButton text="Limpar"
+                                                               id="ctb14"
+                                                               actionListener="#{pageFlowScope.os.limparVeiculo}"/>
+                                    </af:toolbar>
+                                  </af:panelGroupLayout>
+                                  <af:spacer width="10" height="10" id="s4"/>
+                                  <af:table var="row" rowBandingInterval="1"
+                                            id="t4" inlineStyle="height:150px;"
+                                            rowSelection="single"
+                                            value="#{pageFlowScope.os.veiculo}"
+                                            width="380"
+                                            columnStretching="column:c6"
+                                            binding="#{pageFlowScope.os.bindGridVeiculos}"
+                                            selectionListener="#{pageFlowScope.os.selectionListenerVeiculo}">
+                                    <af:column sortable="false"
+                                               headerText="Modelo" id="c6"
+                                               align="center"
+                                               inlineStyle="text-align:left;">
+                                      <af:outputText value="#{row.modeloCar}"
+                                                     id="ot5"/>
+                                    </af:column>
+                                    <af:column sortable="false" headerText="Ano"
+                                               id="c4" align="center">
+                                      <af:outputText value="#{row.anoCar}"
+                                                     id="ot6"/>
+                                    </af:column>
+                                    <af:column sortable="false"
+                                               headerText="Placa" id="c5"
+                                               align="center">
+                                      <af:outputText value="#{row.placaCar}"
+                                                     id="ot7"/>
+                                    </af:column>
+                                  </af:table>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Motorista"
+                                                   id="sdi5">
+                                  <af:spacer width="10" height="10" id="s5"/>
+                                  <af:panelGroupLayout id="pgl3"
+                                                       layout="horizontal">
+                                    <af:inputText label="Nome" id="it5"
+                                                  autoSubmit="true"
+                                                  value="#{pageFlowScope.os.nomeMotPesq}"/>
+                                    <af:toolbar id="t9">
+                                      <af:commandToolbarButton text="Pesquisar"
+                                                               id="ctb11"
+                                                               actionListener="#{pageFlowScope.os.pesquisarMotorista}"/>
+                                      <af:commandToolbarButton text="Limpar"
+                                                               id="ctb12"
+                                                               actionListener="#{pageFlowScope.os.limparMotorista}"/>
+                                    </af:toolbar>
+                                  </af:panelGroupLayout>
+                                  <af:spacer width="10" height="10" id="s6"/>
+                                  <af:table var="row" rowBandingInterval="1"
+                                            id="t5" inlineStyle="height:150px;"
+                                            width="380"
+                                            columnStretching="column:c7"
+                                            value="#{pageFlowScope.os.motorista}"
+                                            rowSelection="single"
+                                            binding="#{pageFlowScope.os.bindGridMotoristas}"
+                                            selectionListener="#{pageFlowScope.os.selectionListenerMotorista}">
+                                    <af:column sortable="false"
+                                               headerText="Nome completo"
+                                               id="c7" align="center"
+                                               inlineStyle="text-align:left;">
+                                      <af:outputText value="#{row.nomeMot}"
+                                                     id="ot11"/>
+                                    </af:column>
+                                    <af:column sortable="false"
+                                               headerText="Habilitação" id="c10"
+                                               align="center">
+                                      <af:outputText value="#{row.catHab}"
+                                                     id="ot9"/>
+                                    </af:column>
+                                    <af:column sortable="false"
+                                               headerText="Telefone" id="c11"
+                                               align="center">
+                                      <af:outputText value="#{row.telefoneMot}"
+                                                     id="ot10"/>
+                                    </af:column>
+                                  </af:table>
+                                </af:showDetailItem>
+                              </af:panelTabbed>
+                              <af:panelBox id="pb1"
+                                           inlineStyle="width:400px; text-align:center;"
+                                           showDisclosure="false" titleHalign="center"
+                                           text="Status">
+                                <f:facet name="toolbar">
+                                  <af:toolbar id="t8"
+                                              inlineStyle="text-align:center;">
+                                    <af:commandToolbarButton id="ctb8"
+                                                             icon="/imagens/tick.png"
+                                                             disabledIcon="/imagens/cross.png"
+                                                             text="Cliente"
+                                                             disabled="#{pageFlowScope.os.statusCliente}"/>
+                                    <af:commandToolbarButton text="Veículo"
+                                                             id="ctb9"
+                                                             icon="/imagens/tick.png"
+                                                             disabledIcon="/imagens/cross.png"
+                                                             disabled="#{pageFlowScope.os.statusVeiculo}"/>
+                                    <af:commandToolbarButton text="Motorista"
+                                                             id="ctb10"
+                                                             icon="/imagens/tick.png"
+                                                             disabledIcon="/imagens/cross.png"
+                                                             disabled="#{pageFlowScope.os.statusMotorista}"/>
+                                  </af:toolbar>
+                                </f:facet>
+                              </af:panelBox>
+                              <af:panelBox id="pb4" disclosed="true"
+                                           text="Informar Usuário"
+                                           inlineStyle="width:400px;">
+                                <f:facet name="toolbar"/>
+                                <af:panelFormLayout id="pfl1">
+                                  <af:inputText label="Nome" id="it1"
+                                                value="#{pageFlowScope.os.nomeUsuario}"
+                                                columns="30" autoSubmit="true"/>
+                                  <af:inputText label="Telefone" id="it2"
+                                                value="#{pageFlowScope.os.telUsuario}"
+                                                autoSubmit="true"/>
+                                </af:panelFormLayout>
+                              </af:panelBox>
+                              <f:facet name="buttonBar">
+                                <af:toolbar id="t6">
+                                  <af:commandToolbarButton text="Gravar"
+                                                           id="ctb4"
+                                                           actionListener="#{pageFlowScope.os.gravarOs}"/>
+                                  <af:commandToolbarButton text="Cancelar"
+                                                           id="ctb5"
+                                                           actionListener="#{pageFlowScope.os.cancelarPopupInserir}">
+                                    <af:resetActionListener/>
+                                  </af:commandToolbarButton>
+                                </af:toolbar>
+                              </f:facet>
+                            </af:dialog>
+                          </af:popup>
+                        </af:panelCollection>
+                      </f:facet>
+                      <f:facet name="second">
+                        <af:panelStretchLayout id="psl14"
+                                               styleClass="AFStretchWidth"
+                                               topHeight="90px">
+                          <f:facet name="bottom"/>
+                          <f:facet name="center">
+                            <af:panelGroupLayout layout="scroll"
+                                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                 id="pgl4" halign="center"/>
+                          </f:facet>
+                          <f:facet name="start"/>
+                          <f:facet name="end"/>
+                          <f:facet name="top">
+                            <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                 id="pgl24" layout="vertical"
+                                                 halign="center"
+                                                 valign="middle">
+                              <af:spacer width="10" height="10" id="s15"/>
+                              <af:outputText value="Dados Gerais"
+                                             id="outputText1"
+                                             inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                    </af:panelSplitter>
+                  </f:facet>
+                  <f:facet name="top"/>
+                </af:decorativeBox>
+              </af:showDetailItem>
+            </af:panelTabbed>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.61.92" id="osPrincipalPageDef"
+                Package="paginas.Ordem_Serviços">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="template.template_principalPageDef" id="pageTemplateBinding"
+          Refresh="ifNeeded"/>
+    <iterator Binds="OsDadosView1" RangeSize="-1"
+              DataControl="AppModuleDataControl" id="OsDadosView1Iterator"/>
+    <searchRegion Binds="OsDadosView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="OsDadosView1Query"/>
+    <iterator id="TbOrdemDeServicoView1Iterator" Binds="TbOrdemDeServicoView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="TbDiariaView1Iterator" Binds="TbDiariaView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="TbClienteView1Iterator" Binds="TbClienteView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="MotoristaCategoriaView1Iterator"
+              Binds="MotoristaCategoriaView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="VeiculoMMView1Iterator" Binds="VeiculoMMView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="OsDadosView1Iterator" id="OsDadosView1">
+      <nodeDefinition DefName="vo.OsDadosView" Name="OsDadosView10">
+        <AttrNames>
+          <Item Value="IdOs"/>
+          <Item Value="DataDaOs"/>
+          <Item Value="FkVeiculo"/>
+          <Item Value="FkCliente"/>
+          <Item Value="FkMotorista"/>
+          <Item Value="UsuarioServ"/>
+          <Item Value="IdCliente"/>
+          <Item Value="Nome"/>
+          <Item Value="CpfCnpj"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="TbOrdemDeServicoView1Iterator" id="CommitTbOs"
+            InstanceName="AppModuleDataControl.TbOrdemDeServicoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action IterBinding="TbDiariaView1Iterator" id="CommitTbDiaria"
+            InstanceName="AppModuleDataControl.TbDiariaView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

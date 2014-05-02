@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="os">
+    <default-activity id="__1">osPrincipal</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name id="__4">os</managed-bean-name>
+      <managed-bean-class id="__5">br.com.locCar.bean.ordemDeServico.OrdemDeServico</managed-bean-class>
+      <managed-bean-scope id="__2">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="osPrincipal">
+      <page>/paginas/Ordem_Serviços/osPrincipal.jspx</page>
+    </view>
+  </task-flow-definition>
+</adfc-config>
