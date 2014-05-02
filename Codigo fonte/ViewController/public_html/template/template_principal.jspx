@@ -52,7 +52,8 @@
                       <af:showDetailItem text="Serviços" id="pt_sdi3"
                                          disclosed="true">
                         <af:panelList id="pt_pl3">
-                          <af:goLink id="pt_gl4" text="Ordem de Serviço"/>
+                          <af:goLink id="pt_gl4" text="Ordem de Serviço"
+                                     destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=os&amp;adf.tfDoc=/WEB-INF/ordem_de_serviço/os.xml"/>
                         </af:panelList>
                       </af:showDetailItem>
                       <af:showDetailItem text="Administrador" id="pt_sdi2"

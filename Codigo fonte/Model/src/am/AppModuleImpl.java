@@ -300,4 +300,12 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
             return 1;
         }
     }
+
+    /**
+     * Container's getter for OsDadosView1.
+     * @return OsDadosView1
+     */
+    public ViewObjectImpl getOsDadosView1() {
+        return (ViewObjectImpl)findViewObject("OsDadosView1");
+    }
 }

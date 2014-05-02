@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:pageTemplate viewId="/template/template_principal.jspx"
+                         value="#{bindings.pageTemplateBinding}" id="pt1">
+          <f:facet name="corpo">
+            <af:panelTabbed id="pt2">
+              <af:showDetailItem text="Abrir Ordem de serviço" id="sdi1"
+                                 stretchChildren="first">
+                <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+                  <f:facet name="center">
+                    <af:panelStretchLayout id="psl1" startWidth="361px">
+                      <f:facet name="center">
+                        <af:panelStretchLayout id="psl2">
+                          <f:facet name="bottom"/>
+                          <f:facet name="center">
+                            <af:panelGroupLayout layout="scroll"
+                                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                 id="pgl2" halign="left">
+                              <af:spacer width="10" height="15" id="s3"/>
+                              <af:panelBox text="Informações da OS" id="pb5"
+                                           showDisclosure="false"
+                                           disclosed="true">
+                                <f:facet name="toolbar"/>
+                                <af:panelFormLayout id="pfl4" rows="1">
+                                  <af:panelLabelAndMessage label="Franquia de horas"
+                                                           id="plam12"
+                                                           partialTriggers="soc1">
+                                    <af:outputText value="#{pageFlowScope.os.hrFranquia}"
+                                                   id="ot19"
+                                                   partialTriggers="soc1"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="Franquia de Quilometragem"
+                                                           id="plam13"
+                                                           partialTriggers="soc2">
+                                    <af:outputText value="#{pageFlowScope.os.kmFranquia}"
+                                                   id="ot20"
+                                                   partialTriggers="soc2">
+                                      <af:convertNumber groupingUsed="false"
+                                                        pattern="#{bindings.KmFranquia.format}"/>
+                                    </af:outputText>
+                                  </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                              </af:panelBox>
+                              <af:spacer width="10" height="10" id="s6"/>
+                              <af:panelBox text="Informações do Cliente" id="pb6"
+                                           showDisclosure="false"
+                                           disclosed="true">
+                                <f:facet name="toolbar"/>
+                                <af:panelFormLayout id="pfl1"
+                                                    partialTriggers="t1"
+                                                    maxColumns="2" rows="2">
+                                  <af:panelLabelAndMessage label="Nome do Cliente"
+                                                           id="plam1">
+                                    <af:outputText value="#{bindings.Nome.inputValue}"
+                                                   id="ot9"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s7"/>
+                                  <af:inputText label="Usuário do serviço"
+                                                id="it1" columns="40"
+                                                value="#{pageFlowScope.os.nomeUsuario}"
+                                                autoSubmit="true"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
+                                                           id="plam2">
+                                    <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                   id="ot12"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s18"/>
+                                  <af:inputText label="Telefone do usuário"
+                                                id="it2" columns="20"
+                                                value="#{pageFlowScope.os.telUsuario}"
+                                                autoSubmit="true"/>
+                                </af:panelFormLayout>
+                              </af:panelBox>
+                              <af:spacer width="10" height="10" id="s9"/>
+                              <af:panelBox text="Informações do Veículo"
+                                           id="pb8" showDisclosure="false"
+                                           disclosed="true">
+                                <f:facet name="toolbar"/>
+                                <af:panelFormLayout id="pfl2"
+                                                    partialTriggers="t2"
+                                                    maxColumns="2" rows="2">
+                                  <af:panelLabelAndMessage label="#{bindings.Marca.hints.label}"
+                                                           id="plam8">
+                                    <af:outputText value="#{bindings.Marca.inputValue}"
+                                                   id="ot15"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s10"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Ano.hints.label}"
+                                                           id="plam9">
+                                    <af:outputText value="#{bindings.Ano.inputValue}"
+                                                   id="ot14"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="#{bindings.Modelo.hints.label}"
+                                                           id="plam6">
+                                    <af:outputText value="#{bindings.Modelo.inputValue}"
+                                                   id="ot13"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:spacer width="10" height="10" id="s13"/>
+                                  <af:panelLabelAndMessage label="#{bindings.Placa.hints.label}"
+                                                           id="plam7">
+                                    <af:outputText value="#{bindings.Placa.inputValue}"
+                                                   id="ot16"/>
+                                  </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                              </af:panelBox>
+                              <af:spacer width="10" height="10" id="s12"/>
+                              <af:panelBox text="Informações do Motorista"
+                                           id="pb7" disclosed="true"
+                                           showDisclosure="false">
+                                <f:facet name="toolbar"/>
+                                <af:panelFormLayout id="pfl3"
+                                                    partialTriggers="t3"
+                                                    rows="1">
+                                  <af:panelLabelAndMessage label="#{bindings.Nome1.hints.label}"
+                                                           id="plam10">
+                                    <af:outputText value="#{bindings.Nome1.inputValue}"
+                                                   id="ot21"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="#{bindings.Telefone1.hints.label}"
+                                                           id="plam14">
+                                    <af:outputText value="#{bindings.Telefone1.inputValue}"
+                                                   id="ot18"/>
+                                  </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                              </af:panelBox>
+                              <af:spacer width="10" height="10" id="s16"/>
+                              <af:panelGroupLayout id="pgl7" halign="center"
+                                                   layout="horizontal">
+                                <af:toolbar id="t4">
+                                  <af:commandToolbarButton text="Gravar"
+                                                           id="ctb1"
+                                                           actionListener="#{pageFlowScope.os.gravarOs}"/>
+                                  <af:commandToolbarButton text="Cancelar"
+                                                           id="ctb2"
+                                                           action="principal">
+                                    <af:resetActionListener/>
+                                  </af:commandToolbarButton>
+                                </af:toolbar>
+                              </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                          </f:facet>
+                          <f:facet name="start"/>
+                          <f:facet name="end"/>
+                          <f:facet name="top"/>
+                        </af:panelStretchLayout>
+                      </f:facet>
+                      <f:facet name="start">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl1">
+                          <af:panelBox text="Definir Franquia" id="pb4"
+                                       disclosed="true" showDisclosure="true">
+                            <f:facet name="toolbar"/>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:selectOneChoice label="Hora Franquia" id="soc1"
+                                                value="#{pageFlowScope.os.idHrFranquia}"
+                                                autoSubmit="true"
+                                                valuePassThru="true"
+                                                unselectedLabel="Selecione"
+                                                required="true"
+                                                valueChangeListener="#{pageFlowScope.os.hrFranquiaChangeListener}"
+                                                binding="#{pageFlowScope.os.bindHrFranquia}">
+                              <f:selectItems value="#{pageFlowScope.os.listHrsFranquia}"
+                                             id="si1"/>
+                            </af:selectOneChoice>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:selectOneChoice label="Km Franquia" id="soc2"
+                                                value="#{pageFlowScope.os.idKmFranquia}"
+                                                unselectedLabel="Selecione"
+                                                autoSubmit="true"
+                                                valuePassThru="true"
+                                                required="true"
+                                                valueChangeListener="#{pageFlowScope.os.kmFranquiaChangeListener}"
+                                                binding="#{pageFlowScope.os.bindKmFranquia}">
+                              <f:selectItems value="#{pageFlowScope.os.listKmFranquia}"
+                                             id="si2"/>
+                            </af:selectOneChoice>
+                          </af:panelBox>
+                          <af:panelBox text="Definir Cliente" id="pb1"
+                                       showDisclosure="true" disclosed="false">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.TbClienteView1.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.TbClienteView1.rangeSize}"
+                                      emptyText="#{bindings.TbClienteView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.TbClienteView1.rangeSize}"
+                                      rowBandingInterval="1"
+                                      filterModel="#{bindings.TbClienteView1Query.queryDescriptor}"
+                                      queryListener="#{bindings.TbClienteView1Query.processQuery}"
+                                      filterVisible="true"
+                                      selectedRowKeys="#{bindings.TbClienteView1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.TbClienteView1.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t1"
+                                      columnStretching="column:c1"
+                                      inlineStyle="height:200px;" width="305"
+                                      columnBandingInterval="0"
+                                      binding="#{pageFlowScope.os.bindGridClientes}"
+                                      varStatus="vs">
+                              <af:column sortProperty="Nome" filterable="true"
+                                         sortable="true"
+                                         headerText="Nome completo"
+                                         id="c1" align="center"
+                                         inlineStyle="text-align:left;">
+                                <af:outputText value="#{row.Nome}" id="ot2"/>
+                              </af:column>
+                              <af:column sortProperty="CpfCnpj"
+                                         filterable="true" sortable="true"
+                                         headerText="CPF/CNPJ"
+                                         id="c2" align="center">
+                                <af:outputText value="#{row.CpfCnpj}" id="ot1"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                          <af:panelBox text="Definir Veiculo" id="pb2"
+                                       disclosed="false" showDisclosure="true">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.VeiculoMMView1.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.VeiculoMMView1.rangeSize}"
+                                      emptyText="#{bindings.VeiculoMMView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.VeiculoMMView1.rangeSize}"
+                                      rowBandingInterval="1"
+                                      filterModel="#{bindings.VeiculoMMView1Query.queryDescriptor}"
+                                      queryListener="#{bindings.VeiculoMMView1Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.VeiculoMMView1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.VeiculoMMView1.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t2" width="305"
+                                      columnStretching="column:c3"
+                                      inlineStyle="height:200px;"
+                                      binding="#{pageFlowScope.os.bindGridVeiculos}">
+                              <af:column sortProperty="Modelo" filterable="true"
+                                         sortable="true"
+                                         headerText="Modelo"
+                                         id="c3" align="center"
+                                         inlineStyle="text-align:left;">
+                                <af:outputText value="#{row.Modelo}" id="ot3"/>
+                              </af:column>
+                              <af:column sortProperty="Ano" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.VeiculoMMView1.hints.Ano.label}"
+                                         id="c5" width="70"
+                                         align="center">
+                                <af:outputText value="#{row.Ano}" id="ot4"/>
+                              </af:column>
+                              <af:column sortProperty="Placa" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.VeiculoMMView1.hints.Placa.label}"
+                                         id="c4" width="80"
+                                         align="center">
+                                <af:outputText value="#{row.Placa}" id="ot5"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                          <af:panelBox text="Definir Motorita" id="pb3"
+                                       disclosed="false" showDisclosure="true">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.MotoristaCategoriaView1.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.MotoristaCategoriaView1.rangeSize}"
+                                      emptyText="#{bindings.MotoristaCategoriaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.MotoristaCategoriaView1.rangeSize}"
+                                      rowBandingInterval="1"
+                                      filterModel="#{bindings.MotoristaCategoriaView1Query.queryDescriptor}"
+                                      queryListener="#{bindings.MotoristaCategoriaView1Query.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.MotoristaCategoriaView1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.MotoristaCategoriaView1.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t3"
+                                      columnStretching="column:c6"
+                                      inlineStyle="height:200px;" width="305"
+                                      binding="#{pageFlowScope.os.bindGridMotoristas}">
+                              <af:column sortProperty="Nome" filterable="true"
+                                         sortable="true"
+                                         headerText="Nome completo"
+                                         id="c6" align="center"
+                                         inlineStyle="text-align:left;">
+                                <af:outputText value="#{row.Nome}" id="ot6"/>
+                              </af:column>
+                              <af:column sortProperty="Categoria"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.MotoristaCategoriaView1.hints.Categoria.label}"
+                                         id="c7"
+                                         align="center">
+                                <af:outputText value="#{row.Categoria}"
+                                               id="ot7"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                      <f:facet name="end"/>
+                    </af:panelStretchLayout>
+                  </f:facet>
+                  <f:facet name="top"/>
+                </af:decorativeBox>
+              </af:showDetailItem>
+            </af:panelTabbed>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

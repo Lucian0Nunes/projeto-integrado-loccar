@@ -14,6 +14,9 @@
     <page path="/login.jspx" usageId="view_loginPageDef1"/>
     <page path="/template/template_principal.jspx"
           usageId="view_template_principalPageDef"/>
+    <page path="/paginas/Ordem_Serviços/osPrincipal.jspx"
+          usageId="view_osPrincipalPageDef"/>
+    <page path="/paginas/Ordem_Serviços/novaOs.jspx" usageId="view_novaOsPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="view_clientesPageDef" path="paginas.cliente.clientesPageDef"/>
@@ -26,6 +29,9 @@
     <page id="view_loginPageDef1" path="view.pageDefs.loginPageDef"/>
     <page id="view_template_principalPageDef"
           path="template.template_principalPageDef"/>
+    <page id="view_osPrincipalPageDef"
+          path="paginas.Ordem_Serviços.osPrincipalPageDef"/>
+    <page id="view_novaOsPageDef" path="view.pageDefs.novaOsPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="am"
