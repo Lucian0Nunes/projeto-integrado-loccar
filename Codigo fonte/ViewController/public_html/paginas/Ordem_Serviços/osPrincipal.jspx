@@ -6,6 +6,16 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <f:view>
     <af:document id="d1">
+      <af:resource type="javascript"
+                   source="/js/mootools-core-1.3-full-nocompat.js"/>
+      <af:resource type="javascript" source="/js/mootools-more-1.3.0.1.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Fixed.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Extras.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Reverse.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Repeat.js"/>
+      <af:resource type="javascript" source="/js/Meio.Mask.Regexp.js"/>
+      <af:resource type="javascript" source="/js/applyMasks.js"/>
       <af:messages id="m1"/>
       <af:form id="f1">
         <af:pageTemplate viewId="/template/template_principal.jspx"
@@ -16,53 +26,58 @@
                                  stretchChildren="first">
                 <af:decorativeBox id="db1" styleClass="AFStretchWidth">
                   <f:facet name="center">
-                    <af:panelSplitter id="ps1" splitterPosition="288">
+                    <af:panelSplitter id="ps1" splitterPosition="309">
                       <f:facet name="first">
                         <af:panelCollection id="pc1"
-                                            styleClass="AFStretchWidth">
-                          <f:facet name="menus"/>
+                                            styleClass="AFStretchWidth"
+                                            featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
                           <f:facet name="toolbar">
                             <af:toolbar id="t1">
                               <af:commandToolbarButton text="Nova Os"
                                                        id="ctb1"
                                                        immediate="true"
-                                                       partialSubmit="true">
+                                                       partialSubmit="true"
+                                                       icon="/imagens/application_add.png">
                                 <af:showPopupBehavior popupId="inserirDadosOS"/>
                               </af:commandToolbarButton>
                               <af:commandToolbarButton
-                                                       id="ctb2" text="Editar"/>
+                                                       id="ctb2" text="Editar"
+                                                       icon="/imagens/application_edit.png"/>
                               <af:commandToolbarButton text="Excluir"
-                                                       id="ctb3"/>
+                                                       id="ctb3"
+                                                       icon="/imagens/application_delete.png"/>
                             </af:toolbar>
                           </f:facet>
-                          <f:facet name="statusbar"/>
                           <af:table value="#{bindings.OsDadosView1.collectionModel}"
                                     var="row"
                                     rows="#{bindings.OsDadosView1.rangeSize}"
                                     emptyText="#{bindings.OsDadosView1.viewable ? 'No data to display.' : 'Access Denied.'}"
                                     fetchSize="#{bindings.OsDadosView1.rangeSize}"
-                                    rowBandingInterval="0"
+                                    rowBandingInterval="1"
                                     filterModel="#{bindings.OsDadosView1Query.queryDescriptor}"
                                     queryListener="#{bindings.OsDadosView1Query.processQuery}"
-                                    filterVisible="true" varStatus="vs"
+                                    filterVisible="true"
+                                    varStatus="vs"
                                     selectedRowKeys="#{bindings.OsDadosView1.collectionModel.selectedRow}"
-                                    selectionListener="#{bindings.OsDadosView1.collectionModel.makeCurrent}"
+                                    selectionListener="#{pageFlowScope.os.selectionListenerGridPrincipal}"
                                     rowSelection="single" id="t2"
-                                    binding="#{pageFlowScope.os.bindGridPrincipal}">
+                                    binding="#{pageFlowScope.os.bindGridPrincipal}"
+                                    columnStretching="column:c8"
+                                    columnBandingInterval="0">
                             <af:column sortProperty="IdOs" filterable="true"
                                        sortable="true" headerText="Nr da Os"
-                                       id="c9" width="50" align="center"
+                                       id="c9" width="54" align="center"
                                        inlineStyle="text-align:center;">
                               <af:outputText value="#{row.IdOs}" id="ot1">
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.OsDadosView1.hints.IdOs.format}"/>
                               </af:outputText>
                             </af:column>
-                            <af:column headerText="Data"
+                            <af:column headerText="Data da Os"
                                         sortProperty="DataDaOs"
                                        id="c1" filterable="true"
                                        sortable="true" align="center"
-                                       width="70">
+                                       width="76">
                               <af:outputText value="#{row.DataDaOs}" id="ot3">
                                 <af:convertDateTime pattern="#{bindings.OsDadosView1.hints.DataDaOs.format}"/>
                               </af:outputText>
@@ -70,7 +85,7 @@
                             <af:column sortProperty="Nome" filterable="true"
                                        sortable="true"
                                        headerText="Nome do Cliente" id="c8"
-                                       width="150" align="center"
+                                       width="122" align="center"
                                        inlineStyle="text-align:left;">
                               <af:outputText value="#{row.Nome}" id="ot8"/>
                             </af:column>
@@ -96,10 +111,12 @@
                                     <af:toolbar id="t7">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb6"
-                                                               actionListener="#{pageFlowScope.os.pesquisarCliente}"/>
+                                                               actionListener="#{pageFlowScope.os.pesquisarCliente}"
+                                                               icon="/imagens/magnifier.png"/>
                                       <af:commandToolbarButton text="Limpar"
                                                                id="ctb7"
-                                                               actionListener="#{pageFlowScope.os.limparCliente}"/>
+                                                               actionListener="#{pageFlowScope.os.limparCliente}"
+                                                               icon="/imagens/page_white.png"/>
                                     </af:toolbar>
                                   </af:panelGroupLayout>
                                   <af:spacer width="10" height="10" id="s2"/>
@@ -136,10 +153,12 @@
                                     <af:toolbar id="t10">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb13"
-                                                               actionListener="#{pageFlowScope.os.pesquisarVeiculo}"/>
+                                                               actionListener="#{pageFlowScope.os.pesquisarVeiculo}"
+                                                               icon="/imagens/magnifier.png"/>
                                       <af:commandToolbarButton text="Limpar"
                                                                id="ctb14"
-                                                               actionListener="#{pageFlowScope.os.limparVeiculo}"/>
+                                                               actionListener="#{pageFlowScope.os.limparVeiculo}"
+                                                               icon="/imagens/page_white.png"/>
                                     </af:toolbar>
                                   </af:panelGroupLayout>
                                   <af:spacer width="10" height="10" id="s4"/>
@@ -182,10 +201,12 @@
                                     <af:toolbar id="t9">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb11"
-                                                               actionListener="#{pageFlowScope.os.pesquisarMotorista}"/>
+                                                               actionListener="#{pageFlowScope.os.pesquisarMotorista}"
+                                                               icon="/imagens/magnifier.png"/>
                                       <af:commandToolbarButton text="Limpar"
                                                                id="ctb12"
-                                                               actionListener="#{pageFlowScope.os.limparMotorista}"/>
+                                                               actionListener="#{pageFlowScope.os.limparMotorista}"
+                                                               icon="/imagens/page_white.png"/>
                                     </af:toolbar>
                                   </af:panelGroupLayout>
                                   <af:spacer width="10" height="10" id="s6"/>
@@ -251,20 +272,31 @@
                                 <af:panelFormLayout id="pfl1">
                                   <af:inputText label="Nome" id="it1"
                                                 value="#{pageFlowScope.os.nomeUsuario}"
-                                                columns="30" autoSubmit="true"/>
+                                                columns="40" autoSubmit="true"
+                                                validator="#{pageFlowScope.os.validarNome}"
+                                                maximumLength="60" rows="1"/>
+                                  <af:spacer width="10" height="10" id="s7"/>
                                   <af:inputText label="Telefone" id="it2"
                                                 value="#{pageFlowScope.os.telUsuario}"
-                                                autoSubmit="true"/>
+                                                validator="#{pageFlowScope.os.validarTelefone}"
+                                                autoSubmit="true" columns="20">
+                                    <af:clientListener method="applyMask"
+                                                       type="focus"/>
+                                    <af:clientAttribute name="meioMask"
+                                                        value="fixed.phone"/>
+                                  </af:inputText>
                                 </af:panelFormLayout>
                               </af:panelBox>
                               <f:facet name="buttonBar">
                                 <af:toolbar id="t6">
                                   <af:commandToolbarButton text="Gravar"
                                                            id="ctb4"
-                                                           actionListener="#{pageFlowScope.os.gravarOs}"/>
+                                                           actionListener="#{pageFlowScope.os.gravarOs}"
+                                                           icon="/imagens/accept.png"/>
                                   <af:commandToolbarButton text="Cancelar"
                                                            id="ctb5"
-                                                           actionListener="#{pageFlowScope.os.cancelarPopupInserir}">
+                                                           actionListener="#{pageFlowScope.os.cancelarPopupInserir}"
+                                                           icon="/imagens/cancel.png">
                                     <af:resetActionListener/>
                                   </af:commandToolbarButton>
                                 </af:toolbar>
@@ -277,12 +309,6 @@
                         <af:panelStretchLayout id="psl14"
                                                styleClass="AFStretchWidth"
                                                topHeight="90px">
-                          <f:facet name="bottom"/>
-                          <f:facet name="center">
-                            <af:panelGroupLayout layout="scroll"
-                                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                                 id="pgl4" halign="center"/>
-                          </f:facet>
                           <f:facet name="start"/>
                           <f:facet name="end"/>
                           <f:facet name="top">
@@ -291,10 +317,48 @@
                                                  halign="center"
                                                  valign="middle">
                               <af:spacer width="10" height="10" id="s15"/>
-                              <af:outputText value="Dados Gerais"
+                              <af:outputText value="Ordem de serviço"
                                              id="outputText1"
                                              inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
                             </af:panelGroupLayout>
+                          </f:facet>
+                          <f:facet name="center">
+                            <af:panelSplitter id="ps2"
+                                              styleClass="AFStretchWidth"
+                                              orientation="vertical"
+                                              splitterPosition="411">
+                              <f:facet name="first">
+                                <af:panelFormLayout id="pfl2"
+                                                    partialTriggers="pc1:t2">
+                                  <af:panelLabelAndMessage label="OS "
+                                                           id="plam6">
+                                    <af:outputText value="#{bindings.IdOs.inputValue}"
+                                                   id="ot15">
+                                      <af:convertNumber groupingUsed="false"
+                                                        pattern="#{bindings.IdOs.format}"/>
+                                    </af:outputText>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="Data"
+                                                           id="plam9">
+                                    <af:outputText value="#{bindings.DataDaOs.inputValue}"
+                                                   id="ot18">
+                                      <af:convertDateTime pattern="#{bindings.DataDaOs.format}"/>
+                                    </af:outputText>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="Cliente"
+                                                           id="plam4">
+                                    <af:outputText value="#{bindings.Nome.inputValue}"
+                                                   id="ot16"/>
+                                  </af:panelLabelAndMessage>
+                                  <af:panelLabelAndMessage label="Usuário"
+                                                           id="plam3">
+                                    <af:outputText value="#{bindings.UsuarioServ.inputValue==null ? 'Não informado' : bindings.UsuarioServ.inputValue }"
+                                                   id="ot14"/>
+                                  </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                              </f:facet>
+                              <f:facet name="second"/>
+                            </af:panelSplitter>
                           </f:facet>
                         </af:panelStretchLayout>
                       </f:facet>

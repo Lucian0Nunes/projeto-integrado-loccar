@@ -5,12 +5,19 @@ import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
 
+import br.com.locCar.util.ValidaCampos;
+
 import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
 
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.MethodExpression;
+
+import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -35,7 +42,7 @@ import oracle.jbo.domain.Number;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
-public class OrdemDeServico {
+public class OrdemDeServico extends ValidaCampos {
 
     private final String IT_TB_FRANQUIA = "TbFranquiaView1Iterator";
     private final String IT_TB_OS = "TbOrdemDeServicoView1Iterator";
@@ -483,6 +490,19 @@ public class OrdemDeServico {
         }
         JSFUtils.addPartialTriggerWithIdFromUiRoot("ctb10");
     }
+    
+    public void makeCurrent(SelectionEvent selectionEvent,
+                            String adfSelectionListener) {
+        FacesContext fctx = FacesContext.getCurrentInstance();
+        Application application = fctx.getApplication();
+        ELContext elCtx = fctx.getELContext();
+        ExpressionFactory exprFactory = application.getExpressionFactory();
+        MethodExpression me =
+            exprFactory.createMethodExpression(elCtx, adfSelectionListener,
+                                               Object.class,
+                                               new Class[] { SelectionEvent.class });
+        me.invoke(elCtx, new Object[] { selectionEvent });
+    }
 
     public void setIdKmFranquia(Number idKmFranquia) {
         this.idKmFranquia = idKmFranquia;
@@ -767,5 +787,10 @@ public class OrdemDeServico {
 
     public RichTable getBindGridPrincipal() {
         return bindGridPrincipal;
+    }
+
+    public void selectionListenerGridPrincipal(SelectionEvent selectionEvent) {
+        makeCurrent(selectionEvent,
+                     "#{bindings.OsDadosView1.collectionModel.makeCurrent}");
     }
 }

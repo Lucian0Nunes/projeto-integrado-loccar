@@ -48,5 +48,25 @@
             InstanceName="AppModuleDataControl.TbDiariaView1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="true"
             Action="commitTransaction"/>
+    <attributeValues IterBinding="OsDadosView1Iterator" id="IdOs">
+      <AttrNames>
+        <Item Value="IdOs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OsDadosView1Iterator" id="DataDaOs">
+      <AttrNames>
+        <Item Value="DataDaOs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OsDadosView1Iterator" id="UsuarioServ">
+      <AttrNames>
+        <Item Value="UsuarioServ"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OsDadosView1Iterator" id="Nome">
+      <AttrNames>
+        <Item Value="Nome"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>
