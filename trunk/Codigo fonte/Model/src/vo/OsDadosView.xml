@@ -6,11 +6,11 @@
   Name="OsDadosView"
   Version="11.1.1.61.92"
   InheritPersonalization="true"
-  OrderBy="ID_OS,NOME"
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  OrderBy='"ID_OS","NOME"'>
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
   </DesignTime>
@@ -60,7 +60,7 @@ WHERE CL.ID_CLIENTE = OS.FK_CLIENTE]]>
     ColumnType="DATE"
     AliasName="DATA_DA_OS"
     Expression="DATA_DA_OS"
-    SQLType="TIMESTAMP">
+    SQLType="DATE">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="7"/>
     </DesignTime>

@@ -308,4 +308,12 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
     public ViewObjectImpl getOsDadosView1() {
         return (ViewObjectImpl)findViewObject("OsDadosView1");
     }
+
+    /**
+     * Container's getter for DadosOS1.
+     * @return DadosOS1
+     */
+    public ViewObjectImpl getDadosOS1() {
+        return (ViewObjectImpl)findViewObject("DadosOS1");
+    }
 }

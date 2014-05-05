@@ -18,7 +18,8 @@
       <af:resource type="javascript" source="/js/applyMasks.js"/>
       <af:messages id="m1"/>
       <af:form id="f1">
-        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+        <af:pageTemplate viewId="/template/template_principal.jspx"
+                         value="#{bindings.pageTemplateBinding}" id="pt1">
           <f:facet name="corpo">
             <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
               <f:facet name="bottom"/>
@@ -32,7 +33,8 @@
                         <af:panelSplitter id="ps1" splitterPosition="344">
                           <f:facet name="first">
                             <af:panelCollection id="pc1"
-                                                styleClass="AFStretchWidth">
+                                                styleClass="AFStretchWidth"
+                                                featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
                               <f:facet name="toolbar">
                                 <af:toolbar id="t2">
                                   <af:commandToolbarButton text="Inserir novo"
@@ -60,7 +62,7 @@
                                         rows="#{bindings.MotoristaCategoriaView1.rangeSize}"
                                         emptyText="#{bindings.MotoristaCategoriaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
                                         fetchSize="#{bindings.MotoristaCategoriaView1.rangeSize}"
-                                        rowBandingInterval="0"
+                                        rowBandingInterval="1"
                                         filterModel="#{bindings.MotoristaCategoriaView1Query.queryDescriptor}"
                                         queryListener="#{bindings.MotoristaCategoriaView1Query.processQuery}"
                                         filterVisible="true" varStatus="vs"
