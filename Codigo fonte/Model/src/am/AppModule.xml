@@ -24,9 +24,6 @@
     Name="TbDiariaView1"
     ViewObjectName="vo.TbDiariaView"/>
   <ViewUsage
-    Name="TbFranquiaView1"
-    ViewObjectName="vo.TbFranquiaView"/>
-  <ViewUsage
     Name="TbFuncionarioView1"
     ViewObjectName="vo.TbFuncionarioView"/>
   <ViewUsage
@@ -38,9 +35,6 @@
   <ViewUsage
     Name="TbPerfilView1"
     ViewObjectName="vo.TbPerfilView"/>
-  <ViewUsage
-    Name="TbDiariaView2"
-    ViewObjectName="vo.TbDiariaView"/>
   <ViewUsage
     Name="TbMotoristaView2"
     ViewObjectName="vo.TbMotoristaView"/>
@@ -90,17 +84,17 @@
     Name="ExisteCpfTbFuncionario1"
     ViewObjectName="vo.ExisteCpfTbFuncionario"/>
   <ViewUsage
-    Name="OsDadosView1"
-    ViewObjectName="vo.OsDadosView"/>
+    Name="DadosOsView1"
+    ViewObjectName="vo.DadosOsView"/>
   <ViewUsage
-    Name="DadosOS1"
-    ViewObjectName="vo.DadosOS"/>
-  <ViewLinkUsage
-    Name="FkFranquia1Link1"
-    ViewLinkObjectName="vo.FkFranquia1Link"
-    SrcViewUsageName="am.AppModule.TbFranquiaView1"
-    DstViewUsageName="am.AppModule.TbDiariaView2"
-    Reversed="false"/>
+    Name="TbFranquiaKmView1"
+    ViewObjectName="vo.TbFranquiaKmView"/>
+  <ViewUsage
+    Name="TbFranquiaHrsView1"
+    ViewObjectName="vo.TbFranquiaHrsView"/>
+  <ViewUsage
+    Name="DadosDiariaView1"
+    ViewObjectName="vo.DadosDiariaView"/>
   <ViewLinkUsage
     Name="FkCatHab1Link1"
     ViewLinkObjectName="vo.FkCatHab1Link"
@@ -143,6 +137,84 @@
     SrcViewUsageName="am.AppModule.TbVeiculoView1"
     DstViewUsageName="am.AppModule.TbOrdemDeServicoView5"
     Reversed="false"/>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ClientInterface>
+    <Method
+      Name="autenticarUsuario">
+      <Return
+        Type="int"/>
+      <Parameter
+        Name="userid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pass"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
   <ClientInterface>
     <Method
       Name="autenticarUsuario">

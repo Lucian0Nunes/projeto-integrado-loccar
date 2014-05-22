@@ -3,69 +3,63 @@
 <!---->
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
-  Name="TbPerfil"
+  Name="TbFranquiaHrs"
   Version="11.1.1.61.92"
   InheritPersonalization="true"
   DBObjectType="table"
-  DBObjectName="TB_PERFIL"
-  AliasName="TbPerfil"
+  DBObjectName="TB_FRANQUIA_HRS"
+  AliasName="TbFranquiaHrs"
   BindingStyle="OracleName"
   UseGlueCode="false">
   <DesignTime>
-    <Attr Name="_codeGenFlag2" Value="Access"/>
     <AttrArray Name="_publishEvents"/>
   </DesignTime>
   <Attribute
-    Name="IdPerfil"
+    Name="IdFranquia"
     IsNotNull="true"
-    ColumnName="ID_PERFIL"
+    Precision="15"
+    Scale="0"
+    ColumnName="ID_FRANQUIA"
     SQLType="NUMERIC"
-    Type="oracle.jbo.domain.Number"
+    Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="TB_PERFIL"
+    TableName="TB_FRANQUIA_HRS"
     PrimaryKey="true">
     <DesignTime>
-      <Attr Name="_DisplaySize" Value="39"/>
+      <Attr Name="_DisplaySize" Value="16"/>
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="Perfil"
+    Name="HrFranquia"
     Precision="15"
-    ColumnName="PERFIL"
+    ColumnName="HR_FRANQUIA"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="TB_PERFIL">
+    TableName="TB_FRANQUIA_HRS">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="15"/>
     </DesignTime>
   </Attribute>
-  <AccessorAttribute
-    Name="TbFuncionario"
-    Association="eo.TbFuncionarioTbPerfilFkAssoc"
-    AssociationEnd="eo.TbFuncionarioTbPerfilFkAssoc.TbFuncionario"
-    AssociationOtherEnd="eo.TbFuncionarioTbPerfilFkAssoc.TbPerfil"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
   <Key
-    Name="SysC0013446">
+    Name="SysC0013417">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0013446"/>
-      <Attr Name="_checkCondition" Value='"ID_PERFIL" IS NOT NULL'/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013417"/>
+      <Attr Name="_checkCondition" Value='"ID_FRANQUIA" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="eo.TbPerfil.IdPerfil"/>
+      <Item Value="eo.TbFranquiaHrs.IdFranquia"/>
     </AttrArray>
   </Key>
   <Key
-    Name="TbPerfilPk"
+    Name="TbFranquiaPk"
     PrimaryKey="true">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="TB_PERFIL_PK"/>
+      <Attr Name="_DBObjectName" Value="TB_FRANQUIA_PK"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="eo.TbPerfil.IdPerfil"/>
+      <Item Value="eo.TbFranquiaHrs.IdFranquia"/>
     </AttrArray>
   </Key>
 </Entity>

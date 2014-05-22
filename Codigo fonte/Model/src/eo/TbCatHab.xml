@@ -50,9 +50,9 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key
-    Name="SysC0012560">
+    Name="SysC0013405">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012560"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013405"/>
       <Attr Name="_checkCondition" Value='"ID_CAT" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>

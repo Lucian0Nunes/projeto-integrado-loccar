@@ -333,4 +333,59 @@ function placa(v) {
         return v;
 }
 
+function maskDateTime(event) {
+    try {
+        var clientId;
+        var obj;
+
+        clientId = event.getSource().getClientId();
+
+        if (clientId.indexOf("::content") <= 0) {
+            clientId = clientId + "::content";
+        }
+
+        obj = document.getElementById(clientId);
+        if (obj.maxLenght != 19) {
+            obj.maxLenght = 19;
+        }
+        mascara(obj, dataHora);
+
+    }
+    catch (_exception) {
+        alert(_exception.msg);
+    }
+}
+
+function dataHora(v){
+	if (v.value == '00/00/0000 00:00:00')
+	{
+		v.value=""
+	}
+ 
+	caracteres = '0123456789';
+	separacao1 = '/';
+	separacao2 = ' ';
+	separacao3 = ':';
+	conjunto1 = 2;
+	conjunto2 = 5;
+	conjunto3 = 10;
+	conjunto4 = 13;
+	conjunto5 = 16;
+	if ((caracteres.search(String.fromCharCode (keypress))!=-1) && v.value.length < (19))
+	{
+		if (campo.value.length == conjunto1 )
+		v.value = v.value + separacao1;
+		else if (campo.value.length == conjunto2)
+		v.value = v.value + separacao1;
+		else if (campo.value.length == conjunto3)
+		v.value = v.value + separacao2;
+		else if (campo.value.length == conjunto4)
+		v.value = v.value + separacao3;
+		else if (campo.value.length == conjunto5)
+		v.value = v.value + separacao3;
+	}
+	else
+		event.returnValue = false;
+}
+
 // ]]>
