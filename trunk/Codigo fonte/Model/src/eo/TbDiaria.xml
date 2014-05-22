@@ -67,20 +67,6 @@
     </DesignTime>
   </Attribute>
   <Attribute
-    Name="FkFranquia"
-    IsNotNull="true"
-    Precision="15"
-    Scale="0"
-    ColumnName="FK_FRANQUIA"
-    SQLType="NUMERIC"
-    Type="oracle.jbo.domain.Number"
-    ColumnType="NUMBER"
-    TableName="TB_DIARIA">
-    <DesignTime>
-      <Attr Name="_DisplaySize" Value="16"/>
-    </DesignTime>
-  </Attribute>
-  <Attribute
     Name="FkOrdemDeServico"
     IsNotNull="true"
     Precision="15"
@@ -133,13 +119,32 @@
       <Attr Name="_DisplaySize" Value="16"/>
     </DesignTime>
   </Attribute>
-  <AccessorAttribute
-    Name="TbFranquia"
-    Association="eo.FkFranquia1Assoc"
-    AssociationEnd="eo.FkFranquia1Assoc.TbFranquia"
-    AssociationOtherEnd="eo.FkFranquia1Assoc.TbDiaria"
-    Type="oracle.jbo.server.EntityImpl"
-    IsUpdateable="true"/>
+  <Attribute
+    Name="FkFranquiaHrs"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="FK_FRANQUIA_HRS"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FkFranquiaKm"
+    IsNotNull="true"
+    ColumnName="FK_FRANQUIA_KM"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="TB_DIARIA">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="TbOrdemDeServico"
     Association="eo.FkOrdemDeServico1Assoc"
@@ -147,10 +152,17 @@
     AssociationOtherEnd="eo.FkOrdemDeServico1Assoc.TbDiaria"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbFranquiaKm"
+    Association="eo.TbDiariaTbFranquiaKmFkAssoc"
+    AssociationEnd="eo.TbDiariaTbFranquiaKmFkAssoc.TbFranquiaKm"
+    AssociationOtherEnd="eo.TbDiariaTbFranquiaKmFkAssoc.TbDiaria"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
   <Key
-    Name="SysC0012567">
+    Name="SysC0013412">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012567"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013412"/>
       <Attr Name="_checkCondition" Value='"ID_DIARIA" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -159,25 +171,36 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012568">
+    Name="SysC0013413">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012568"/>
-      <Attr Name="_checkCondition" Value='"FK_FRANQUIA" IS NOT NULL'/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013413"/>
+      <Attr Name="_checkCondition" Value='"FK_FRANQUIA_HRS" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
-      <Item Value="eo.TbDiaria.FkFranquia"/>
+      <Item Value="eo.TbDiaria.FkFranquiaHrs"/>
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012569">
+    Name="SysC0013414">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012569"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013414"/>
       <Attr Name="_checkCondition" Value='"FK_ORDEM_DE_SERVICO" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbDiaria.FkOrdemDeServico"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0013415">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0013415"/>
+      <Attr Name="_checkCondition" Value='"FK_FRANQUIA_KM" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkFranquiaKm"/>
     </AttrArray>
   </Key>
   <Key
@@ -191,17 +214,6 @@
     </AttrArray>
   </Key>
   <Key
-    Name="FkFranquia1">
-    <DesignTime>
-      <Attr Name="_referencedKey" Value="TB_FRANQUIA_PK"/>
-      <Attr Name="_isForeign" Value="true"/>
-      <Attr Name="_DBObjectName" Value="FK_FRANQUIA"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="eo.TbDiaria.FkFranquia"/>
-    </AttrArray>
-  </Key>
-  <Key
     Name="FkOrdemDeServico1">
     <DesignTime>
       <Attr Name="_referencedKey" Value="TB_ORDEM_DE_SERVICO_PK"/>
@@ -210,6 +222,17 @@
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbDiaria.FkOrdemDeServico"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TbDiariaTbFranquiaKmFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TB_FRANQUIA_KM_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TB_DIARIA_TB_FRANQUIA_KM_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkFranquiaKm"/>
     </AttrArray>
   </Key>
 </Entity>

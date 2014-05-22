@@ -26,13 +26,13 @@
                                  stretchChildren="first">
                 <af:decorativeBox id="db1" styleClass="AFStretchWidth">
                   <f:facet name="center">
-                    <af:panelSplitter id="ps1" splitterPosition="309">
+                    <af:panelSplitter id="ps1" splitterPosition="343">
                       <f:facet name="first">
                         <af:panelCollection id="pc1"
                                             styleClass="AFStretchWidth"
                                             featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
                           <f:facet name="toolbar">
-                            <af:toolbar id="t1">
+                            <af:toolbar id="t2">
                               <af:commandToolbarButton text="Nova Os"
                                                        id="ctb1"
                                                        immediate="true"
@@ -48,46 +48,55 @@
                                                        icon="/imagens/application_delete.png"/>
                             </af:toolbar>
                           </f:facet>
-                          <af:table value="#{bindings.OsDadosView1.collectionModel}"
+                          <af:table value="#{bindings.DadosOsView1.collectionModel}"
                                     var="row"
-                                    rows="#{bindings.OsDadosView1.rangeSize}"
-                                    emptyText="#{bindings.OsDadosView1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                    fetchSize="#{bindings.OsDadosView1.rangeSize}"
+                                    rows="#{bindings.DadosOsView1.rangeSize}"
+                                    emptyText="#{bindings.DadosOsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    fetchSize="#{bindings.DadosOsView1.rangeSize}"
                                     rowBandingInterval="1"
-                                    filterModel="#{bindings.OsDadosView1Query.queryDescriptor}"
-                                    queryListener="#{bindings.OsDadosView1Query.processQuery}"
-                                    filterVisible="true"
-                                    varStatus="vs"
-                                    selectedRowKeys="#{bindings.OsDadosView1.collectionModel.selectedRow}"
+                                    filterModel="#{bindings.DadosOsView1Query.queryDescriptor}"
+                                    queryListener="#{pageFlowScope.os.queryListener}"
+                                    filterVisible="true" varStatus="vs"
+                                    selectedRowKeys="#{bindings.DadosOsView1.collectionModel.selectedRow}"
                                     selectionListener="#{pageFlowScope.os.selectionListenerGridPrincipal}"
-                                    rowSelection="single" id="t2"
-                                    binding="#{pageFlowScope.os.bindGridPrincipal}"
-                                    columnStretching="column:c8"
-                                    columnBandingInterval="0">
+                                    rowSelection="single" id="t1"
+                                    columnStretching="column:c1"
+                                    binding="#{pageFlowScope.os.bindGridPrincipal}">
                             <af:column sortProperty="IdOs" filterable="true"
-                                       sortable="true" headerText="Nr da Os"
-                                       id="c9" width="54" align="center"
-                                       inlineStyle="text-align:center;">
-                              <af:outputText value="#{row.IdOs}" id="ot1">
+                                       sortable="true" headerText="Nr da OS"
+                                       id="c8" width="76" align="center">
+                              <af:outputText value="#{row.IdOs}" id="ot8">
                                 <af:convertNumber groupingUsed="false"
-                                                  pattern="#{bindings.OsDadosView1.hints.IdOs.format}"/>
+                                                  pattern="#{bindings.DadosOsView1.hints.IdOs.format}"/>
                               </af:outputText>
+                              <f:facet name="filter">
+                                <af:inputText label="Label 2" id="it14"/>
+                              </f:facet>
                             </af:column>
-                            <af:column headerText="Data da Os"
-                                        sortProperty="DataDaOs"
-                                       id="c1" filterable="true"
-                                       sortable="true" align="center"
-                                       width="76">
-                              <af:outputText value="#{row.DataDaOs}" id="ot3">
-                                <af:convertDateTime pattern="#{bindings.OsDadosView1.hints.DataDaOs.format}"/>
+                            <af:column sortProperty="DataDaOs" filterable="true"
+                                       sortable="true" headerText="Data da OS"
+                                       id="c9" width="81" align="center">
+                              <f:facet name="filter">
+                                <af:inputText label="Label 3" id="it15">
+                                  <af:clientListener method="applyMask"
+                                                     type="focus"/>
+                                  <af:clientAttribute name="meioMask"
+                                                      value="fixed.date"/>
+                                </af:inputText>
+                              </f:facet>
+                              <af:outputText value="#{row.DataDaOs}" id="ot1">
+                                <af:convertDateTime pattern="#{bindings.DadosOsView1.hints.DataDaOs.format}"/>
                               </af:outputText>
                             </af:column>
                             <af:column sortProperty="Nome" filterable="true"
                                        sortable="true"
-                                       headerText="Nome do Cliente" id="c8"
-                                       width="122" align="center"
+                                       headerText="Nome do Cliente" id="c1"
+                                       width="152" align="center"
                                        inlineStyle="text-align:left;">
-                              <af:outputText value="#{row.Nome}" id="ot8"/>
+                              <af:outputText value="#{row.Nome}" id="ot3"/>
+                              <f:facet name="filter">
+                                <af:inputText label="Label 4" id="it16"/>
+                              </f:facet>
                             </af:column>
                           </af:table>
                           <af:popup id="inserirDadosOS"
@@ -311,53 +320,317 @@
                                                topHeight="90px">
                           <f:facet name="start"/>
                           <f:facet name="end"/>
-                          <f:facet name="top">
-                            <af:panelGroupLayout xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                                 id="pgl24" layout="vertical"
-                                                 halign="center"
-                                                 valign="middle">
-                              <af:spacer width="10" height="10" id="s15"/>
-                              <af:outputText value="Ordem de serviço"
-                                             id="outputText1"
-                                             inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
-                            </af:panelGroupLayout>
-                          </f:facet>
                           <f:facet name="center">
                             <af:panelSplitter id="ps2"
                                               styleClass="AFStretchWidth"
                                               orientation="vertical"
-                                              splitterPosition="411">
+                                              splitterPosition="280"
+                                              partialTriggers="pc1:t1"
+                                              positionedFromEnd="true">
                               <f:facet name="first">
-                                <af:panelFormLayout id="pfl2"
-                                                    partialTriggers="pc1:t2">
-                                  <af:panelLabelAndMessage label="OS "
-                                                           id="plam6">
-                                    <af:outputText value="#{bindings.IdOs.inputValue}"
-                                                   id="ot15">
-                                      <af:convertNumber groupingUsed="false"
-                                                        pattern="#{bindings.IdOs.format}"/>
-                                    </af:outputText>
-                                  </af:panelLabelAndMessage>
-                                  <af:panelLabelAndMessage label="Data"
-                                                           id="plam9">
-                                    <af:outputText value="#{bindings.DataDaOs.inputValue}"
-                                                   id="ot18">
-                                      <af:convertDateTime pattern="#{bindings.DataDaOs.format}"/>
-                                    </af:outputText>
-                                  </af:panelLabelAndMessage>
-                                  <af:panelLabelAndMessage label="Cliente"
-                                                           id="plam4">
-                                    <af:outputText value="#{bindings.Nome.inputValue}"
-                                                   id="ot16"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:panelLabelAndMessage label="Usuário"
-                                                           id="plam3">
-                                    <af:outputText value="#{bindings.UsuarioServ.inputValue==null ? 'Não informado' : bindings.UsuarioServ.inputValue }"
-                                                   id="ot14"/>
-                                  </af:panelLabelAndMessage>
-                                </af:panelFormLayout>
+                                <af:panelGroupLayout layout="scroll"
+                                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                     id="pgl4">
+                                  <af:panelBox id="pb9">
+                                    <af:panelBox text="Cliente" id="pb3"
+                                                 showDisclosure="false">
+                                      <f:facet name="toolbar"/>
+                                      <af:panelFormLayout id="pfl2" rows="2"
+                                                          maxColumns="2">
+                                        <af:panelLabelAndMessage label="Nome do Cliente"
+                                                                 id="plam4">
+                                          <af:outputText value="#{bindings.Nome.inputValue}"
+                                                         id="ot19"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="Usuário"
+                                                                 id="plam2">
+                                          <af:outputText value="#{bindings.UsuarioServ.inputValue==null ? 'Não informado' : bindings.UsuarioServ.inputValue }"
+                                                         id="ot22"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="Telefone"
+                                                                 id="plam7">
+                                          <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                         id="ot20"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="Telefone do usuário"
+                                                                 id="plam5">
+                                          <af:outputText value="#{bindings.UsuarioTel.inputValue==null ? 'Não informado' : bindings.UsuarioTel.inputValue }"
+                                                         id="ot18"/>
+                                        </af:panelLabelAndMessage>
+                                      </af:panelFormLayout>
+                                    </af:panelBox>
+                                    <af:panelBox text="Motorista" id="pb5"
+                                                 showDisclosure="false">
+                                      <f:facet name="toolbar"/>
+                                      <af:panelFormLayout id="pfl3" rows="1"
+                                                          maxColumns="2">
+                                        <af:panelLabelAndMessage label="Motorista"
+                                                                 id="plam8">
+                                          <af:outputText value="#{pageFlowScope.os.nomeMotorista}"
+                                                         id="ot15"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage id="plam10"
+                                                                 label="Telefone">
+                                          <af:outputText value="#{pageFlowScope.os.telefoneMotorista}"
+                                                         id="ot21"/>
+                                        </af:panelLabelAndMessage>
+                                      </af:panelFormLayout>
+                                    </af:panelBox>
+                                    <af:panelBox text="Veículo" id="pb6"
+                                                 showDisclosure="false">
+                                      <f:facet name="toolbar"/>
+                                      <af:panelFormLayout id="pfl4" rows="1">
+                                        <af:panelLabelAndMessage label="Modelo"
+                                                                 id="plam3">
+                                          <af:outputText value="#{pageFlowScope.os.modeloVeiculo}"
+                                                         id="ot12"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="Placa"
+                                                                 id="plam12">
+                                          <af:outputText value="#{bindings.Placa.inputValue}"
+                                                         id="ot25"/>
+                                        </af:panelLabelAndMessage>
+                                      </af:panelFormLayout>
+                                    </af:panelBox>
+                                  </af:panelBox>
+                                  <af:panelBox text="Geral" id="pb7">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelFormLayout id="pfl5" rows="1"
+                                                        maxColumns="2">
+                                      <af:panelLabelAndMessage label="Total Hrs Extras"
+                                                               id="plam6">
+                                        <af:outputText value="#{bindings.TotalHrsExtra.inputValue==null ? '-' : bindings.TotalHrsExtra.inputValue }"
+                                                       id="ot17"/>
+                                      </af:panelLabelAndMessage>
+                                      <af:panelLabelAndMessage label="Total de Km extras"
+                                                               id="plam13">
+                                        <af:outputText value="#{bindings.TotalKmExtra.inputValue==null ? '-' : bindings.TotalKmExtra.inputValue }"
+                                                       id="ot14">
+                                          <af:convertNumber groupingUsed="false"
+                                                            pattern="#{bindings.TotalKmExtra.format}"/>
+                                        </af:outputText>
+                                      </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                  </af:panelBox>
+                                  <af:panelBox text="Obesevações" id="pb8">
+                                    <f:facet name="toolbar"/>
+                                    <af:inputText value="#{bindings.Observacao.inputValue}"
+                                                  label="#{bindings.Observacao.hints.label}"
+                                                  required="#{bindings.Observacao.hints.mandatory}"
+                                                  columns="120"
+                                                  maximumLength="#{bindings.Observacao.hints.precision}"
+                                                  shortDesc="#{bindings.Observacao.hints.tooltip}"
+                                                  id="it6" rows="3">
+                                      <f:validator binding="#{bindings.Observacao.validator}"/>
+                                    </af:inputText>
+                                  </af:panelBox>
+                                </af:panelGroupLayout>
                               </f:facet>
-                              <f:facet name="second"/>
+                              <f:facet name="second">
+                                <af:panelGroupLayout
+                                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                     id="pgl5">
+                                  <af:panelBox text="Diária" id="pb2">
+                                    <f:facet name="toolbar"/>
+                                    <af:panelCollection id="pc2"
+                                                        styleClass="AFStretchWidth">
+                                      <f:facet name="menus"/>
+                                      <f:facet name="toolbar">
+                                        <af:toolbar id="t12">
+                                          <af:commandToolbarButton text="Inserir"
+                                                                   id="ctb15">
+                                            <af:showPopupBehavior popupId="::inserirDiaria"/>
+                                          </af:commandToolbarButton>
+                                        </af:toolbar>
+                                      </f:facet>
+                                      <f:facet name="statusbar"/>
+                                      <af:table value="#{bindings.DadosDiariaView1.collectionModel}"
+                                                var="row"
+                                                rows="#{bindings.DadosDiariaView1.rangeSize}"
+                                                emptyText="#{bindings.DadosDiariaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                fetchSize="#{bindings.DadosDiariaView1.rangeSize}"
+                                                rowBandingInterval="0"
+                                                selectedRowKeys="#{bindings.DadosDiariaView1.collectionModel.selectedRow}"
+                                                selectionListener="#{bindings.DadosDiariaView1.collectionModel.makeCurrent}"
+                                                rowSelection="single" id="t11"
+                                                binding="#{pageFlowScope.os.bindGridDiaria}">
+                                        <af:column sortProperty="HrSaida"
+                                                   sortable="false"
+                                                   headerText="Data e Hora saída"
+                                                   id="c17" width="130">
+                                          <af:outputText value="#{row.HrSaida}"
+                                                         id="ot16">
+                                            <af:convertDateTime pattern="#{bindings.DadosDiariaView1.hints.HrSaida.format}"/>
+                                          </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="KmSaida"
+                                                   sortable="false"
+                                                   headerText="Km saída"
+                                                   id="c12" width="120">
+                                          <af:outputText value="#{row.KmSaida}"
+                                                         id="ot26">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.DadosDiariaView1.hints.KmSaida.format}"/>
+                                          </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="HrChegada"
+                                                   sortable="false"
+                                                   headerText="Data e Hora chegada"
+                                                   id="c13" width="130">
+                                          <af:outputText value="#{row.HrChegada}"
+                                                         id="ot23">
+                                            <af:convertDateTime pattern="#{bindings.DadosDiariaView1.hints.HrChegada.format}"/>
+                                          </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="KmChegada"
+                                                   sortable="false"
+                                                   headerText="Km chegada"
+                                                   id="c15" width="120">
+                                          <af:outputText value="#{row.KmChegada}"
+                                                         id="ot24">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.DadosDiariaView1.hints.KmChegada.format}"/>
+                                          </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="TotalHrExtDia"
+                                                   sortable="false"
+                                                   headerText="Horas extras"
+                                                   id="c14" width="130">
+                                          <af:outputText value="#{row.TotalHrExtDia}"
+                                                         id="ot27"/>
+                                        </af:column>
+                                        <af:column sortProperty="TotalKmRodado"
+                                                   sortable="false"
+                                                   headerText="#{bindings.DadosDiariaView1.hints.TotalKmRodado.label}"
+                                                   id="c16" width="125">
+                                          <af:outputText value="#{row.TotalKmRodado}"
+                                                         id="ot28">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.DadosDiariaView1.hints.TotalKmRodado.format}"/>
+                                          </af:outputText>
+                                        </af:column>
+                                      </af:table>
+                                    </af:panelCollection>
+                                  </af:panelBox>
+                                  <af:popup id="inserirDiaria" animate="false"
+                                            contentDelivery="lazyUncached"
+                                            binding="#{pageFlowScope.os.popupInserirDiaria}">
+                                    <af:dialog id="d3"
+                                               closeIconVisible="false"
+                                               title="Inserir Diária"
+                                               type="none">
+                                      <af:spacer width="10" height="10"
+                                                 id="s9"/>
+                                      <af:panelFormLayout id="pfl6"
+                                                          maxColumns="2"
+                                                          rows="3"
+                                                          inlineStyle="width:525px;">
+                                        <af:spacer width="10" height="15"
+                                                   id="s17"/>
+                                        <af:selectOneRadio value="#{bindings.TbFranquiaHrsView1.inputValue}"
+                                                           label="Franquia por"
+                                                           required="#{bindings.TbFranquiaHrsView1.hints.mandatory}"
+                                                           shortDesc="#{bindings.TbFranquiaHrsView1.hints.tooltip}"
+                                                           id="sor1"
+                                                           layout="horizontal">
+                                          <f:selectItems value="#{bindings.TbFranquiaHrsView1.items}"
+                                                         id="si2"/>
+                                        </af:selectOneRadio>
+                                        <af:spacer width="10" height="10"
+                                                   id="s16"/>
+                                        <af:inputDate label="Data/Hora Saída"
+                                                      required="#{bindings.HrSaida.hints.mandatory}"
+                                                      shortDesc="#{bindings.HrSaida.hints.tooltip}"
+                                                      id="id1"
+                                                      value="#{pageFlowScope.os.dtHrSaida}">
+                                          <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                        </af:inputDate>
+                                        <af:spacer width="10" height="10"
+                                                   id="s15"/>
+                                        <af:inputText label="KM Saída"
+                                                      required="#{bindings.KmSaida.hints.mandatory}"
+                                                      columns="#{bindings.KmSaida.hints.displayWidth}"
+                                                      maximumLength="#{bindings.KmSaida.hints.precision}"
+                                                      shortDesc="#{bindings.KmSaida.hints.tooltip}"
+                                                      id="it7"
+                                                      value="#{pageFlowScope.os.kmsaida}">
+                                          <f:validator binding="#{bindings.KmSaida.validator}"/>
+                                          <af:convertNumber groupingUsed="false"
+                                                            pattern="#{bindings.KmSaida.format}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10" height="10"
+                                                   id="s10"/>
+                                        <af:inputText label="Total Hora extra"
+                                                      required="#{bindings.TotalHrExtDia.hints.mandatory}"
+                                                      columns="#{bindings.TotalHrExtDia.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalHrExtDia.hints.precision}"
+                                                      shortDesc="#{bindings.TotalHrExtDia.hints.tooltip}"
+                                                      id="it10" readOnly="true"
+                                                      value="#{pageFlowScope.os.totalHrsDia}">
+                                          <f:validator binding="#{bindings.TotalHrExtDia.validator}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10" height="10"
+                                                   id="s11"/>
+                                        <af:selectOneChoice value="#{bindings.TbFranquiaKmView1.inputValue}"
+                                                            label="Franquia por "
+                                                            required="#{bindings.TbFranquiaKmView1.hints.mandatory}"
+                                                            shortDesc="#{bindings.TbFranquiaKmView1.hints.tooltip}"
+                                                            id="soc1">
+                                          <f:selectItems value="#{bindings.TbFranquiaKmView1.items}"
+                                                         id="si1"/>
+                                        </af:selectOneChoice>
+                                        <af:spacer width="10" height="10"
+                                                   id="s12"/>
+                                        <af:inputDate label="Data/Hora Chegada"
+                                                      required="#{bindings.HrChegada.hints.mandatory}"
+                                                      shortDesc="#{bindings.HrChegada.hints.tooltip}"
+                                                      id="id2"
+                                                      value="#{pageFlowScope.os.dtHrChegada}">
+                                          <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                        </af:inputDate>
+                                        <af:spacer width="10" height="10"
+                                                   id="s13"/>
+                                        <af:inputText
+                                                      label="KM Chegada"
+                                                      required="#{bindings.KmChegada.hints.mandatory}"
+                                                      columns="#{bindings.KmChegada.hints.displayWidth}"
+                                                      maximumLength="#{bindings.KmChegada.hints.precision}"
+                                                      shortDesc="#{bindings.KmChegada.hints.tooltip}"
+                                                      id="it11"
+                                                      value="#{pageFlowScope.os.kmChegada}">
+                                          <f:validator binding="#{bindings.KmChegada.validator}"/>
+                                          <af:convertNumber groupingUsed="false"
+                                                            pattern="#{bindings.KmChegada.format}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10" height="10"
+                                                   id="s14"/>
+                                        <af:inputText
+                                                      label="Total KM Rodado"
+                                                      required="#{bindings.TotalKmRodado.hints.mandatory}"
+                                                      columns="#{bindings.TotalKmRodado.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalKmRodado.hints.precision}"
+                                                      shortDesc="#{bindings.TotalKmRodado.hints.tooltip}"
+                                                      id="it9" readOnly="true"
+                                                      value="#{pageFlowScope.os.totalKmDia}">
+                                          <f:validator binding="#{bindings.TotalKmRodado.validator}"/>
+                                          <af:convertNumber groupingUsed="false"
+                                                            pattern="#{bindings.TotalKmRodado.format}"/>
+                                        </af:inputText>
+                                      </af:panelFormLayout>
+                                      <f:facet name="buttonBar">
+                                        <af:toolbar id="t13">
+                                          <af:commandToolbarButton text="Gravar"
+                                                                   id="ctb16"
+                                                                   actionListener="#{pageFlowScope.os.gravarDiaria}"/>
+                                          <af:commandToolbarButton text="Cancelar"
+                                                                   id="ctb17"
+                                                                   actionListener="#{pageFlowScope.os.cancelPopupInserirDiaria}"/>
+                                        </af:toolbar>
+                                      </f:facet>
+                                    </af:dialog>
+                                  </af:popup>
+                                </af:panelGroupLayout>
+                              </f:facet>
                             </af:panelSplitter>
                           </f:facet>
                         </af:panelStretchLayout>

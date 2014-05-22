@@ -1,5 +1,7 @@
 package eo;
 
+import java.math.BigDecimal;
+
 import oracle.jbo.ApplicationModule;
 import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
@@ -62,16 +64,6 @@ public class TbDiariaImpl extends EntityImpl {
             }
         }
         ,
-        FkFranquia {
-            public Object get(TbDiariaImpl obj) {
-                return obj.getFkFranquia();
-            }
-
-            public void put(TbDiariaImpl obj, Object value) {
-                obj.setFkFranquia((Number)value);
-            }
-        }
-        ,
         FkOrdemDeServico {
             public Object get(TbDiariaImpl obj) {
                 return obj.getFkOrdemDeServico();
@@ -112,13 +104,23 @@ public class TbDiariaImpl extends EntityImpl {
             }
         }
         ,
-        TbFranquia {
+        FkFranquiaHrs {
             public Object get(TbDiariaImpl obj) {
-                return obj.getTbFranquia();
+                return obj.getFkFranquiaHrs();
             }
 
             public void put(TbDiariaImpl obj, Object value) {
-                obj.setTbFranquia((EntityImpl)value);
+                obj.setFkFranquiaHrs((BigDecimal)value);
+            }
+        }
+        ,
+        FkFranquiaKm {
+            public Object get(TbDiariaImpl obj) {
+                return obj.getFkFranquiaKm();
+            }
+
+            public void put(TbDiariaImpl obj, Object value) {
+                obj.setFkFranquiaKm((BigDecimal)value);
             }
         }
         ,
@@ -129,6 +131,16 @@ public class TbDiariaImpl extends EntityImpl {
 
             public void put(TbDiariaImpl obj, Object value) {
                 obj.setTbOrdemDeServico((TbOrdemDeServicoImpl)value);
+            }
+        }
+        ,
+        TbFranquiaKm {
+            public Object get(TbDiariaImpl obj) {
+                return obj.getTbFranquiaKm();
+            }
+
+            public void put(TbDiariaImpl obj, Object value) {
+                obj.setTbFranquiaKm((EntityImpl)value);
             }
         }
         ;
@@ -158,22 +170,36 @@ public class TbDiariaImpl extends EntityImpl {
             return vals;
         }
     }
+
+
     public static final int IDDIARIA = AttributesEnum.IdDiaria.index();
     public static final int HRCHEGADA = AttributesEnum.HrChegada.index();
     public static final int HRSAIDA = AttributesEnum.HrSaida.index();
     public static final int TOTALHREXTDIA = AttributesEnum.TotalHrExtDia.index();
-    public static final int FKFRANQUIA = AttributesEnum.FkFranquia.index();
     public static final int FKORDEMDESERVICO = AttributesEnum.FkOrdemDeServico.index();
     public static final int KMCHEGADA = AttributesEnum.KmChegada.index();
     public static final int KMSAIDA = AttributesEnum.KmSaida.index();
     public static final int TOTALKMRODADO = AttributesEnum.TotalKmRodado.index();
-    public static final int TBFRANQUIA = AttributesEnum.TbFranquia.index();
+    public static final int FKFRANQUIAHRS = AttributesEnum.FkFranquiaHrs.index();
+    public static final int FKFRANQUIAKM = AttributesEnum.FkFranquiaKm.index();
     public static final int TBORDEMDESERVICO = AttributesEnum.TbOrdemDeServico.index();
+    public static final int TBFRANQUIAKM = AttributesEnum.TbFranquiaKm.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public TbDiariaImpl() {
+    }
+
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        if (mDefinitionObject == null) {
+            mDefinitionObject = EntityDefImpl.findDefObject("eo.TbDiaria");
+        }
+        return mDefinitionObject;
     }
 
     /**
@@ -240,21 +266,6 @@ public class TbDiariaImpl extends EntityImpl {
         setAttributeInternal(TOTALHREXTDIA, value);
     }
 
-    /**
-     * Gets the attribute value for FkFranquia, using the alias name FkFranquia.
-     * @return the FkFranquia
-     */
-    public Number getFkFranquia() {
-        return (Number)getAttributeInternal(FKFRANQUIA);
-    }
-
-    /**
-     * Sets <code>value</code> as the attribute value for FkFranquia.
-     * @param value value to set the FkFranquia
-     */
-    public void setFkFranquia(Number value) {
-        setAttributeInternal(FKFRANQUIA, value);
-    }
 
     /**
      * Gets the attribute value for FkOrdemDeServico, using the alias name FkOrdemDeServico.
@@ -321,6 +332,38 @@ public class TbDiariaImpl extends EntityImpl {
     }
 
     /**
+     * Gets the attribute value for FkFranquiaHrs, using the alias name FkFranquiaHrs.
+     * @return the FkFranquiaHrs
+     */
+    public BigDecimal getFkFranquiaHrs() {
+        return (BigDecimal)getAttributeInternal(FKFRANQUIAHRS);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for FkFranquiaHrs.
+     * @param value value to set the FkFranquiaHrs
+     */
+    public void setFkFranquiaHrs(BigDecimal value) {
+        setAttributeInternal(FKFRANQUIAHRS, value);
+    }
+
+    /**
+     * Gets the attribute value for FkFranquiaKm, using the alias name FkFranquiaKm.
+     * @return the FkFranquiaKm
+     */
+    public BigDecimal getFkFranquiaKm() {
+        return (BigDecimal)getAttributeInternal(FKFRANQUIAKM);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for FkFranquiaKm.
+     * @param value value to set the FkFranquiaKm
+     */
+    public void setFkFranquiaKm(BigDecimal value) {
+        setAttributeInternal(FKFRANQUIAKM, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -354,20 +397,6 @@ public class TbDiariaImpl extends EntityImpl {
     }
 
     /**
-     * @return the associated entity oracle.jbo.server.EntityImpl.
-     */
-    public EntityImpl getTbFranquia() {
-        return (EntityImpl)getAttributeInternal(TBFRANQUIA);
-    }
-
-    /**
-     * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
-     */
-    public void setTbFranquia(EntityImpl value) {
-        setAttributeInternal(TBFRANQUIA, value);
-    }
-
-    /**
      * @return the associated entity TbOrdemDeServicoImpl.
      */
     public TbOrdemDeServicoImpl getTbOrdemDeServico() {
@@ -381,6 +410,22 @@ public class TbDiariaImpl extends EntityImpl {
         setAttributeInternal(TBORDEMDESERVICO, value);
     }
 
+
+    /**
+     * @return the associated entity oracle.jbo.server.EntityImpl.
+     */
+    public EntityImpl getTbFranquiaKm() {
+        return (EntityImpl)getAttributeInternal(TBFRANQUIAKM);
+    }
+
+    /**
+     * Sets <code>value</code> as the associated entity oracle.jbo.server.EntityImpl.
+     */
+    public void setTbFranquiaKm(EntityImpl value) {
+        setAttributeInternal(TBFRANQUIAKM, value);
+    }
+
+
     /**
      * @param idDiaria key constituent
 
@@ -390,16 +435,6 @@ public class TbDiariaImpl extends EntityImpl {
         return new Key(new Object[]{idDiaria});
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        if (mDefinitionObject == null) {
-            mDefinitionObject = EntityDefImpl.findDefObject("eo.TbDiaria");
-        }
-        return mDefinitionObject;
-    }
-    
     protected void create(AttributeList attributeList) {
         super.create(attributeList);
         //Sequence

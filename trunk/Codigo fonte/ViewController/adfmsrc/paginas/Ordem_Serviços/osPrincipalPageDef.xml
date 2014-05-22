@@ -7,11 +7,6 @@
     <variableIterator id="variables"/>
     <page path="template.template_principalPageDef" id="pageTemplateBinding"
           Refresh="ifNeeded"/>
-    <iterator Binds="OsDadosView1" RangeSize="-1"
-              DataControl="AppModuleDataControl" id="OsDadosView1Iterator"/>
-    <searchRegion Binds="OsDadosView1Iterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  id="OsDadosView1Query"/>
     <iterator id="TbOrdemDeServicoView1Iterator" Binds="TbOrdemDeServicoView1"
               DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator id="TbDiariaView1Iterator" Binds="TbDiariaView1"
@@ -23,23 +18,21 @@
               RangeSize="25"/>
     <iterator id="VeiculoMMView1Iterator" Binds="VeiculoMMView1"
               DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="DadosOsView1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="DadosOsView1Iterator"/>
+    <searchRegion Binds="DadosOsView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="DadosOsView1Query"/>
+    <iterator Binds="DadosDiariaView1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="DadosDiariaView1Iterator"/>
+    <iterator Binds="TbFranquiaKmView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="TbFranquiaKmView1Iterator"/>
+    <iterator Binds="TbFranquiaHrsView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="TbFranquiaHrsView1Iterator"/>
   </executables>
   <bindings>
-    <tree IterBinding="OsDadosView1Iterator" id="OsDadosView1">
-      <nodeDefinition DefName="vo.OsDadosView" Name="OsDadosView10">
-        <AttrNames>
-          <Item Value="IdOs"/>
-          <Item Value="DataDaOs"/>
-          <Item Value="FkVeiculo"/>
-          <Item Value="FkCliente"/>
-          <Item Value="FkMotorista"/>
-          <Item Value="UsuarioServ"/>
-          <Item Value="IdCliente"/>
-          <Item Value="Nome"/>
-          <Item Value="CpfCnpj"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <action IterBinding="TbOrdemDeServicoView1Iterator" id="CommitTbOs"
             InstanceName="AppModuleDataControl.TbOrdemDeServicoView1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="true"
@@ -48,25 +41,116 @@
             InstanceName="AppModuleDataControl.TbDiariaView1"
             DataControl="AppModuleDataControl" RequiresUpdateModel="true"
             Action="commitTransaction"/>
-    <attributeValues IterBinding="OsDadosView1Iterator" id="IdOs">
-      <AttrNames>
-        <Item Value="IdOs"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="OsDadosView1Iterator" id="DataDaOs">
-      <AttrNames>
-        <Item Value="DataDaOs"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="OsDadosView1Iterator" id="UsuarioServ">
-      <AttrNames>
-        <Item Value="UsuarioServ"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="OsDadosView1Iterator" id="Nome">
+    <tree IterBinding="DadosOsView1Iterator" id="DadosOsView1">
+      <nodeDefinition DefName="vo.DadosOsView" Name="DadosOsView10">
+        <AttrNames>
+          <Item Value="IdOs"/>
+          <Item Value="DataDaOs"/>
+          <Item Value="Nome"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="Nome">
       <AttrNames>
         <Item Value="Nome"/>
       </AttrNames>
     </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="Telefone">
+      <AttrNames>
+        <Item Value="Telefone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="UsuarioServ">
+      <AttrNames>
+        <Item Value="UsuarioServ"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="UsuarioTel">
+      <AttrNames>
+        <Item Value="UsuarioTel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="Placa">
+      <AttrNames>
+        <Item Value="Placa"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="TotalKmExtra">
+      <AttrNames>
+        <Item Value="TotalKmExtra"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="TotalHrsExtra">
+      <AttrNames>
+        <Item Value="TotalHrsExtra"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosOsView1Iterator" id="Observacao">
+      <AttrNames>
+        <Item Value="Observacao"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="DadosDiariaView1Iterator" id="DadosDiariaView1">
+      <nodeDefinition DefName="vo.DadosDiariaView" Name="DadosDiariaView10">
+        <AttrNames>
+          <Item Value="HrSaida"/>
+          <Item Value="HrChegada"/>
+          <Item Value="KmSaida"/>
+          <Item Value="KmChegada"/>
+          <Item Value="TotalHrExtDia"/>
+          <Item Value="TotalKmRodado"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DadosDiariaView1Iterator" id="buscarDiaria"
+            InstanceName="AppModuleDataControl.DadosDiariaView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="idOs" NDType="oracle.jbo.domain.Number"/>
+    </action>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="HrChegada">
+      <AttrNames>
+        <Item Value="HrChegada"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="HrSaida">
+      <AttrNames>
+        <Item Value="HrSaida"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="TotalHrExtDia">
+      <AttrNames>
+        <Item Value="TotalHrExtDia"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="KmChegada">
+      <AttrNames>
+        <Item Value="KmChegada"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="KmSaida">
+      <AttrNames>
+        <Item Value="KmSaida"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DadosDiariaView1Iterator" id="TotalKmRodado">
+      <AttrNames>
+        <Item Value="TotalKmRodado"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="TbFranquiaKmView1Iterator" ListOperMode="navigation"
+          ListIter="TbFranquiaKmView1Iterator" id="TbFranquiaKmView1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Km"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="TbFranquiaHrsView1Iterator" ListOperMode="navigation"
+          ListIter="TbFranquiaHrsView1Iterator" id="TbFranquiaHrsView1"
+          DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="HrFranquia"/>
+      </AttrNames>
+    </list>
   </bindings>
 </pageDefinition>

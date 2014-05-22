@@ -10,16 +10,18 @@
        TbDiaria.HR_CHEGADA, 
        TbDiaria.HR_SAIDA, 
        TbDiaria.TOTAL_HR_EXT_DIA, 
-       TbDiaria.FK_FRANQUIA, 
        TbDiaria.FK_ORDEM_DE_SERVICO, 
        TbDiaria.KM_CHEGADA, 
        TbDiaria.KM_SAIDA, 
-       TbDiaria.TOTAL_KM_RODADO"
+       TbDiaria.TOTAL_KM_RODADO, 
+       TbDiaria.FK_FRANQUIA_HRS, 
+       TbDiaria.FK_FRANQUIA_KM"
   FromList="TB_DIARIA TbDiaria"
   BindingStyle="OracleName"
   CustomQuery="false"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  OrderBy="TbDiaria.ID_DIARIA">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
   </DesignTime>
@@ -52,13 +54,6 @@
     EntityUsage="TbDiaria"
     AliasName="TOTAL_HR_EXT_DIA"/>
   <ViewAttribute
-    Name="FkFranquia"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="FkFranquia"
-    EntityUsage="TbDiaria"
-    AliasName="FK_FRANQUIA"/>
-  <ViewAttribute
     Name="FkOrdemDeServico"
     IsNotNull="true"
     PrecisionRule="true"
@@ -83,4 +78,18 @@
     EntityAttrName="TotalKmRodado"
     EntityUsage="TbDiaria"
     AliasName="TOTAL_KM_RODADO"/>
+  <ViewAttribute
+    Name="FkFranquiaHrs"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkFranquiaHrs"
+    EntityUsage="TbDiaria"
+    AliasName="FK_FRANQUIA_HRS"/>
+  <ViewAttribute
+    Name="FkFranquiaKm"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="FkFranquiaKm"
+    EntityUsage="TbDiaria"
+    AliasName="FK_FRANQUIA_KM"/>
 </ViewObject>

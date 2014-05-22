@@ -116,7 +116,8 @@
     SQLType="NUMERIC"
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
-    TableName="TB_ORDEM_DE_SERVICO">
+    TableName="TB_ORDEM_DE_SERVICO"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="16"/>
     </DesignTime>
@@ -194,9 +195,9 @@
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
   <Key
-    Name="SysC0012594">
+    Name="SysC0013441">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012594"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013441"/>
       <Attr Name="_checkCondition" Value='"ID_OS" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -205,9 +206,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012595">
+    Name="SysC0013442">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012595"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013442"/>
       <Attr Name="_checkCondition" Value='"FK_VEICULO" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -216,14 +217,25 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012596">
+    Name="SysC0013443">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012596"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013443"/>
       <Attr Name="_checkCondition" Value='"FK_CLIENTE" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="eo.TbOrdemDeServico.FkCliente"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0013444">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0013444"/>
+      <Attr Name="_checkCondition" Value='"FK_MOTORISTA" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbOrdemDeServico.FkMotorista"/>
     </AttrArray>
   </Key>
   <Key
@@ -280,4 +292,8 @@
       <Item Value="eo.TbOrdemDeServico.FkVeiculo"/>
     </AttrArray>
   </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

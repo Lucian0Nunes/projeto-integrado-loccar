@@ -64,10 +64,17 @@
     AssociationOtherEnd="eo.FkMarca1Assoc.TbModelo"
     Type="oracle.jbo.server.EntityImpl"
     IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TbVeiculo"
+    Association="eo.FkModelo1Assoc"
+    AssociationEnd="eo.FkModelo1Assoc.TbVeiculo"
+    AssociationOtherEnd="eo.FkModelo1Assoc.TbModelo"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <Key
-    Name="SysC0012583">
+    Name="SysC0013431">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012583"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013431"/>
       <Attr Name="_checkCondition" Value='"ID_MODELO" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -76,9 +83,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012584">
+    Name="SysC0013432">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012584"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013432"/>
       <Attr Name="_checkCondition" Value='"MODELO" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -87,9 +94,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012585">
+    Name="SysC0013433">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012585"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013433"/>
       <Attr Name="_checkCondition" Value='"FK_MARCA" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>

@@ -116,9 +116,9 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <Key
-    Name="SysC0012562">
+    Name="SysC0013407">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012562"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013407"/>
       <Attr Name="_checkCondition" Value='"ID_CLIENTE" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -127,9 +127,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012563">
+    Name="SysC0013408">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012563"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013408"/>
       <Attr Name="_checkCondition" Value='"NOME" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -138,9 +138,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012564">
+    Name="SysC0013409">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012564"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013409"/>
       <Attr Name="_checkCondition" Value='"CPF_CNPJ" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
@@ -149,9 +149,9 @@
     </AttrArray>
   </Key>
   <Key
-    Name="SysC0012565">
+    Name="SysC0013410">
     <DesignTime>
-      <Attr Name="_DBObjectName" Value="SYS_C0012565"/>
+      <Attr Name="_DBObjectName" Value="SYS_C0013410"/>
       <Attr Name="_checkCondition" Value='"TELEFONE" IS NOT NULL'/>
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>

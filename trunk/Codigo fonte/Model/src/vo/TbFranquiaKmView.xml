@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbFranquiaKmView"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true"
+  SelectList="TbFranquiaKm.ID_FRANQUIA_KM, 
+       TbFranquiaKm.KM"
+  FromList="TB_FRANQUIA_KM TbFranquiaKm"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="TbFranquiaKm"
+    Entity="eo.TbFranquiaKm"/>
+  <ViewAttribute
+    Name="IdFranquiaKm"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IdFranquiaKm"
+    EntityUsage="TbFranquiaKm"
+    AliasName="ID_FRANQUIA_KM"/>
+  <ViewAttribute
+    Name="Km"
+    PrecisionRule="true"
+    EntityAttrName="Km"
+    EntityUsage="TbFranquiaKm"
+    AliasName="KM"/>
+  <ViewLinkAccessor
+    Name="TbDiariaView"
+    ViewLink="vo.TbDiariaTbFranquiaKmFkLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TbDiariaTbFranquiaKmFkAssoc"
+  Version="11.1.1.61.92"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="TbFranquiaKm"
+    Cardinality="1"
+    Source="true"
+    Owner="eo.TbFranquiaKm">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="TbFranquiaKm"/>
+      <Attr Name="_foreignKey" Value="eo.TbFranquiaKm.TbFranquiaKmPk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbFranquiaKm.IdFranquiaKm"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="TbDiaria"
+    Cardinality="-1"
+    Owner="eo.TbDiaria">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="TbDiaria"/>
+      <Attr Name="_foreignKey" Value="eo.TbDiaria.TbDiariaTbFranquiaKmFk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="eo.TbDiaria.FkFranquiaKm"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

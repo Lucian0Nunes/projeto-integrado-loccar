@@ -4,6 +4,8 @@ import am.common.AppModule;
 
 import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
+
+
 import oracle.jbo.server.ViewObjectImpl;
 
 import vo.TbFuncionarioViewImpl;
@@ -44,13 +46,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (ViewObjectImpl)findViewObject("TbDiariaView1");
     }
 
-    /**
-     * Container's getter for TbFranquiaView1.
-     * @return TbFranquiaView1
-     */
-    public ViewObjectImpl getTbFranquiaView1() {
-        return (ViewObjectImpl)findViewObject("TbFranquiaView1");
-    }
 
     /**
      * Container's getter for TbFuncionarioView1.
@@ -84,13 +79,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (ViewObjectImpl)findViewObject("TbPerfilView1");
     }
 
-    /**
-     * Container's getter for TbDiariaView2.
-     * @return TbDiariaView2
-     */
-    public ViewObjectImpl getTbDiariaView2() {
-        return (ViewObjectImpl)findViewObject("TbDiariaView2");
-    }
 
     /**
      * Container's getter for TbMotoristaView2.
@@ -220,13 +208,6 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         return (ViewObjectImpl)findViewObject("ExisteCpfTbFuncionario1");
     }
 
-    /**
-     * Container's getter for FkFranquia1Link1.
-     * @return FkFranquia1Link1
-     */
-    public ViewLinkImpl getFkFranquia1Link1() {
-        return (ViewLinkImpl)findViewLink("FkFranquia1Link1");
-    }
 
     /**
      * Container's getter for FkCatHab1Link1.
@@ -301,19 +282,36 @@ public class AppModuleImpl extends ApplicationModuleImpl implements AppModule {
         }
     }
 
+
     /**
-     * Container's getter for OsDadosView1.
-     * @return OsDadosView1
+     * Container's getter for DadosOsView1.
+     * @return DadosOsView1
      */
-    public ViewObjectImpl getOsDadosView1() {
-        return (ViewObjectImpl)findViewObject("OsDadosView1");
+    public ViewObjectImpl getDadosOsView1() {
+        return (ViewObjectImpl)findViewObject("DadosOsView1");
     }
 
     /**
-     * Container's getter for DadosOS1.
-     * @return DadosOS1
+     * Container's getter for TbFranquiaKmView1.
+     * @return TbFranquiaKmView1
      */
-    public ViewObjectImpl getDadosOS1() {
-        return (ViewObjectImpl)findViewObject("DadosOS1");
+    public ViewObjectImpl getTbFranquiaKmView1() {
+        return (ViewObjectImpl)findViewObject("TbFranquiaKmView1");
+    }
+
+    /**
+     * Container's getter for TbFranquiaHrsView1.
+     * @return TbFranquiaHrsView1
+     */
+    public ViewObjectImpl getTbFranquiaHrsView1() {
+        return (ViewObjectImpl)findViewObject("TbFranquiaHrsView1");
+    }
+
+    /**
+     * Container's getter for DadosDiariaView1.
+     * @return DadosDiariaView1
+     */
+    public ViewObjectImpl getDadosDiariaView1() {
+        return (ViewObjectImpl)findViewObject("DadosDiariaView1");
     }
 }
