@@ -118,11 +118,6 @@
         <Item Value="HrSaida"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="DadosDiariaView1Iterator" id="TotalHrExtDia">
-      <AttrNames>
-        <Item Value="TotalHrExtDia"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="DadosDiariaView1Iterator" id="KmChegada">
       <AttrNames>
         <Item Value="KmChegada"/>
@@ -131,11 +126,6 @@
     <attributeValues IterBinding="DadosDiariaView1Iterator" id="KmSaida">
       <AttrNames>
         <Item Value="KmSaida"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="DadosDiariaView1Iterator" id="TotalKmRodado">
-      <AttrNames>
-        <Item Value="TotalKmRodado"/>
       </AttrNames>
     </attributeValues>
     <list IterBinding="TbFranquiaKmView1Iterator" ListOperMode="navigation"
