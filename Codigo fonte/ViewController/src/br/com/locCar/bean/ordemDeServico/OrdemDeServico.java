@@ -9,6 +9,8 @@ import br.com.locCar.util.ValidaCampos;
 
 import java.sql.Timestamp;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -24,11 +26,15 @@ import javax.el.ExpressionFactory;
 import javax.el.MethodExpression;
 
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+
+import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.binding.DCIteratorBinding;
 
@@ -534,13 +540,6 @@ public class OrdemDeServico extends ValidaCampos {
             RowSetIterator it =
                 ADFUtils.findIterator(IT_DIARIA).getRowSetIterator();
 
-            Row[] row = it.getAllRowsInRange();
-            if (row != null) {
-                for (Row row1 : row) {
-                    System.out.println(row1.getAttribute("HrChegada").toString());
-                }
-            }
-
             JSFUtils.addPartialTriggerWithIdFromUiRoot("t11");
         } //end
 
@@ -617,6 +616,13 @@ public class OrdemDeServico extends ValidaCampos {
     //TODO
     //Codigo da diaria
 
+    public void chamadaPopupInserirDiaria(PopupFetchEvent popupFetchEvent) {
+        setDtHrChegada(null);
+        setDtHrSaida(null);
+        setKmChegada(null);
+        setKmsaida(null);
+    }
+
     public void gravarDiaria(ActionEvent actionEvent) {
         RowSetIterator iteratorDiaria = ADFUtils.findIterator(IT_TB_DIARIA).getRowSetIterator();
         RowSetIterator iteratorHrs = ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
@@ -624,8 +630,7 @@ public class OrdemDeServico extends ValidaCampos {
         
         Row rowHoras = iteratorHrs.getCurrentRow();
         Row rowKm = iteratorKm.getCurrentRow();
-        
-        
+              
         try {
 
             Row criarRow = iteratorDiaria.createRow();
@@ -635,8 +640,13 @@ public class OrdemDeServico extends ValidaCampos {
             criarRow.setAttribute("FkOrdemDeServico", this.getIdOs());
             criarRow.setAttribute("KmChegada", this.getKmChegada());
             criarRow.setAttribute("KmSaida", this.getKmsaida());
-            criarRow.setAttribute("TotalHrExtDia", this.getTotalHrsDia());
-            criarRow.setAttribute("TotalKmRodado", this.getTotalKmDia());
+            
+            if(this.getTotalHrsDia()!= null){
+                criarRow.setAttribute("TotalHrExtDia", this.getTotalHrsDia() +"Hrs");
+            }
+            if(this.getTotalKmDia()!= null){
+                criarRow.setAttribute("TotalKmRodado", this.getTotalKmDia() +"Hrs");
+            }
             criarRow.setAttribute("FkFranquiaHrs", rowHoras.getAttribute("IdFranquia"));
             criarRow.setAttribute("FkFranquiaKm", rowKm.getAttribute("IdFranquiaKm"));
 
@@ -661,6 +671,24 @@ public class OrdemDeServico extends ValidaCampos {
 
     public void cancelPopupInserirDiaria(ActionEvent actionEvent) {
         popupInserirDiaria.cancel();
+    }
+    
+    
+    public void validarHoraChegada(FacesContext facesContext,UIComponent uIComponent, Object object) {
+        Timestamp dataChegada = (Timestamp)object;
+        Timestamp dataSaida = getDtHrSaida();
+        if (dataSaida != null && dataChegada.compareTo(dataSaida) < 0) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data inv�lida","A data de chegada nao pode ser menor que a saida");
+            throw new ValidatorException(msg);
+        }//end if 
+    }//end
+    
+    public void validarKmChegada(FacesContext facesContext, UIComponent uIComponent, Object object) {
+        Integer chegada = Integer.parseInt(object.toString());
+        if (getKmsaida() != null && getKmsaida().intValue() > chegada) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem inv�lida","A Quilometragem de chegada nao pode ser menor que a saida");
+            throw new ValidatorException(msg);
+        }//end if 
     }
     
     //TODO
@@ -840,67 +868,7 @@ public class OrdemDeServico extends ValidaCampos {
 
     public String getModeloVeiculo() {
         return modeloVeiculo;
-    }
-
-    /*
-    public void kmFranquiaChangeListener(ValueChangeEvent valueChangeEvent) {
-        Number value = (Number)valueChangeEvent.getNewValue();
-        if (value != null) {
-
-            try {
-                DCIteratorBinding it = ADFUtils.findIterator(IT_TB_FRANQUIA);
-                ViewObject view = it.getViewObject();
-                view.reset();
-                view.clearCache();
-                view.setWhereClause("ID_FRANQUIA = " + value);
-                view.executeQuery();
-
-                RowSetIterator iteratorFranquia =
-                    ADFUtils.findIterator(IT_TB_FRANQUIA).getRowSetIterator();
-
-                Row row = iteratorFranquia.getCurrentRow();
-
-                if (row != null) {
-                    String km = row.getAttribute("KmFranquia").toString();
-                    km = km + "Km";
-                    setKmFranquia(km);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    } */
-
-
-    /*     public List<SelectItem> getListKmFranquia() {
-        if (listaKmFranquia == null) {
-            listaKmFranquia = new ArrayList<SelectItem>();
-            try {
-                DCIteratorBinding it = ADFUtils.findIterator(IT_TB_FRANQUIA);
-                ViewObject view = it.getViewObject();
-                view.reset();
-                view.clearCache();
-                view.executeQuery();
-
-                RowSetIterator iteratorFranquia =
-                    ADFUtils.findIterator(IT_TB_FRANQUIA).getRowSetIterator();
-
-                Row[] rows = iteratorFranquia.getAllRowsInRange();
-
-                if (rows != null) {
-                    for (Row rw : rows) {
-                        listaKmFranquia.add(new SelectItem(rw.getAttribute("IdFranquia"),
-                                                           rw.getAttribute("KmFranquia").toString()));
-                    } //end for
-                } //end if
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } //end if
-        return listaKmFranquia;
-    } //end
-
-    */
+    }   
 
     public void setDtHrSaida(Timestamp dtHrSaida) {
         this.dtHrSaida = dtHrSaida;
@@ -973,5 +941,33 @@ public class OrdemDeServico extends ValidaCampos {
     public RichTable getBindGridDiaria() {
         return bindGridDiaria;
     }
-
 }
+
+/*     public List<SelectItem> getListKmFranquia() {
+        //#{bindings.TbFranquiaKmView1.items}        
+      if (listaKmFranquia == null) {
+          listaKmFranquia = new ArrayList<SelectItem>();
+          try {
+              DCIteratorBinding it = ADFUtils.findIterator(IT_TB_FRANQUIA_KM);
+              ViewObject view = it.getViewObject();
+              view.reset();
+              view.clearCache();
+              view.executeQuery();
+
+              RowSetIterator iteratorFranquia =
+                  ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
+
+              Row[] rows = iteratorFranquia.getAllRowsInRange();
+
+              if (rows != null) {
+                  for (Row rw : rows) {
+                      listaKmFranquia.add(new SelectItem(rw.getAttribute("IdFranquiaKm"),
+                                                         rw.getAttribute("Km").toString()));
+                  } //end for
+              } //end if
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      } //end if
+      return listaKmFranquia;
+    } //end */
