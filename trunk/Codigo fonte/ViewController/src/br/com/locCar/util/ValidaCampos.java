@@ -5,11 +5,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-import oracle.adf.model.binding.DCIteratorBinding;
-
-import oracle.jbo.Row;
-import oracle.jbo.RowIterator;
-import oracle.jbo.ViewObject;
 
 public abstract class ValidaCampos {
     

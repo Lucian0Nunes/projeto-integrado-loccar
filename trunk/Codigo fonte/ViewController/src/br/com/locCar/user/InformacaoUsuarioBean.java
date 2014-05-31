@@ -1,16 +1,10 @@
 package br.com.locCar.user;
 
 
-import br.com.locCar.bean.autenticacao.AutenticarUsuarioBean;
-import br.com.locCar.bean.funcionario.FuncionarioBean;
 import br.com.locCar.util.JSFUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import javax.faces.context.FacesContext;
-
-import javax.servlet.http.HttpServletRequest;
 
 import oracle.adf.share.logging.ADFLogger;
 
