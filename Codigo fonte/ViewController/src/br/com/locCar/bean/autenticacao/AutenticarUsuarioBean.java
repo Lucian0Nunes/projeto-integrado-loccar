@@ -1,24 +1,15 @@
 package br.com.locCar.bean.autenticacao;
 
 
-import br.com.locCar.util.ADFUtils;
-import br.com.locCar.util.JSFUtils;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.HttpServletRequest;
 
 import oracle.adf.model.BindingContext;
-import oracle.adf.model.binding.DCIteratorBinding;
-import oracle.adf.share.logging.ADFLogger;
-import oracle.adf.view.rich.component.rich.input.RichInputText;
 
 import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
-
-import oracle.jbo.Row;
-import oracle.jbo.ViewObject;
 
 
 public class AutenticarUsuarioBean {

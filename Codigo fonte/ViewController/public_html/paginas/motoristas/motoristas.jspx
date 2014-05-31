@@ -39,19 +39,22 @@
                                 <af:toolbar id="t2">
                                   <af:commandToolbarButton text="Inserir novo"
                                                            id="ctb1"
-                                                           icon="/imagens/user_add.png">
+                                                           icon="/imagens/user_add.png"
+                                                           shortDesc="Inserir novo">
                                     <af:showPopupBehavior popupId="inserir"/>
                                   </af:commandToolbarButton>
                                   <af:commandToolbarButton text="Editar"
                                                            id="ctb3"
                                                            disabled="#{not pageFlowScope.motoristaBean.habilitaBotoes}"
-                                                           icon="/imagens/user_edit.png">
+                                                           icon="/imagens/user_edit.png"
+                                                           shortDesc="Editar">
                                     <af:showPopupBehavior popupId="editar"/>
                                   </af:commandToolbarButton>
                                   <af:commandToolbarButton text="Excluir"
                                                            id="ctb2"
                                                            disabled="#{not pageFlowScope.motoristaBean.habilitaBotoes}"
-                                                           icon="/imagens/user_delete.png">
+                                                           icon="/imagens/user_delete.png"
+                                                           shortDesc="Excluir">
                                     <af:showPopupBehavior popupId="excluir"/>
                                   </af:commandToolbarButton>
                                 </af:toolbar>
@@ -109,8 +112,9 @@
                                                   label="Nome Completo"
                                                   required="true" columns="60"
                                                   maximumLength="#{bindings.Nome.hints.precision}"
-                                                  shortDesc="#{bindings.Nome.hints.tooltip}"
-                                                  id="it3">
+                                                  shortDesc="NOME"
+                                                  id="it3"
+                                                  requiredMessageDetail="Campo Obrigatório">
                                       <f:validator binding="#{bindings.Nome.validator}"/>
                                     </af:inputText>
                                     <af:spacer width="10" height="10" id="s1"/>
@@ -118,9 +122,10 @@
                                                   label="CPF" required="true"
                                                   columns="20"
                                                   maximumLength="#{bindings.Cpf.hints.precision}"
-                                                  shortDesc="#{bindings.Cpf.hints.tooltip}"
+                                                  shortDesc="CPF"
                                                   id="it2"
-                                                  validator="#{pageFlowScope.motoristaBean.verficarValidarCpf}">
+                                                  validator="#{pageFlowScope.motoristaBean.verficarValidarCpf}"
+                                                  requiredMessageDetail="Campo Obrigatório">
                                       <af:clientListener method="applyMask"
                                                          type="focus"/>
                                       <af:clientAttribute name="meioMask"
@@ -129,13 +134,14 @@
                                     <af:spacer width="10" height="10" id="s2"/>
                                     <af:selectOneChoice label="#{bindings.TbCatHabView1.label}"
                                                         required="#{bindings.TbCatHabView1.hints.mandatory}"
-                                                        shortDesc="Tipo de habilitação"
+                                                        shortDesc="HABILITAÇÃO"
                                                         id="soc1"
                                                         unselectedLabel="Selecione"
                                                         autoSubmit="true"
                                                         valuePassThru="true"
                                                         value="#{bindings.TbCatHabView1.inputValue}"
-                                                        binding="#{pageFlowScope.motoristaBean.comboCategoria}">
+                                                        binding="#{pageFlowScope.motoristaBean.comboCategoria}"
+                                                        requiredMessageDetail="Campo Obrigatório">
                                       <f:selectItems value="#{bindings.TbCatHabView1.items}"
                                                      id="si1"/>
                                     </af:selectOneChoice>
@@ -144,9 +150,10 @@
                                                   label="#{bindings.Telefone.hints.label}"
                                                   required="true" columns="20"
                                                   maximumLength="#{bindings.Telefone.hints.precision}"
-                                                  shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                  shortDesc="TELEFONE"
                                                   id="it4"
-                                                  validator="#{pageFlowScope.motoristaBean.validarTelefone}">
+                                                  validator="#{pageFlowScope.motoristaBean.validarTelefone}"
+                                                  requiredMessageDetail="Campo Obrigatório">
                                       <f:validator binding="#{bindings.Telefone.validator}"/>
                                       <af:clientListener method="applyMask"
                                                          type="focus"/>
@@ -158,17 +165,17 @@
                                                   label="#{bindings.Email.hints.label}"
                                                   columns="60"
                                                   maximumLength="#{bindings.Email.hints.precision}"
-                                                  shortDesc="#{bindings.Email.hints.tooltip}"
+                                                  shortDesc="EMAIL"
                                                   id="it5"
                                                   validator="#{pageFlowScope.motoristaBean.validarEmail}">
                                       <f:validator binding="#{bindings.Email.validator}"/>
                                     </af:inputText>
                                     <af:spacer width="10" height="10" id="s5"/>
                                     <af:inputText value="#{pageFlowScope.motoristaBean.vlEndereco}"
-                                                  label="#{bindings.Endereco.hints.label}"
+                                                  label="Endereço"
                                                   columns="60"
                                                   maximumLength="#{bindings.Endereco.hints.precision}"
-                                                  shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                  shortDesc="ENDEREÇO"
                                                   id="it1" rows="2">
                                       <f:validator binding="#{bindings.Endereco.validator}"/>
                                     </af:inputText>
@@ -179,13 +186,15 @@
                                       <af:commandToolbarButton text="Gravar"
                                                                id="ctb4"
                                                                actionListener="#{pageFlowScope.motoristaBean.inserirNovoMotorista}"
-                                                               icon="/imagens/accept.png"/>
+                                                               icon="/imagens/accept.png"
+                                                               shortDesc="GRAVAR"/>
                                       <af:commandToolbarButton text="Cancelar"
                                                                id="ctb5"
                                                                actionListener="#{pageFlowScope.motoristaBean.cancelarRegistro}"
                                                                partialSubmit="true"
                                                                immediate="true"
-                                                               icon="/imagens/cancel.png">
+                                                               icon="/imagens/cancel.png"
+                                                               shortDesc="CANCELAR">
                                         <af:resetActionListener/>
                                       </af:commandToolbarButton>
                                     </af:toolbar>
@@ -208,8 +217,9 @@
                                                   label="Nome completo"
                                                   required="true" columns="60"
                                                   maximumLength="#{bindings.Nome.hints.precision}"
-                                                  shortDesc="#{bindings.Nome.hints.tooltip}"
-                                                  id="it6">
+                                                  shortDesc="NOME"
+                                                  id="it6"
+                                                  requiredMessageDetail="Campo Obrigatório">
                                       <f:validator binding="#{bindings.Nome.validator}"/>
                                     </af:inputText>
                                     <af:spacer width="10" height="10" id="s6"/>
@@ -226,8 +236,9 @@
                                     <af:selectOneChoice value="#{bindings.TbCatHabView1.inputValue}"
                                                         label="#{bindings.TbCatHabView1.label}"
                                                         required="true"
-                                                        shortDesc="Tipo de habilitação"
-                                                        id="soc2">
+                                                        shortDesc="HABILITAÇÃO"
+                                                        id="soc2"
+                                                        requiredMessageDetail="Campo Obrigatório">
                                       <f:selectItems value="#{bindings.TbCatHabView1.items}"
                                                      id="si2"/>
                                     </af:selectOneChoice>
@@ -236,9 +247,10 @@
                                                   label="#{bindings.Telefone.hints.label}"
                                                   required="true" columns="20"
                                                   maximumLength="#{bindings.Telefone.hints.precision}"
-                                                  shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                  shortDesc="TELEFONE"
                                                   id="it8"
-                                                  validator="#{pageFlowScope.motoristaBean.validarTelefone}">
+                                                  validator="#{pageFlowScope.motoristaBean.validarTelefone}"
+                                                  requiredMessageDetail="Campo Obrigatório">
                                       <af:clientListener method="applyMask"
                                                          type="focus"/>
                                       <af:clientAttribute name="meioMask"
@@ -249,17 +261,17 @@
                                                   label="#{bindings.Email.hints.label}"
                                                   columns="60"
                                                   maximumLength="#{bindings.Email.hints.precision}"
-                                                  shortDesc="#{bindings.Email.hints.tooltip}"
+                                                  shortDesc="EMAIL"
                                                   id="it7"
                                                   validator="#{pageFlowScope.motoristaBean.validarEmail}">
                                       <f:validator binding="#{bindings.Email.validator}"/>
                                     </af:inputText>
                                     <af:spacer width="10" height="10" id="s10"/>
                                     <af:inputText value="#{bindings.Endereco.inputValue}"
-                                                  label="#{bindings.Endereco.hints.label}"
+                                                  label="Endereço"
                                                   columns="60"
                                                   maximumLength="#{bindings.Endereco.hints.precision}"
-                                                  shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                  shortDesc="ENDEREÇO"
                                                   id="it9" rows="2">
                                       <f:validator binding="#{bindings.Endereco.validator}"/>
                                     </af:inputText>
@@ -309,41 +321,51 @@
                                   <f:facet name="center">
                                     <af:panelGroupLayout layout="scroll"
                                                          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                                         id="pgl3">
+                                                         id="pgl3"
+                                                         halign="center">
+                                    <af:panelBox id="pb1"
+                                                 showDisclosure="false">
                                       <af:panelFormLayout id="pfl3"
                                                           partialTriggers="pc1:t1"
                                                           inlineStyle="font-size:x-large;">
                                         <af:panelLabelAndMessage label="Nome completo"
-                                                                 id="plam1">
+                                                                 id="plam1"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
                                           <af:outputText value="#{bindings.Nome1.inputValue}"
                                                          id="ot7"/>
                                         </af:panelLabelAndMessage>
                                         <af:panelLabelAndMessage label="CPF"
-                                                                 id="plam2">
+                                                                 id="plam2"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
                                           <af:outputText value="#{bindings.Cpf1.inputValue}"
                                                          id="ot8"/>
                                         </af:panelLabelAndMessage>
-                                        <af:panelLabelAndMessage label="Categoria da Habilitação"
-                                                                 id="plam4">
+                                        <af:panelLabelAndMessage label="Habilitação"
+                                                                 id="plam4"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
                                           <af:outputText value="#{bindings.Categoria.inputValue}"
                                                          id="ot5"/>
                                         </af:panelLabelAndMessage>
                                         <af:panelLabelAndMessage label="#{bindings.Telefone1.hints.label}"
-                                                                 id="plam3">
+                                                                 id="plam3"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
                                           <af:outputText value="#{bindings.Telefone1.inputValue}"
                                                          id="ot10"/>
                                         </af:panelLabelAndMessage>
                                         <af:panelLabelAndMessage label="#{bindings.Email1.hints.label}"
-                                                                 id="plam6">
-                                          <af:outputText value="#{bindings.Email1.inputValue}"
+                                                                 id="plam6"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                          <af:outputText value="#{bindings.Email1.inputValue ==null? 'Não informado': bindings.Email1.inputValue}"
                                                          id="ot6"/>
                                         </af:panelLabelAndMessage>
                                         <af:panelLabelAndMessage label="#{bindings.Endereco1.hints.label}"
-                                                                 id="plam5">
-                                          <af:outputText value="#{bindings.Endereco1.inputValue}"
+                                                                 id="plam5"
+                                                                 labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                          <af:outputText value="#{bindings.Endereco1.inputValue ==null? 'Não informado': bindings.Endereco1.inputValue}"
                                                          id="ot9"/>
                                         </af:panelLabelAndMessage>
                                       </af:panelFormLayout>
+                                    </af:panelBox>
                                     </af:panelGroupLayout>
                                   </f:facet>
                                   <f:facet name="start"/>
@@ -356,9 +378,9 @@
                                                          valign="middle">
                                       <af:spacer width="10" height="10"
                                                  id="s15"/>
-                                      <af:outputText value="Dados Gerais"
+                                      <af:outputText value="Motorista"
                                                      id="outputText1"
-                                                     inlineStyle="text-align:center; vertical-align:bottom; font-size:xx-large;"/>
+                                                     inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
                                     </af:panelGroupLayout>
                                   </f:facet>
                                 </af:panelStretchLayout>

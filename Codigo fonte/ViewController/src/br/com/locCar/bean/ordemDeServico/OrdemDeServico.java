@@ -1,24 +1,17 @@
 package br.com.locCar.bean.ordemDeServico;
 
-import br.com.locCar.util.ADFUtils;
 
+import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-
 import br.com.locCar.util.ValidaCampos;
 
 import java.sql.Timestamp;
 
-import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-
 import java.util.Map;
 
 import javax.el.ELContext;
@@ -30,32 +23,23 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-
 import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.binding.DCIteratorBinding;
-
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.data.RichTable;
-
-
 import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 
-import oracle.adf.view.rich.event.QueryEvent;
-
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
-import oracle.jbo.ViewCriteria;
 import oracle.jbo.ViewObject;
-
 import oracle.jbo.domain.Number;
 
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
+
 
 public class OrdemDeServico extends ValidaCampos {
 

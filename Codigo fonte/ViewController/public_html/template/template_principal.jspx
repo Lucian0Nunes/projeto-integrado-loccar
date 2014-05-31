@@ -5,27 +5,15 @@
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <af:pageTemplateDef var="attrs">
-    <af:panelSplitter id="pt_ps1" orientation="vertical" splitterPosition="93">
+    <af:panelSplitter id="pt_ps1" orientation="vertical" splitterPosition="59">
       <f:facet name="first">
         <af:panelStretchLayout id="pt_psl1" endWidth="200px" startWidth="220px">
           <f:facet name="center">
             <af:panelGroupLayout id="pt_pgl2" halign="center"
-                                 layout="vertical">
-              <af:outputText value="Locação de veículos" id="pt_ot100"
-                             inlineStyle="font-family:'Times New Roman', 'Arial Black', times, Serif; font-size:0.3in; font-weight:bold;"/>
-            </af:panelGroupLayout>
+                                 layout="vertical"/>
           </f:facet>
           <f:facet name="start"/>
-          <f:facet name="end">
-            <af:panelGroupLayout layout="scroll"
-                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                 id="pt_pgl1">
-              <af:spacer width="10" height="10" id="pt_s1"/>
-              <af:panelBox text="Usuário" id="pt_pb1" showDisclosure="false">
-                <f:facet name="toolbar"/>
-              </af:panelBox>
-            </af:panelGroupLayout>
-          </f:facet>
+          <f:facet name="end"/>
         </af:panelStretchLayout>
       </f:facet>
       <f:facet name="second">

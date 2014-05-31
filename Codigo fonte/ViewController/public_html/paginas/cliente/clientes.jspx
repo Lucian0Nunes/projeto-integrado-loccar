@@ -42,7 +42,8 @@
                                                              id="ctb1"
                                                              partialSubmit="true"
                                                              immediate="true"
-                                                             icon="/imagens/user_add.png">
+                                                             icon="/imagens/user_add.png"
+                                                             shortDesc="Inserir novo">
                                       <af:showPopupBehavior popupId="inserir"/>
                                     </af:commandToolbarButton>
                                     <af:commandToolbarButton text="Editar"
@@ -50,13 +51,15 @@
                                                              partialSubmit="true"
                                                              immediate="true"
                                                              disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}"
-                                                             icon="/imagens/user_edit.png">
+                                                             icon="/imagens/user_edit.png"
+                                                             shortDesc="Editar">
                                       <af:showPopupBehavior popupId="editar"/>
                                     </af:commandToolbarButton>
                                     <af:commandToolbarButton text="Excluir"
                                                              id="ctb3"
                                                              disabled="#{not pageFlowScope.clienteBean.habilitaBotoes}"
-                                                             icon="/imagens/user_delete.png">
+                                                             icon="/imagens/user_delete.png"
+                                                             shortDesc="Excluir">
                                       <af:showPopupBehavior popupId="excluir"/>
                                     </af:commandToolbarButton>
                                   </af:toolbar>
@@ -113,7 +116,8 @@
                                                          valueChangeListener="#{pageFlowScope.clienteBean.setaMaskCpfCnpj}"
                                                          autoSubmit="true"
                                                          immediate="true"
-                                                         label="Escolha">
+                                                         label="Escolha"
+                                                         shortDesc="ESCOLHA">
                                         <af:selectItem label="CPF" value="CPF"
                                                        id="si1"/>
                                         <af:selectItem label="CNPJ" value="CNPJ"
@@ -127,7 +131,9 @@
                                                     maximumLength="#{bindings.CpfCnpj.hints.precision}"
                                                     id="it2"
                                                     columns="20"
-                                                    validator="#{pageFlowScope.clienteBean.validaCpfECnpj}">
+                                                    validator="#{pageFlowScope.clienteBean.validaCpfECnpj}"
+                                                    requiredMessageDetail="Campo Obrigatório"
+                                                    shortDesc="NR DOCUMENTO">
                                         <af:clientListener method="applyMask"
                                                            type="focus"/>
                                         <af:clientAttribute name="meioMask"
@@ -140,7 +146,9 @@
                                                     columns="50"
                                                     maximumLength="60"
                                                     id="it1"
-                                                    required="true"/>
+                                                    required="true"
+                                                    requiredMessageDetail="Campo Obrigatório"
+                                                    shortDesc="NOME"/>
                                       <af:spacer width="10" height="10"
                                                  id="s3"/>
                                       <af:inputText value="#{pageFlowScope.clienteBean.vlTelefone}"
@@ -148,9 +156,10 @@
                                                     required="true"
                                                     columns="20"
                                                     maximumLength="#{bindings.Telefone.hints.precision}"
-                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    shortDesc="TELEFONE"
                                                     id="it3"
-                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}">
+                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}"
+                                                    requiredMessageDetail="Campo Obrigatório">
                                         <f:validator binding="#{bindings.Telefone.validator}"/>
                                         <af:clientListener method="applyMask"
                                                            type="focus"/>
@@ -164,7 +173,7 @@
                                                     required="#{bindings.Email.hints.mandatory}"
                                                     columns="50"
                                                     maximumLength="60"
-                                                    shortDesc="#{bindings.Email.hints.tooltip}"
+                                                    shortDesc="EMAIL"
                                                     validator="#{pageFlowScope.clienteBean.validarEmail}"
                                                     id="it5"/>
                                       <af:spacer width="10" height="10"
@@ -174,7 +183,7 @@
                                                     required="#{bindings.Endereco.hints.mandatory}"
                                                     columns="50"
                                                     maximumLength="100"
-                                                    shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                    shortDesc="ENDEREÇO"
                                                     id="it4" rows="2">
                                         <f:validator binding="#{bindings.Endereco.validator}"/>
                                       </af:inputText>
@@ -186,13 +195,15 @@
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb4"
                                                                  actionListener="#{pageFlowScope.clienteBean.incluirNovo}"
-                                                                 icon="/imagens/accept.png"/>
+                                                                 icon="/imagens/accept.png"
+                                                                 shortDesc="GRAVAR"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb5"
                                                                  actionListener="#{pageFlowScope.clienteBean.cancelarNovo}"
                                                                  partialSubmit="true"
                                                                  immediate="true"
-                                                                 icon="/imagens/cancel.png">
+                                                                 icon="/imagens/cancel.png"
+                                                                 shortDesc="CANCELAR">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>
@@ -218,7 +229,7 @@
                                                     required="#{bindings.CpfCnpj.hints.mandatory}"
                                                     columns="20"
                                                     maximumLength="#{bindings.CpfCnpj.hints.precision}"
-                                                    shortDesc="#{bindings.CpfCnpj.hints.tooltip}"
+                                                    shortDesc="NR DOCUMENTO"
                                                     id="it6" readOnly="true">
                                         <f:validator binding="#{bindings.CpfCnpj.validator}"/>
                                       </af:inputText>
@@ -229,8 +240,9 @@
                                                     required="true"
                                                     columns="50"
                                                     maximumLength="60"
-                                                    shortDesc="#{bindings.Nome.hints.tooltip}"
-                                                    id="it7">
+                                                    shortDesc="NOME"
+                                                    id="it7"
+                                                    requiredMessageDetail="Campo Obrigatório">
                                         <f:validator binding="#{bindings.Nome.validator}"/>
                                       </af:inputText>
                                       <af:spacer width="10" height="10"
@@ -240,9 +252,10 @@
                                                     required="true"
                                                     columns="20"
                                                     maximumLength="#{bindings.Telefone.hints.precision}"
-                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    shortDesc="TELEFONE"
                                                     id="it9"
-                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}">
+                                                    validator="#{pageFlowScope.clienteBean.validarTelefone}"
+                                                    requiredMessageDetail="Campo Obrigatório">
                                         <f:validator binding="#{bindings.Telefone.validator}"/>
                                          <af:clientListener method="applyMask"
                                                            type="focus"/>
@@ -256,7 +269,7 @@
                                                     required="#{bindings.Email.hints.mandatory}"
                                                     columns="50"
                                                     maximumLength="60"
-                                                    shortDesc="#{bindings.Email.hints.tooltip}"
+                                                    shortDesc="EMAIL"
                                                     validator="#{pageFlowScope.clienteBean.validarEmail}"
                                                     id="it10">                                        
                                       </af:inputText>
@@ -267,7 +280,7 @@
                                                     required="#{bindings.Endereco.hints.mandatory}"
                                                     columns="50"
                                                     maximumLength="100"
-                                                    shortDesc="#{bindings.Endereco.hints.tooltip}"
+                                                    shortDesc="ENDEREÇO"
                                                     id="it8" rows="2">
                                         <f:validator binding="#{bindings.Endereco.validator}"/>
                                       </af:inputText>
@@ -277,13 +290,15 @@
                                         <af:commandToolbarButton text="Gravar"
                                                                  id="ctb6"
                                                                  actionListener="#{pageFlowScope.clienteBean.gravarEdicao}"
-                                                                 icon="/imagens/accept.png"/>
+                                                                 icon="/imagens/accept.png"
+                                                                 shortDesc="GRAVAR"/>
                                         <af:commandToolbarButton text="Cancelar"
                                                                  id="ctb7"
                                                                  actionListener="#{pageFlowScope.clienteBean.cancelarEdicao}"
                                                                  partialSubmit="true"
                                                                  immediate="true"
-                                                                 icon="/imagens/cancel.png">
+                                                                 icon="/imagens/cancel.png"
+                                                                 shortDesc="CANCELAR">
                                           <af:resetActionListener/>
                                         </af:commandToolbarButton>
                                       </af:toolbar>
@@ -307,45 +322,74 @@
                               </af:panelCollection>
                             </f:facet>
                             <f:facet name="second">
-                              <af:decorativeBox id="db2">
-                                <f:facet name="center">
-                                  <af:panelGroupLayout layout="scroll"
-                                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                                       id="pgl1">
-                                    <af:outputText value="Dados Gerais" id="ot1"
-                                                   inlineStyle="text-align:center; vertical-align:bottom; font-size:xx-large;"/>
-                                    <af:panelFormLayout id="pfl3"
-                                                        partialTriggers="pc1:t1"
-                                                        inlineStyle="font-size:large; font-weight:lighter; color:Black;">
-                                      <af:panelLabelAndMessage label="CPF/CNPJ"
-                                                               id="plam3">
-                                        <af:outputText value="#{bindings.CpfCnpj.inputValue}"
-                                                       id="ot11"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
-                                                               id="plam1">
-                                        <af:outputText value="#{bindings.Nome.inputValue}"
-                                                       id="ot9"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
-                                                               id="plam5">
-                                        <af:outputText value="#{bindings.Telefone.inputValue}"
-                                                       id="ot10"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
-                                                               id="plam2">
-                                        <af:outputText value="#{bindings.Email.inputValue}"
-                                                       id="ot6"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Endereco.hints.label}"
-                                                               id="plam4">
-                                        <af:outputText value="#{bindings.Endereco.inputValue}"
-                                                       id="ot8"/>
-                                      </af:panelLabelAndMessage>
-                                    </af:panelFormLayout>
-                                  </af:panelGroupLayout>
-                                </f:facet>
-                              </af:decorativeBox>
+                              <af:panelGroupLayout
+                                                   xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                   id="pgl2">
+                                <af:panelStretchLayout id="psl2"
+                                                       topHeight="82px"
+                                                       styleClass="AFStretchWidth"
+                                                       inlineStyle="height:530px;">
+                                  <f:facet name="bottom"/>
+                                  <f:facet name="center">
+                                    <af:panelGroupLayout layout="scroll"
+                                                         xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                         id="pgl1"
+                                                         halign="center">
+                                      <af:panelBox id="pb1"
+                                                   showDisclosure="false">
+                                        <af:panelFormLayout id="pfl3"
+                                                            partialTriggers="pc1:t1"
+                                                            inlineStyle="font-size:x-large; font-family:Verdana;">
+                                          <af:panelLabelAndMessage label="CPF/CNPJ"
+                                                                   id="plam3"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.CpfCnpj.inputValue}"
+                                                           id="ot11"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
+                                                                   id="plam1"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Nome.inputValue}"
+                                                           id="ot9"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
+                                                                   id="plam5"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                           id="ot10"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
+                                                                   id="plam2"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Email.inputValue==null ? 'Não informado' : bindings.Email.inputValue}"
+                                                           id="ot6"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Endereco.hints.label}"
+                                                                   id="plam4"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Endereco.inputValue==null ? 'Não informado' : bindings.Endereco.inputValue}"
+                                                           id="ot8"/>
+                                          </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                      </af:panelBox>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                                  <f:facet name="start"/>
+                                  <f:facet name="end"/>
+                                  <f:facet name="top">
+                                    <af:panelGroupLayout id="pgl3"
+                                                         halign="center"
+                                                         valign="middle"
+                                                         layout="vertical">
+                                      <af:spacer width="10" height="10"
+                                                 id="s13"/>
+                                      <af:outputText value="Cliente"
+                                                     id="ot1"
+                                                     inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                                </af:panelStretchLayout>
+                              </af:panelGroupLayout>
                             </f:facet>
                           </af:panelSplitter>
                         </f:facet>

@@ -35,17 +35,20 @@
                             <af:toolbar id="t2">
                               <af:commandToolbarButton text="Inserir novo"
                                                        id="ctb1"
-                                                       icon="/imagens/user_add.png">
+                                                       icon="/imagens/user_add.png"
+                                                       shortDesc="Inserir novo">
                                 <af:showPopupBehavior popupId="inserir"/>
                               </af:commandToolbarButton>
                               <af:commandToolbarButton text="Editar" id="ctb2"
                                                        disabled="#{not pageFlowScope.FuncionarioBean.habilitaBotoes}"
-                                                       icon="/imagens/user_edit.png">
+                                                       icon="/imagens/user_edit.png"
+                                                       shortDesc="Editar">
                                 <af:showPopupBehavior popupId="editar"/>
                               </af:commandToolbarButton>
                               <af:commandToolbarButton text="Excluir" id="ctb3"
                                                        disabled="#{not pageFlowScope.FuncionarioBean.habilitaBotoes}"
-                                                       icon="/imagens/user_delete.png">
+                                                       icon="/imagens/user_delete.png"
+                                                       shortDesc="Excluir">
                                 <af:showPopupBehavior popupId="excluir"/>
                               </af:commandToolbarButton>
                             </af:toolbar>
@@ -62,13 +65,15 @@
                                   <af:commandToolbarButton text="Gravar"
                                                            id="ctb4"
                                                            actionListener="#{pageFlowScope.FuncionarioBean.inserirNovoFuncionario}"
-                                                           icon="/imagens/accept.png"/>
+                                                           icon="/imagens/accept.png"
+                                                           shortDesc="GRAVAR"/>
                                   <af:commandToolbarButton text="Cancelar"
                                                            id="ctb5"
                                                            actionListener="#{pageFlowScope.FuncionarioBean.cancelarRegistro}"
                                                            partialSubmit="true"
                                                            immediate="true"
-                                                           icon="/imagens/cancel.png">
+                                                           icon="/imagens/cancel.png"
+                                                           shortDesc="CANCELAR">
                                     <af:resetActionListener/>
                                   </af:commandToolbarButton>
                                 </af:toolbar>
@@ -79,7 +84,8 @@
                                 <af:spacer width="10" height="10" id="s7"/>
                                 <af:selectOneRadio label="Perfil de acesso"
                                                    id="sor1" layout="horizontal"
-                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}">
+                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}"
+                                                   shortDesc="PERFIL">
                                   <af:selectItem label="Funcionário" value="2"
                                                  id="si2"/>
                                   <af:selectItem label="Administrador" value="1"
@@ -91,9 +97,10 @@
                                               required="true"
                                               columns="60"
                                               maximumLength="60"
-                                              shortDesc="#{bindings.Nome.hints.tooltip}"
+                                              shortDesc="NOME"
                                               id="it3"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Nome.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s2"/>
@@ -102,9 +109,10 @@
                                               required="true"
                                               columns="20"
                                               maximumLength="#{bindings.Cpf.hints.precision}"
-                                              shortDesc="#{bindings.Cpf.hints.tooltip}"
+                                              shortDesc="CPF"
                                               id="it5"
-                                              validator="#{pageFlowScope.FuncionarioBean.verficarValidarCpf}">
+                                              validator="#{pageFlowScope.FuncionarioBean.verficarValidarCpf}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <af:clientListener method="applyMask"
                                                      type="focus"/>
                                   <af:clientAttribute name="meioMask"
@@ -116,9 +124,10 @@
                                               required="true"
                                               columns="20"
                                               maximumLength="#{bindings.Telefone.hints.precision}"
-                                              shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                              shortDesc="TELEFONE"
                                               id="it1"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <af:clientListener method="applyMask"
                                                      type="focus"/>
                                   <af:clientAttribute name="meioMask"
@@ -130,19 +139,21 @@
                                               required="true"
                                               columns="60"
                                               maximumLength="#{bindings.Email.hints.precision}"
-                                              shortDesc="#{bindings.Email.hints.tooltip}"
+                                              shortDesc="EMAIL"
                                               id="it2"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Email.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s5"/>
                                 <af:inputText value="#{pageFlowScope.FuncionarioBean.vlEndereco}"
-                                              label="#{bindings.Endereco.hints.label}"
+                                              label="Endereço"
                                               required="true"
                                               columns="60"
                                               maximumLength="#{bindings.Endereco.hints.precision}"
-                                              shortDesc="#{bindings.Endereco.hints.tooltip}"
-                                              id="it4" rows="2">
+                                              shortDesc="ENDEREÇO"
+                                              id="it4" rows="2"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Endereco.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s6"/>
@@ -161,7 +172,9 @@
                                 <af:spacer width="10" height="10" id="s8"/>
                                 <af:selectOneRadio label="Perfil de acesso"
                                                    id="sor2" layout="horizontal"
-                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}">
+                                                   value="#{pageFlowScope.FuncionarioBean.vlPerfil}"
+                                                   requiredMessageDetail="Campo obrigatório"
+                                                   shortDesc="PERFIL">
                                   <af:selectItem label="Funcionário" value="2"
                                                  id="si4"/>
                                   <af:selectItem label="Administrador" value="1"
@@ -173,9 +186,10 @@
                                               required="true"
                                               columns="60"
                                               maximumLength="#{bindings.Nome.hints.precision}"
-                                              shortDesc="#{bindings.Nome.hints.tooltip}"
+                                              shortDesc="NOME"
                                               id="it8"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarNome}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Nome.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s10"/>
@@ -184,8 +198,9 @@
                                               required="true"
                                               columns="20"
                                               maximumLength="#{bindings.Cpf.hints.precision}"
-                                              shortDesc="#{bindings.Cpf.hints.tooltip}"
-                                              id="it9" readOnly="true">
+                                              shortDesc="CPF"
+                                              id="it9" readOnly="true"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <af:clientListener method="applyMask"
                                                      type="focus"/>
                                   <af:clientAttribute name="meioMask"
@@ -197,9 +212,10 @@
                                               required="true"
                                               columns="20"
                                               maximumLength="#{bindings.Telefone.hints.precision}"
-                                              shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                              shortDesc="TELEFONE"
                                               id="it7"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarTelefone}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <af:clientListener method="applyMask"
                                                      type="focus"/>
                                   <af:clientAttribute name="meioMask"
@@ -211,9 +227,10 @@
                                               required="true"
                                               columns="60"
                                               maximumLength="#{bindings.Email.hints.precision}"
-                                              shortDesc="#{bindings.Email.hints.tooltip}"
+                                              shortDesc="EMAIL"
                                               id="it6"
-                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}">
+                                              validator="#{pageFlowScope.FuncionarioBean.validarEmail}"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Email.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s13"/>
@@ -222,8 +239,9 @@
                                               required="true"
                                               columns="60"
                                               maximumLength="#{bindings.Endereco.hints.precision}"
-                                              shortDesc="#{bindings.Endereco.hints.tooltip}"
-                                              id="it10" rows="2">
+                                              shortDesc="ENDEREÇO"
+                                              id="it10" rows="2"
+                                              requiredMessageDetail="Campo obrigatório">
                                   <f:validator binding="#{bindings.Endereco.validator}"/>
                                 </af:inputText>
                                 <af:spacer width="10" height="10" id="s14"/>
@@ -233,13 +251,15 @@
                                   <af:commandToolbarButton text="Gravar"
                                                            id="ctb6"
                                                            actionListener="#{pageFlowScope.FuncionarioBean.gravarEdicao}"
-                                                           icon="/imagens/accept.png"/>
+                                                           icon="/imagens/accept.png"
+                                                           shortDesc="GRAVAR"/>
                                   <af:commandToolbarButton text="Cancelar"
                                                            id="ctb7"
                                                            partialSubmit="true"
                                                            immediate="true"
                                                            actionListener="#{pageFlowScope.FuncionarioBean.cancelarEdicao}"
-                                                           icon="/imagens/cancel.png">
+                                                           icon="/imagens/cancel.png"
+                                                           shortDesc="CANCELAR">
                                     <af:resetActionListener/>
                                   </af:commandToolbarButton>
                                 </af:toolbar>
@@ -311,51 +331,53 @@
                               <af:panelGroupLayout layout="scroll"
                                                    xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                                                    id="pgl4" halign="center">
-                                <af:panelFormLayout id="pfl3"
-                                                    partialTriggers="pc1:t1"
-                                                    inlineStyle="font-size:x-large; font-family:Verdana;">
-                                  <af:panelLabelAndMessage label="Perfil de acesso"
-                                                           id="plam3"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.TbPerfilIdPerfil.inputValue =='1'? 'Administrador':'Funcionário'}"
-                                                   id="ot9"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:spacer width="10" height="10" id="s16"/>
-                                  <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
-                                                           id="plam2"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.Nome.inputValue}"
-                                                   id="ot2"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:spacer width="10" height="10" id="s17"/>
-                                  <af:panelLabelAndMessage label="CPF"
-                                                           id="plam1"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.Cpf.inputValue}"
-                                                   id="ot7"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:spacer width="10" height="10" id="s18"/>
-                                  <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
-                                                           id="plam4"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.Telefone.inputValue}"
-                                                   id="ot6"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:spacer width="10" height="10" id="s19"/>
-                                  <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
-                                                           id="plam6"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.Email.inputValue}"
-                                                   id="ot10"/>
-                                  </af:panelLabelAndMessage>
-                                  <af:spacer width="10" height="10" id="s20"/>
-                                  <af:panelLabelAndMessage label="Endereço"
-                                                           id="plam5"
-                                                           labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
-                                    <af:outputText value="#{bindings.Endereco.inputValue}"
-                                                   id="ot8"/>
-                                  </af:panelLabelAndMessage>
-                                </af:panelFormLayout>
+                                <af:panelBox id="pb1" showDisclosure="false">
+                                  <af:panelFormLayout id="pfl3"
+                                                      partialTriggers="pc1:t1"
+                                                      inlineStyle="font-size:x-large; font-family:Verdana;">
+                                    <af:panelLabelAndMessage label="Perfil de acesso"
+                                                             id="plam3"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.TbPerfilIdPerfil.inputValue =='1'? 'Administrador':'Funcionário'}"
+                                                     id="ot9"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="10" id="s16"/>
+                                    <af:panelLabelAndMessage label="#{bindings.Nome.hints.label}"
+                                                             id="plam2"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.Nome.inputValue}"
+                                                     id="ot2"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="10" id="s17"/>
+                                    <af:panelLabelAndMessage label="CPF"
+                                                             id="plam1"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.Cpf.inputValue}"
+                                                     id="ot7"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="10" id="s18"/>
+                                    <af:panelLabelAndMessage label="#{bindings.Telefone.hints.label}"
+                                                             id="plam4"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.Telefone.inputValue}"
+                                                     id="ot6"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="10" id="s19"/>
+                                    <af:panelLabelAndMessage label="#{bindings.Email.hints.label}"
+                                                             id="plam6"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.Email.inputValue}"
+                                                     id="ot10"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="10" id="s20"/>
+                                    <af:panelLabelAndMessage label="Endereço"
+                                                             id="plam5"
+                                                             labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                      <af:outputText value="#{bindings.Endereco.inputValue}"
+                                                     id="ot8"/>
+                                    </af:panelLabelAndMessage>
+                                  </af:panelFormLayout>
+                                </af:panelBox>
                               </af:panelGroupLayout>
                             </f:facet>
                             <f:facet name="start"/>

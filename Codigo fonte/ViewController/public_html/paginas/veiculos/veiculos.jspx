@@ -41,19 +41,22 @@
                                       <af:commandToolbarButton text="Inserir novo"
                                                                id="ctb1"
                                                                partialSubmit="true"
-                                                               icon="/imagens/car_add.png">
+                                                               icon="/imagens/car_add.png"
+                                                               shortDesc="Inserir novo">
                                       <af:showPopupBehavior popupId="inserir"/>
                                     </af:commandToolbarButton>
                                       <af:commandToolbarButton text="Editar"
                                                                id="ctb2"
                                                                disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}"
-                                                               icon="/imagens/car_edit.png">
+                                                               icon="/imagens/car_edit.png"
+                                                               shortDesc="Editar">
                                       <af:showPopupBehavior popupId="editar"/>
                                     </af:commandToolbarButton>
                                       <af:commandToolbarButton text="Excluir"
                                                                id="ctb3"
                                                                disabled="#{not pageFlowScope.veiculoBean.habilitaBotoes}"
-                                                               icon="/imagens/car_delete.png">
+                                                               icon="/imagens/car_delete.png"
+                                                               shortDesc="Excluir">
                                       <af:showPopupBehavior popupId="excluir"/>
                                     </af:commandToolbarButton>
                                     </af:toolbar>
@@ -76,7 +79,7 @@
                                       <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
                                                           label="#{bindings.ListarMarcaView1.label}"
                                                           required="true"
-                                                          shortDesc="#{bindings.ListarMarcaView1.hints.tooltip}"
+                                                          shortDesc="MARCA"
                                                           id="soc1"
                                                           autoSubmit="true"
                                                           binding="#{pageFlowScope.veiculoBean.comboMarca}"
@@ -89,7 +92,7 @@
                                       <af:selectOneChoice value="#{bindings.ListarModeloView1.inputValue}"
                                                           label="#{bindings.ListarModeloView1.label}"
                                                           required="true"
-                                                          shortDesc="#{bindings.ListarModeloView1.hints.tooltip}"
+                                                          shortDesc="MODELO"
                                                           id="soc2"
                                                           partialTriggers="soc1"
                                                           binding="#{pageFlowScope.veiculoBean.comboModelo}">
@@ -103,7 +106,8 @@
                                                           unselectedLabel="Selecione"
                                                           value="#{pageFlowScope.veiculoBean.vlAno}"
                                                           required="true"
-                                                          requiredMessageDetail="Campo obrigatório">
+                                                          requiredMessageDetail="Campo obrigatório"
+                                                          shortDesc="ANO">
                                         <f:selectItems value="#{pageFlowScope.veiculoBean.comboAno}"
                                                        id="selectItems1"/>
                                       </af:selectOneChoice>
@@ -116,7 +120,8 @@
                                                     id="it1"
                                                     value="#{pageFlowScope.veiculoBean.vlPlaca}"
                                                     validator="#{pageFlowScope.veiculoBean.validarPlaca}"
-                                                    requiredMessageDetail="Campo obrigatório">
+                                                    requiredMessageDetail="Campo obrigatório"
+                                                    shortDesc="PLACA">
                                         <f:validator binding="#{bindings.Placa.validator}"/>
                                         <af:clientListener method="maskPlaca"
                                                            type="keyPress"/>
@@ -129,7 +134,8 @@
                                                     columns="30"
                                                     maximumLength="60"
                                                     id="it3"
-                                                    requiredMessageDetail="Campo obrigatório">
+                                                    requiredMessageDetail="Campo obrigatório"
+                                                    shortDesc="PROPRIETÁRIO">
                                         <f:validator binding="#{bindings.Proprietario.validator}"/>
                                       </af:inputText>
                                       <af:spacer width="10" height="10"
@@ -143,7 +149,7 @@
                                                     value="#{pageFlowScope.veiculoBean.vlTelefone}"
                                                     requiredMessageDetail="Campo obrigatório"
                                                     validator="#{pageFlowScope.veiculoBean.validarTelefone}"
-                                                    shortDesc="Informe um telefone">
+                                                    shortDesc="TELEFONE">
                                         <f:validator binding="#{bindings.Telefone.validator}"/>
                                         <af:clientListener method="applyMask"
                                                            type="focus"/>
@@ -185,7 +191,7 @@
                                       <af:selectOneChoice value="#{bindings.ListarMarcaView1.inputValue}"
                                                           label="#{bindings.ListarMarcaView1.label}"
                                                           required="true"
-                                                          shortDesc="#{bindings.ListarMarcaView1.hints.tooltip}"
+                                                          shortDesc="MARCA"
                                                           id="soc3"
                                                           autoSubmit="true"
                                                           valueChangeListener="#{pageFlowScope.veiculoBean.buscarModelos}">
@@ -197,7 +203,7 @@
                                       <af:selectOneChoice value="#{bindings.ListarModeloView1.inputValue}"
                                                           label="#{bindings.ListarModeloView1.label}"
                                                           required="true"
-                                                          shortDesc="#{bindings.ListarModeloView1.hints.tooltip}"
+                                                          shortDesc="MODELO"
                                                           id="soc4"
                                                           partialTriggers="soc3"
                                                           autoSubmit="true">
@@ -208,7 +214,8 @@
                                                  id="s8"/>
                                       <af:selectOneChoice label="Ano" id="soc5"
                                                           value="#{pageFlowScope.veiculoBean.vlAno}"
-                                                          required="true">
+                                                          required="true"
+                                                          shortDesc="ANO">
                                         <f:selectItems value="#{pageFlowScope.veiculoBean.comboAno}"
                                                        id="si5"/>
                                       </af:selectOneChoice>
@@ -218,7 +225,7 @@
                                                     label="#{bindings.Placa.hints.label}"
                                                     required="true" columns="20"
                                                     maximumLength="#{bindings.Placa.hints.precision}"
-                                                    shortDesc="#{bindings.Placa.hints.tooltip}"
+                                                    shortDesc="PLACA"
                                                     id="it8">
                                         <f:validator binding="#{bindings.Placa.validator}"/>
                                         <af:clientListener method="maskPlaca"
@@ -230,7 +237,7 @@
                                                     label="#{bindings.Proprietario.hints.label}"
                                                     required="true" columns="30"
                                                     maximumLength="#{bindings.Proprietario.hints.precision}"
-                                                    shortDesc="#{bindings.Proprietario.hints.tooltip}"
+                                                    shortDesc="PROPRIETÁRIO"
                                                     id="it6">
                                         <f:validator binding="#{bindings.Proprietario.validator}"/>
                                       </af:inputText>
@@ -240,7 +247,7 @@
                                                     label="#{bindings.Telefone.hints.label}"
                                                     required="true" columns="20"
                                                     maximumLength="#{bindings.Telefone.hints.precision}"
-                                                    shortDesc="#{bindings.Telefone.hints.tooltip}"
+                                                    shortDesc="TELEFONE"
                                                     id="it5"
                                                     validator="#{pageFlowScope.veiculoBean.validarTelefone}">
                                         <f:validator binding="#{bindings.Telefone.validator}"/>
@@ -332,50 +339,80 @@
                               </af:panelCollection>                                                      
                             </f:facet>
                             <f:facet name="second">
-                              <af:decorativeBox id="db2">
-                                <f:facet name="center">
-                                  <af:panelGroupLayout layout="scroll"
-                                                       xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-                                                       id="pgl1">
-                                    <af:outputText value="Dados Gerais"
-                                                   id="outputText1"
-                                                   inlineStyle="text-align:center; vertical-align:bottom; font-size:xx-large;"/>
-                                    <af:panelFormLayout id="pfl1"
-                                                        partialTriggers="pc1:t1">
-                                      <af:panelLabelAndMessage label="#{bindings.Marca.hints.label}"
-                                                               id="plam3">
-                                        <af:outputText value="#{bindings.Marca.inputValue}"
-                                                       id="ot8"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Modelo.hints.label}"
-                                                               id="plam1">
-                                        <af:outputText value="#{bindings.Modelo.inputValue}"
-                                                       id="ot7"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Ano1.hints.label}"
-                                                               id="plam2">
-                                        <af:outputText value="#{bindings.Ano1.inputValue}"
-                                                       id="ot9"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Placa1.hints.label}"
-                                                               id="plam6">
-                                        <af:outputText value="#{bindings.Placa1.inputValue}"
-                                                       id="ot5"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Proprietario1.hints.label}"
-                                                               id="plam4">
-                                        <af:outputText value="#{bindings.Proprietario1.inputValue}"
-                                                       id="ot10"/>
-                                      </af:panelLabelAndMessage>
-                                      <af:panelLabelAndMessage label="#{bindings.Telefone1.hints.label}"
-                                                               id="plam5">
-                                        <af:outputText value="#{bindings.Telefone1.inputValue}"
-                                                       id="ot6"/>
-                                      </af:panelLabelAndMessage>
-                                    </af:panelFormLayout>
-                                  </af:panelGroupLayout>
-                                </f:facet>
-                              </af:decorativeBox>
+                              <af:panelGroupLayout
+                                                   xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                   id="pgl2">
+                                <af:panelStretchLayout id="psl2"
+                                                       styleClass="AFStretchWidth"
+                                                       inlineStyle="height:530px;"
+                                                       topHeight="75px">
+                                  <f:facet name="bottom"/>
+                                  <f:facet name="center">
+                                    <af:panelGroupLayout layout="scroll"
+                                                         xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                         id="pgl1"
+                                                         halign="center">
+                                      <af:panelBox id="pb1"
+                                                   showDisclosure="false">
+                                        <af:panelFormLayout id="pfl1"
+                                                            partialTriggers="pc1:t1"
+                                                            inlineStyle="font-size:x-large; font-family:Verdana;">
+                                          <af:panelLabelAndMessage label="#{bindings.Marca.hints.label}"
+                                                                   id="plam3"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Marca.inputValue}"
+                                                           id="ot8"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Modelo.hints.label}"
+                                                                   id="plam1"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Modelo.inputValue}"
+                                                           id="ot7"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Ano1.hints.label}"
+                                                                   id="plam2"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Ano1.inputValue}"
+                                                           id="ot9"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Placa1.hints.label}"
+                                                                   id="plam6"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Placa1.inputValue}"
+                                                           id="ot5"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Proprietario1.hints.label}"
+                                                                   id="plam4"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Proprietario1.inputValue}"
+                                                           id="ot10"/>
+                                          </af:panelLabelAndMessage>
+                                          <af:panelLabelAndMessage label="#{bindings.Telefone1.hints.label}"
+                                                                   id="plam5"
+                                                                   labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
+                                            <af:outputText value="#{bindings.Telefone1.inputValue}"
+                                                           id="ot6"/>
+                                          </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                      </af:panelBox>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                                  <f:facet name="start"/>
+                                  <f:facet name="end"/>
+                                  <f:facet name="top">
+                                    <af:panelGroupLayout id="pgl3"
+                                                         halign="center"
+                                                         valign="middle"
+                                                         layout="vertical">
+                                      <af:spacer width="10" height="10"
+                                                 id="s15"/>
+                                      <af:outputText value="Veículo"
+                                                     id="outputText1"
+                                                     inlineStyle="text-align:center; vertical-align:bottom; font-weight:bold; color:black;font-size:xx-large; font-family:Verdana;"/>
+                                    </af:panelGroupLayout>
+                                  </f:facet>
+                                </af:panelStretchLayout>
+                              </af:panelGroupLayout>
                             </f:facet>
                           </af:panelSplitter>
                         </f:facet>
