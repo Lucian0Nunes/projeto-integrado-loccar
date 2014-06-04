@@ -21,7 +21,7 @@
     Scale="0"
     ColumnName="ID_FRANQUIA"
     SQLType="NUMERIC"
-    Type="java.math.BigDecimal"
+    Type="java.lang.Integer"
     ColumnType="NUMBER"
     TableName="TB_FRANQUIA_HRS"
     PrimaryKey="true">
