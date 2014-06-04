@@ -493,14 +493,16 @@
                                         <af:column sortProperty="TotalHrExtDia"
                                                    sortable="false"
                                                    headerText="Horas extras"
-                                                   id="c14" width="130">
-                                          <af:outputText value="#{empty row.TotalHrExtDia  ? '00:00 hrs': row.TotalHrExtDia} "
+                                                   id="c14" width="130"
+                                                   inlineStyle="text-align:center;">
+                                          <af:outputText value="#{empty row.TotalHrExtDia  ? '--': row.TotalHrExtDia} "
                                                          id="ot27"/>
                                         </af:column>
                                         <af:column sortProperty="TotalKmRodado"
                                                    sortable="false"
                                                    headerText="#{bindings.DadosDiariaView1.hints.TotalKmRodado.label}"
-                                                   id="c16" width="125">
+                                                   id="c16" width="125"
+                                                   inlineStyle="text-align:center;">
                                           <af:outputText value="#{empty row.TotalKmRodado ? '--': row.TotalKmRodado} "
                                                          id="ot28">
                                             <af:convertNumber groupingUsed="false"
@@ -589,7 +591,6 @@
                                                         shortDesc="#{bindings.HrChegada.hints.tooltip}"
                                                         id="id2"
                                                         value="#{pageFlowScope.os.dtHrChegada}"
-                                                        validator="#{pageFlowScope.os.validarHoraChegada}"
                                                         immediate="true"
                                                         autoSubmit="true">
                                             <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
