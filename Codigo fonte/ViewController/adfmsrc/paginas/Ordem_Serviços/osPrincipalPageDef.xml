@@ -163,11 +163,6 @@
         <Item Value="HrChegada"/>
       </AttrNames>
     </attributeValues>
-    <attributeValues IterBinding="TbDiariaView1Iterator" id="HrSaida">
-      <AttrNames>
-        <Item Value="HrSaida"/>
-      </AttrNames>
-    </attributeValues>
     <attributeValues IterBinding="TbDiariaView1Iterator" id="KmChegada1">
       <AttrNames>
         <Item Value="KmChegada"/>

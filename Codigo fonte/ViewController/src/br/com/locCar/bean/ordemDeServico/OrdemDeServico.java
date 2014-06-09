@@ -44,8 +44,7 @@ import org.apache.myfaces.trinidad.model.RowKeySet;
 
 public class OrdemDeServico extends ValidaCampos {
 
-    private static ADFLogger logger =
-        ADFLogger.createADFLogger(OrdemDeServico.class);
+    private static ADFLogger logger = ADFLogger.createADFLogger(OrdemDeServico.class);
 
     private final String IT_TB_OS = "TbOrdemDeServicoView1Iterator";
     private final String IT_OS = "DadosOsView1Iterator";
@@ -101,14 +100,14 @@ public class OrdemDeServico extends ValidaCampos {
     private Timestamp dataChegadaDiariaAnterior;
     private Boolean botaoEditarDiaria;
     private Boolean botaoInserirDiaria;
+    private Row linhaDiariaSelecionada;
 
     public OrdemDeServico() {
         iniciar();
     }
 
     public void iniciar() {
-        Row rw =
-            (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
+        Row rw = (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
         Number idMotorista = null;
         Number idModelo = null;
         if (rw != null) {
@@ -117,15 +116,10 @@ public class OrdemDeServico extends ValidaCampos {
             idOs = (Number)rw.getAttribute("IdOs");
         } //end if
         if (idOs != null) {
-            final Map<String, Object> parametros =
-                new HashMap<String, Object>();
+            final Map<String, Object> parametros = new HashMap<String, Object>();
             parametros.put("idOs", idOs);
-            ADFUtils.executeOperationBinding("buscarDiaria", parametros);
-
-            habitarInserirDiaria();
-            habilitarEdicaoDiaria();
-            JSFUtils.addPartialTriggerWithIdFromUiRoot("t11");
-        } //end if
+            ADFUtils.executeOperationBinding("buscarDiaria", parametros);            
+        } //end if        
 
         if (idMotorista != null) {
             indicaMotorista(idMotorista);
@@ -138,6 +132,9 @@ public class OrdemDeServico extends ValidaCampos {
         } else {
             setModeloVeiculo(null);
         } //end if else
+        habitarInserirDiaria();
+        habilitarEdicaoDiaria();
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("t11");
         JSFUtils.addPartialTriggerWithIdFromUiRoot("t2");
     } //end
 
@@ -148,8 +145,7 @@ public class OrdemDeServico extends ValidaCampos {
         view.clearCache();
         view.setWhereClause("ID_MOTORISTA = " + idMotorista);
         view.executeQuery();
-        RowSetIterator iteratorMotorista =
-            ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
+        RowSetIterator iteratorMotorista = ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
         Row row = iteratorMotorista.getCurrentRow();
         if (row != null) {
             String nome = (String)row.getAttribute("Nome");
@@ -166,8 +162,7 @@ public class OrdemDeServico extends ValidaCampos {
         view.clearCache();
         view.setWhereClause("ID_MODELO = " + idModelo);
         view.executeQuery();
-        RowSetIterator iteratorVeiculo =
-            ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
+        RowSetIterator iteratorVeiculo =  ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
         Row row = iteratorVeiculo.getCurrentRow();
         if (row != null) {
             String modelo = (String)row.getAttribute("Modelo");
@@ -182,8 +177,7 @@ public class OrdemDeServico extends ValidaCampos {
         view.clearCache();
         view.setWhereClause("ID_VEICULO = " + idVeiculo);
         view.executeQuery();
-        RowSetIterator iteratorVeiculo =
-            ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
+        RowSetIterator iteratorVeiculo = ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
         Row row = iteratorVeiculo.getCurrentRow();
         if (row != null) {
             String modelo = (String)row.getAttribute("Modelo");
@@ -214,17 +208,15 @@ public class OrdemDeServico extends ValidaCampos {
     //Gravar os dados da nova OS.
 
     public void gravarOs(ActionEvent actionEvent) {
-        RowSetIterator it =
-            ADFUtils.findIterator(IT_TB_OS).getRowSetIterator();
+        RowSetIterator it = ADFUtils.findIterator(IT_TB_OS).getRowSetIterator();
         try {
-            oracle.jbo.domain.Date dataAtual =
-                new oracle.jbo.domain.Date(oracle.jbo.domain.Date.getCurrentDate());
+            oracle.jbo.domain.Date dataAtual = new oracle.jbo.domain.Date(oracle.jbo.domain.Date.getCurrentDate());
             pegaIdCliente();
             pegaIdVeiculo();
             pegaIdMotorista();
 
             if (getIdCliente() == null || getIdVeiculo() == null) {
-                JSFUtils.addFacesErrorMessage("Cliente ou Veiculo nao informado");
+                JSFUtils.addFacesErrorMessage("Cliente ou Ve\u00EDculo nao informado");
             } else {
 
                 Row criarRow = it.createRow();
@@ -245,11 +237,11 @@ public class OrdemDeServico extends ValidaCampos {
                                                             criarRow.getAttribute("IdOs").toString(),
                                                             null);
 
-                final Map<String, Object> parametros =
-                    new HashMap<String, Object>();
+                final Map<String, Object> parametros = new HashMap<String, Object>();
                 parametros.put("idOs", (Number)criarRow.getAttribute("IdOs"));
                 ADFUtils.executeOperationBinding("buscarDiaria", parametros);
-
+                habilitarEdicaoDiaria();
+                habitarInserirDiaria();
                 if (this.getIdMotorista() != null) {
                     indicaMotorista(new Number(this.getIdMotorista()));
                 } else {
@@ -262,10 +254,12 @@ public class OrdemDeServico extends ValidaCampos {
                     setModeloVeiculo(null);
                 }
                 JSFUtils.addPartialTriggerWithIdFromUiRoot("t11");
+                JSFUtils.addPartialTriggerWithIdFromUiRoot("t12");
                 JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl2");
                 JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl3");
                 JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl4");
                 JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl5");
+
                 popupInserir.cancel();
                 JSFUtils.addFacesConfirmationMessage("Dados gravados com sucesso");
             } //end if else
@@ -362,8 +356,7 @@ public class OrdemDeServico extends ValidaCampos {
 
     public void pegaIdCliente() {
         if (bindGridClientes.getSelectedRowKeys() != null) {
-            RowKeySet selectedRowKeySet =
-                bindGridClientes.getSelectedRowKeys();
+            RowKeySet selectedRowKeySet =  bindGridClientes.getSelectedRowKeys();
             Iterator selectionIt = selectedRowKeySet.iterator();
             Integer rowKey;
             while (selectionIt.hasNext()) {
@@ -378,8 +371,7 @@ public class OrdemDeServico extends ValidaCampos {
 
     public void pegaIdVeiculo() {
         if (bindGridVeiculos.getSelectedRowKeys() != null) {
-            RowKeySet selectedRowKeySet =
-                bindGridVeiculos.getSelectedRowKeys();
+            RowKeySet selectedRowKeySet =  bindGridVeiculos.getSelectedRowKeys();
             Iterator selectionIt = selectedRowKeySet.iterator();
             Integer rowKey;
             while (selectionIt.hasNext()) {
@@ -394,8 +386,7 @@ public class OrdemDeServico extends ValidaCampos {
 
     public void pegaIdMotorista() {
         if (bindGridMotoristas.getSelectedRowKeys() != null) {
-            RowKeySet selectedRowKeySet =
-                bindGridMotoristas.getSelectedRowKeys();
+            RowKeySet selectedRowKeySet = bindGridMotoristas.getSelectedRowKeys();
             Iterator selectionIt = selectedRowKeySet.iterator();
             Integer rowKey;
             while (selectionIt.hasNext()) {
@@ -412,12 +403,10 @@ public class OrdemDeServico extends ValidaCampos {
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
-        view.setWhereClause("( (UPPER(NOME) LIKE UPPER('%' || '" +
-                            nomeCliPesq + "'|| '%') ) )");
+        view.setWhereClause("( (UPPER(NOME) LIKE UPPER('%' || '" + nomeCliPesq + "'|| '%') ) )");
         view.executeQuery();
 
-        RowSetIterator iteratorFranquia =
-            ADFUtils.findIterator(IT_TB_CLIENTE).getRowSetIterator();
+        RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_CLIENTE).getRowSetIterator();
 
         Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -445,12 +434,10 @@ public class OrdemDeServico extends ValidaCampos {
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
-        view.setWhereClause("( (UPPER(NOME) LIKE UPPER('%' || '" +
-                            nomeMotPesq + "'|| '%') ) )");
+        view.setWhereClause("( (UPPER(NOME) LIKE UPPER('%' || '" + nomeMotPesq + "'|| '%') ) )");
         view.executeQuery();
 
-        RowSetIterator iteratorFranquia =
-            ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
+        RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
 
         Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -480,12 +467,10 @@ public class OrdemDeServico extends ValidaCampos {
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
-        view.setWhereClause("( (UPPER(MODELO) LIKE UPPER('%' || '" +
-                            modeloPesq + "'|| '%') ) )");
+        view.setWhereClause("( (UPPER(MODELO) LIKE UPPER('%' || '" +  modeloPesq + "'|| '%') ) )");
         view.executeQuery();
 
-        RowSetIterator iteratorFranquia =
-            ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
+        RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
 
         Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -519,8 +504,7 @@ public class OrdemDeServico extends ValidaCampos {
                 view.clearCache();
                 view.executeQuery();
 
-                RowSetIterator iteratorFranquia =
-                    ADFUtils.findIterator(IT_TB_CLIENTE).getRowSetIterator();
+                RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_CLIENTE).getRowSetIterator();
 
                 Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -555,8 +539,7 @@ public class OrdemDeServico extends ValidaCampos {
                 view.clearCache();
                 view.executeQuery();
 
-                RowSetIterator iteratorFranquia =
-                    ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
+                RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_VEICULO).getRowSetIterator();
 
                 Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -593,8 +576,7 @@ public class OrdemDeServico extends ValidaCampos {
                 view.clearCache();
                 view.executeQuery();
 
-                RowSetIterator iteratorFranquia =
-                    ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
+                RowSetIterator iteratorFranquia = ADFUtils.findIterator(IT_TB_MOTORISTA).getRowSetIterator();
 
                 Row[] rows = iteratorFranquia.getAllRowsInRange();
 
@@ -602,8 +584,7 @@ public class OrdemDeServico extends ValidaCampos {
                     for (Row rw : rows) {
                         Number id = (Number)rw.getAttribute("IdMotorista");
                         String nome = (String)rw.getAttribute("Nome");
-                        String categoria =
-                            (String)rw.getAttribute("Categoria");
+                        String categoria = (String)rw.getAttribute("Categoria");
                         String telefone = (String)rw.getAttribute("Telefone");
 
                         OsTO dadosCliente = new OsTO();
@@ -624,15 +605,13 @@ public class OrdemDeServico extends ValidaCampos {
 
 
     public void excluirOrdemDeServico(DialogEvent dialogEvent) throws Exception {
-        Row rw =
-            (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
+        Row rw = (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
 
         DCIteratorBinding it = ADFUtils.findIterator(IT_TB_DIARIA);
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
-        view.setWhereClause("FK_ORDEM_DE_SERVICO = " +
-                            rw.getAttribute("IdOs"));
+        view.setWhereClause("FK_ORDEM_DE_SERVICO = " + rw.getAttribute("IdOs"));
         view.executeQuery();
 
         buscarOS((Number)rw.getAttribute("IdOs"));
@@ -666,14 +645,14 @@ public class OrdemDeServico extends ValidaCampos {
     } //end
 
     private void habitarInserirDiaria() {
-        RowSetIterator itDiaria =
-            ADFUtils.findIterator(IT_DIARIA).getRowSetIterator();
+        Row rw = (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
+        RowSetIterator itDiaria = ADFUtils.findIterator(IT_DIARIA).getRowSetIterator();
         Row[] rows = itDiaria.getAllRowsInRange();
         Row ultimaLinha = itDiaria.last();
 
-        if (rows == null || rows.length == 0) {
+        if (rw != null && (rows == null || rows.length == 0)) {
             setBotaoInserirDiaria(false);
-        } else if (ultimaLinha != null &&
+        } else if (rw != null && ultimaLinha != null &&
                    ultimaLinha.getAttribute("HrChegada") != null &&
                    ultimaLinha.getAttribute("KmChegada") != null) {
             setBotaoInserirDiaria(false);
@@ -685,8 +664,7 @@ public class OrdemDeServico extends ValidaCampos {
     //Método utilizado para atualizar a grid de retorno e buscar as diárias referente a OS selecionada.
 
     public void selectionListenerGridPrincipal(SelectionEvent selectionEvent) {
-        makeCurrent(selectionEvent,
-                    "#{bindings.DadosOsView1.collectionModel.makeCurrent}");
+        makeCurrent(selectionEvent, "#{bindings.DadosOsView1.collectionModel.makeCurrent}");
         iniciar();
         JSFUtils.addPartialTriggerWithIdFromUiRoot("ps2");
     } //end
@@ -714,16 +692,14 @@ public class OrdemDeServico extends ValidaCampos {
     } //end
 
     public void selectionListenerGridDiarias(SelectionEvent selectionEvent) {
-        makeCurrent(selectionEvent,
-                    "#{bindings.DadosDiariaView1.collectionModel.makeCurrent}");
+        makeCurrent(selectionEvent, "#{bindings.DadosDiariaView1.collectionModel.makeCurrent}");
         habilitarEdicaoDiaria();
         habitarInserirDiaria();
         JSFUtils.addPartialTriggerWithIdFromUiRoot("t12");
     } //end
 
     private void habilitarEdicaoDiaria() {
-        Row linhaCorrente =
-            (Row)ADFUtils.evaluateEL("#{bindings.DadosDiariaView1.currentRow}");
+        Row linhaCorrente = (Row)ADFUtils.evaluateEL("#{bindings.DadosDiariaView1.currentRow}");
         Row ultimaLinha =
             ADFUtils.findIterator(IT_DIARIA).getViewObject().last();
 
@@ -733,10 +709,8 @@ public class OrdemDeServico extends ValidaCampos {
         if (linhaCorrente != null && ultimaLinha != null) {
             idCorrente = (Number)linhaCorrente.getAttribute("IdDiaria");
             idUltimo = (Number)ultimaLinha.getAttribute("IdDiaria");
-            System.out.println("Linha atual: " + idCorrente);
-            System.out.println("Last row: " + idUltimo);
             if (idCorrente.compareTo(idUltimo) == 0) {
-                setBotaoEditarDiaria(false);                
+                setBotaoEditarDiaria(false);
             } else {
                 setBotaoEditarDiaria(true);
             }
@@ -769,22 +743,26 @@ public class OrdemDeServico extends ValidaCampos {
         setTotalKmDia(null);
         refreshComboKm();
         refreshRadioHrs();
-        setaVariaveisParaValidacao();
+        Row lastRow = ADFUtils.findIterator(IT_DIARIA).getViewObject().last();
+          
+        if(lastRow != null){
+            setDataChegadaDiariaAnterior((Timestamp)lastRow.getAttribute("HrChegada"));
+            setKmChegadaDiariaAnterior((Number)lastRow.getAttribute("KmChegada"));        
+         }else {
+            setDataChegadaDiariaAnterior(null);
+            setKmChegadaDiariaAnterior(null);
+        }
     } //end
 
     public void gravarDiaria(ActionEvent actionEvent) {
-        RowSetIterator iteratorDiaria =
-            ADFUtils.findIterator(IT_TB_DIARIA).getRowSetIterator();
-        RowSetIterator iteratorHrs =
-            ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
-        RowSetIterator iteratorKm =
-            ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
+        RowSetIterator iteratorDiaria = ADFUtils.findIterator(IT_TB_DIARIA).getRowSetIterator();
+        RowSetIterator iteratorHrs = ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
+        RowSetIterator iteratorKm = ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
 
         Row rowHoras = iteratorHrs.getCurrentRow();
         Row rowKm = iteratorKm.getCurrentRow();
 
-        Row rw =
-            (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
+        Row rw = (Row)ADFUtils.evaluateEL("#{bindings.DadosOsView1.currentRow}");
         idOs = (Number)rw.getAttribute("IdOs");
 
         try {
@@ -841,6 +819,8 @@ public class OrdemDeServico extends ValidaCampos {
             } //end if
 
             popupInserirDiaria.cancel();
+            habitarInserirDiaria();
+            habilitarEdicaoDiaria();
             refreshTableDiaria();
             GenericTableSelectionHandler.setFocusOnLine(IT_DIARIA,
                                                         bindGridDiaria,
@@ -854,45 +834,120 @@ public class OrdemDeServico extends ValidaCampos {
         } //end try... catch
     } //end
 
-    public void chamadaPopupEditarDiaria(PopupFetchEvent popupFetchEvent) {
-        Row linhaCorrente =
-            (Row)ADFUtils.evaluateEL("#{bindings.DadosDiariaView1.currentRow}");
 
-        RowSetIterator iteratorHoras =
-            ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
+    public void gravarEdicaoDiaria(ActionEvent actionEvent) throws Exception {
+        DCIteratorBinding it = ADFUtils.findIterator(IT_TB_DIARIA);
+        ViewObject view = it.getViewObject();
+        view.reset();
+        view.clearCache();
+        view.setWhereClause("ID_DIARIA = " + linhaDiariaSelecionada.getAttribute("IdDiaria"));
+        view.executeQuery();
+
+        RowSetIterator iteratorHrs = ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
+        RowSetIterator iteratorKm = ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
+        Row linhaCorrente = ADFUtils.findIterator(IT_TB_DIARIA).getCurrentRow();
+
+        Row rowHoras = iteratorHrs.getCurrentRow();
+        Row rowKm = iteratorKm.getCurrentRow();
+
+
+        linhaCorrente.setAttribute("HrChegada", getDtHrChegada());
+        linhaCorrente.setAttribute("HrSaida", getDtHrSaida());
+        linhaCorrente.setAttribute("KmChegada", getKmChegada());
+        linhaCorrente.setAttribute("KmSaida", getKmsaida());
+        linhaCorrente.setAttribute("FkFranquiaHrs", rowHoras.getAttribute("IdFranquia"));
+        linhaCorrente.setAttribute("FkFranquiaKm", rowKm.getAttribute("IdFranquiaKm"));
+
+        String horas = (String)rowHoras.getAttribute("HrFranquia");
+        addFranquiaHras(horas);
+        String km = (String)rowKm.getAttribute("Km");
+        addFranquiaKm(km);
+
+        linhaCorrente.setAttribute("TotalHrExtDia", this.getTotalHrsDia());
+        linhaCorrente.setAttribute("TotalKmRodado", this.getTotalKmDia());
+
+        ADFUtils.executeBindingOperation("CommitTbDiaria");
+
+        Row[] rowsDiarias = buscarDiarias(idOs);
+
+        List<String> listaDeHoras = new ArrayList<String>();
+        List<Number> listaDeKm = new ArrayList<Number>();
+
+        if (rowsDiarias != null) {
+            for (Row row : rowsDiarias) {
+                if (row.getAttribute("TotalHrExtDia") != null) {
+                    listaDeHoras.add((String)row.getAttribute("TotalHrExtDia"));
+                } //end if
+                if (row.getAttribute("TotalKmRodado") != null) {
+                    listaDeKm.add((Number)row.getAttribute("TotalKmRodado"));
+                } //end if
+            } //end for
+        } //end if
+
+        Row rowOs = buscarOS(idOs);
+
+        if (rowOs != null) {
+            String totalHrs = somarHoras(listaDeHoras);
+            Number totalKm = somarTotalKm(listaDeKm);
+            rowOs.setAttribute("TotalHrsExtra", totalHrs);
+            rowOs.setAttribute("TotalKmExtra", totalKm);
+            ADFUtils.executeBindingOperation("CommitTbOs");
+        } //end if
+
+        popupEditarDiaria.cancel();
+        habitarInserirDiaria();
+        habilitarEdicaoDiaria();
+        refreshTableDiaria();
+        GenericTableSelectionHandler.setFocusOnLine(IT_DIARIA, bindGridDiaria,
+                                                    "IdDiaria",
+                                                    linhaCorrente.getAttribute("IdDiaria").toString(),
+                                                    null);
+        JSFUtils.addFacesConfirmationMessage("Dados gravados com sucesso");
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl5");
+    }
+
+    public void chamadaPopupEditarDiaria(PopupFetchEvent popupFetchEvent) {
+        linhaDiariaSelecionada = (Row)ADFUtils.evaluateEL("#{bindings.DadosDiariaView1.currentRow}");
+
+        RowSetIterator iteratorHoras = ADFUtils.findIterator(IT_TB_FRANQUIA_HR).getRowSetIterator();
         Row[] rowsHrs = iteratorHoras.getAllRowsInRange();
         for (Row row : rowsHrs) {
-            if (linhaCorrente.getAttribute("FkFranquiaHrs").equals(row.getAttribute("IdFranquia"))) {
+            if (linhaDiariaSelecionada.getAttribute("FkFranquiaHrs").equals(row.getAttribute("IdFranquia"))) {
                 iteratorHoras.setCurrentRow(row);
             } //end if
         } //end for
 
-        RowSetIterator iteratorKm =
-            ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
+        RowSetIterator iteratorKm = ADFUtils.findIterator(IT_TB_FRANQUIA_KM).getRowSetIterator();
         Row[] rowsKm = iteratorKm.getAllRowsInRange();
         for (Row row : rowsKm) {
-            if (linhaCorrente.getAttribute("FkFranquiaKm").equals(row.getAttribute("IdFranquiaKm"))) {
+            if (linhaDiariaSelecionada.getAttribute("FkFranquiaKm").equals(row.getAttribute("IdFranquiaKm"))) {
                 iteratorKm.setCurrentRow(row);
             } //end if
         } //end for
-        setDtHrChegada((Timestamp)linhaCorrente.getAttribute("HrChegada"));
-        setDtHrSaida((Timestamp)linhaCorrente.getAttribute("HrSaida"));
-        setKmChegada((Number)linhaCorrente.getAttribute("KmChegada"));
-        setKmsaida((Number)linhaCorrente.getAttribute("KmSaida"));
+        setDtHrChegada((Timestamp)linhaDiariaSelecionada.getAttribute("HrChegada"));
+        setDtHrSaida((Timestamp)linhaDiariaSelecionada.getAttribute("HrSaida"));
+        setKmChegada((Number)linhaDiariaSelecionada.getAttribute("KmChegada"));
+        setKmsaida((Number)linhaDiariaSelecionada.getAttribute("KmSaida"));
 
         setaVariaveisParaValidacao();
 
     } //end
 
-    public void setaVariaveisParaValidacao() {
-        RowSetIterator itDiaria =
-            ADFUtils.findIterator(IT_DIARIA).getRowSetIterator();
-
-        if (itDiaria.hasPrevious()) {
-            Row linhaAnterior = itDiaria.previous();
+    public void setaVariaveisParaValidacao() {       
+        Row linhaAnterior = ADFUtils.findIterator(IT_DIARIA).getViewObject().previous();
+        Row lastRow = ADFUtils.findIterator(IT_DIARIA).getViewObject().last();
+        Boolean op = false;
+        
+        if(linhaAnterior == null && lastRow != null){
+            op = true;    
+        }       
+        if (linhaAnterior != null) {
             setDataChegadaDiariaAnterior((Timestamp)linhaAnterior.getAttribute("HrChegada"));
             setKmChegadaDiariaAnterior((Number)linhaAnterior.getAttribute("KmChegada"));
-        } else {
+        } else if(op){
+            setDataChegadaDiariaAnterior((Timestamp)lastRow.getAttribute("HrChegada"));
+            setKmChegadaDiariaAnterior((Number)lastRow.getAttribute("KmChegada"));        
+         }else {
             setDataChegadaDiariaAnterior(null);
             setKmChegadaDiariaAnterior(null);
         }
@@ -909,8 +964,7 @@ public class OrdemDeServico extends ValidaCampos {
             vo.executeQuery();
             iterator.executeQuery();
 
-            RowSetIterator itOs =
-                ADFUtils.findIterator(IT_TB_OS).getRowSetIterator();
+            RowSetIterator itOs = ADFUtils.findIterator(IT_TB_OS).getRowSetIterator();
 
             return itOs.getCurrentRow();
         } catch (Exception e) {
@@ -921,8 +975,7 @@ public class OrdemDeServico extends ValidaCampos {
 
     public Row[] buscarDiarias(Number idOs) throws Exception {
         try {
-            final Map<String, Object> parametros =
-                new HashMap<String, Object>();
+            final Map<String, Object> parametros = new HashMap<String, Object>();
             parametros.put("idOs", idOs);
             ADFUtils.executeOperationBinding("buscarDiaria", parametros);
 
@@ -941,6 +994,7 @@ public class OrdemDeServico extends ValidaCampos {
         dcIter.executeQuery();
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.getBindGridDiaria());
         this.getBindGridDiaria().processUpdates(FacesContext.getCurrentInstance());
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("t12");
         JSFUtils.addPartialTriggerWithIdFromUiRoot("t12");
     } //end
 
@@ -967,14 +1021,14 @@ public class OrdemDeServico extends ValidaCampos {
         if (getDataChegadaDiariaAnterior() != null &&
             getDataChegadaDiariaAnterior().compareTo(dataSaida) > 0) {
             FacesMessage msg =
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data invalida",
-                                 "Data de saida nao pode ser menor que a data de chegada da diaria anterior");
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data inv\u00E1lida",
+                                 "Data de Sa\u00EDda n\u00E3o pode ser menor que a Data de Chegada da di\u00E1ria anterior");
             throw new ValidatorException(msg);
         } else if (dataChegada != null &&
                    dataSaida.compareTo(dataChegada) > 0) {
             FacesMessage msg =
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data invalida",
-                                 "A data de saida nao pode ser maior que a chegada");
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data inv\u00E1lida",
+                                 "Data de Sa\u00EDda n\u00E3o pode ser maior que a Data de Chegada");
             throw new ValidatorException(msg);
         } //end if else
     } //end
@@ -986,8 +1040,8 @@ public class OrdemDeServico extends ValidaCampos {
 
         if (dataSaida != null && dataChegada.compareTo(dataSaida) < 0) {
             FacesMessage msg =
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data invalida",
-                                 "Data de chegada nao pode ser menor que a Data de Saida");
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data inv\u00E1lida",
+                                 "Data de Chegada n\u00E3o pode ser menor que a Data de Sa\u00EDda");
             throw new ValidatorException(msg);
         } //end if else
     } //end
@@ -995,39 +1049,36 @@ public class OrdemDeServico extends ValidaCampos {
     public void validarKmSaida(FacesContext facesContext,
                                UIComponent uIComponent, Object object) {
 
-        Integer saida =
-            Integer.parseInt(object.toString()); //Recebe o valor digitado
+        Integer saida = Integer.parseInt(object.toString()); //Recebe o valor digitado
 
 
-        System.out.println("Quilometragem chegada anterior: " +
-                           getKmChegadaDiariaAnterior());
+        System.out.println("Quilometragem chegada anterior: " + getKmChegadaDiariaAnterior());
         System.out.println("Quilometragem chegada: " + getKmChegada());
         System.out.println("Quilometragem saida: " + saida);
 
         if (getKmChegadaDiariaAnterior() != null &&
             getKmChegadaDiariaAnterior().intValue() > saida) {
             FacesMessage msg =
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem invalida",
-                                 "Quilometragem de saida nao pode ser menor que a Quilometragem de chegada da diaria anterior");
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem inv\u00E1lida",
+                                 "Quilometragem de Sa\u00EDda n\u00E3o pode ser menor que a Quilometragem de Chegada da di\u00E1ria anterior");
             throw new ValidatorException(msg);
         } else if (getKmChegada() != null &&
                    getKmChegada().intValue() < saida) {
             FacesMessage msg =
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem invalida",
-                                 "A Quilometragem de saida nao pode ser maior que a chegada");
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem inv\u00E1lida",
+                                 "A Quilometragem de sa\u00EDda n\u00E3o pode ser maior que a Quilometragem de Chegada");
             throw new ValidatorException(msg);
         } //end if
     } //end
 
     public void validarKmChegada(FacesContext facesContext,
                                  UIComponent uIComponent, Object object) {
-        Integer kmDeChegada =
-            Integer.parseInt(object.toString()); //Recebe o valor digitado
+        Integer kmDeChegada = Integer.parseInt(object.toString()); //Recebe o valor digitado
 
         if (getKmsaida() != null && getKmsaida().intValue() > kmDeChegada) {
             FacesMessage msg =
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Quilometragem invalida",
-                                 "A Quilometragem de chegada nao pode ser menor que a Quilometragem de saida");
+                                 "A Quilometragem de chegada n\u00E3o pode ser menor que a Quilometragem de Sa\u00EDda");
             throw new ValidatorException(msg);
         } //end if
     } //end
@@ -1047,7 +1098,9 @@ public class OrdemDeServico extends ValidaCampos {
                 String result = subtrairHoras(diferenca, getDtHrChegada());
                 setTotalHrsDia(result);
             } //end if
-        } //end if
+        } else {
+            setTotalHrsDia(null);
+        }
     } //end
 
     private void addFranquiaKm(String km) {
@@ -1061,7 +1114,9 @@ public class OrdemDeServico extends ValidaCampos {
                     new Number(getKmChegada().intValue() - diferenca);
                 setTotalKmDia(result);
             } //end if
-        } //end if
+        } else {
+            setTotalKmDia(null);
+        }
     } //end
 
     public String subtrairHoras(Timestamp inicio, Timestamp fim) {
@@ -1372,10 +1427,6 @@ public class OrdemDeServico extends ValidaCampos {
 
     public RichPopup getPopupEditarDiaria() {
         return popupEditarDiaria;
-    }
-
-    public void gravarEdicaoDiaria(ActionEvent actionEvent) {
-        // Add event code here...
     }
 
     public void setKmChegadaDiariaAnterior(Number kmChegadaDiariaAnterior) {

@@ -141,12 +141,18 @@ public class ClienteBean extends ValidaCampos {
     public void excluirCliente(DialogEvent dialogEvent) throws Exception {
         try {
             ADFUtils.executeBindingOperation("Delete");
-            ADFUtils.executeBindingOperation("CommitTbCliente");
+            List erros =  ADFUtils.executeBindingOperation("CommitTbCliente");
+
+            if(erros != null && erros.size()>0){
+                ADFUtils.executeBindingOperation("Rollback");
+                JSFUtils.addFacesErrorMessage("Não foi possível excluir!");
+                return;
+            }
             refreshTable();
             JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");
         } catch (Exception e) {
-            JSFUtils.addFacesErrorMessage("Não foi possível excluir!");
-            throw e;
+            ADFUtils.executeBindingOperation("Rollback");
+            JSFUtils.addFacesErrorMessage("Não foi possível excluir!"); 
         }
     }
     
