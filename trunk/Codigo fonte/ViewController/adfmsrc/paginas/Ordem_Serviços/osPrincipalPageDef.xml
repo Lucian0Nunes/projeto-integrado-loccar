@@ -99,6 +99,9 @@
           <Item Value="KmChegada"/>
           <Item Value="TotalHrExtDia"/>
           <Item Value="TotalKmRodado"/>
+          <Item Value="IdDiaria"/>
+          <Item Value="Km"/>
+          <Item Value="HrFranquia"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
@@ -111,11 +114,6 @@
     <attributeValues IterBinding="DadosDiariaView1Iterator" id="HrChegada">
       <AttrNames>
         <Item Value="HrChegada"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="DadosDiariaView1Iterator" id="HrSaida">
-      <AttrNames>
-        <Item Value="HrSaida"/>
       </AttrNames>
     </attributeValues>
     <attributeValues IterBinding="DadosDiariaView1Iterator" id="KmChegada">
@@ -142,5 +140,43 @@
         <Item Value="HrFranquia"/>
       </AttrNames>
     </list>
+    <action IterBinding="TbOrdemDeServicoView1Iterator" id="buscarOS"
+            InstanceName="AppModuleDataControl.TbOrdemDeServicoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="executeWithParams" MethodName="getViewCriteria"
+            IsViewObjectMethod="true"
+            ReturnName="data.AppModuleDataControl.methodResults.buscarOS_AppModuleDataControl_TbOrdemDeServicoView_getViewCriteria_result">
+      <NamedData NDName="idOs" NDValue="" NDType="java.lang.Integer"/>
+    </action>
+    <action IterBinding="TbOrdemDeServicoView1Iterator"
+            id="rollbackTbOrdemDeServicoView"
+            InstanceName="AppModuleDataControl.TbOrdemDeServicoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="rollbackTransaction"/>
+    <action IterBinding="TbOrdemDeServicoView1Iterator"
+            id="DeleteTbOrdemDeServico"
+            InstanceName="AppModuleDataControl.TbOrdemDeServicoView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="TbDiariaView1Iterator" id="HrChegada1">
+      <AttrNames>
+        <Item Value="HrChegada"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbDiariaView1Iterator" id="HrSaida">
+      <AttrNames>
+        <Item Value="HrSaida"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbDiariaView1Iterator" id="KmChegada1">
+      <AttrNames>
+        <Item Value="KmChegada"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="TbDiariaView1Iterator" id="KmSaida1">
+      <AttrNames>
+        <Item Value="KmSaida"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

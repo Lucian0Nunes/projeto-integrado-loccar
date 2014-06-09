@@ -98,7 +98,7 @@
   <Attribute
     Name="Senha"
     IsNotNull="true"
-    Precision="15"
+    Precision="200"
     ColumnName="SENHA"
     SQLType="VARCHAR"
     Type="java.lang.String"

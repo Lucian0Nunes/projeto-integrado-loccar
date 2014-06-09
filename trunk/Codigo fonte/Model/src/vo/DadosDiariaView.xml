@@ -9,7 +9,8 @@
   BindingStyle="OracleName"
   CustomQuery="true"
   PageIterMode="Full"
-  UseGlueCode="false">
+  UseGlueCode="false"
+  OrderBy='"ID_DIARIA"'>
   <DesignTime>
     <Attr Name="_isExpertMode" Value="true"/>
   </DesignTime>
@@ -24,17 +25,27 @@
     Kind="where"
     Type="oracle.jbo.domain.Number"/>
   <SQLQuery>
-    <![CDATA[SELECT TbDiaria.ID_DIARIA, 
-       TbDiaria.HR_CHEGADA, 
-       TbDiaria.HR_SAIDA, 
-       TbDiaria.TOTAL_HR_EXT_DIA, 
-       TbDiaria.FK_ORDEM_DE_SERVICO, 
-       TbDiaria.KM_CHEGADA, 
-       TbDiaria.KM_SAIDA, 
-       TbDiaria.TOTAL_KM_RODADO
-FROM TB_DIARIA TbDiaria
-where tbdiaria.fk_ordem_de_servico =:idOs
-ORDER BY TbDiaria.ID_DIARIA]]>
+    <![CDATA[SELECT B.ID_DIARIA,
+  B.HR_CHEGADA,
+  B.HR_SAIDA,
+  B.TOTAL_HR_EXT_DIA,
+  B.FK_FRANQUIA_HRS,
+  B.FK_ORDEM_DE_SERVICO,
+  B.KM_CHEGADA,
+  B.KM_SAIDA,
+  B.TOTAL_KM_RODADO,
+  B.FK_FRANQUIA_KM,
+  C.ID_FRANQUIA,
+  C.HR_FRANQUIA,
+  A.ID_FRANQUIA_KM,
+  A.KM
+FROM TB_DIARIA B,
+  TB_FRANQUIA_KM A,
+  TB_FRANQUIA_HRS C
+WHERE 
+B.FK_ORDEM_DE_SERVICO =:idOs
+AND A.ID_FRANQUIA_KM = B.FK_FRANQUIA_KM
+AND C.ID_FRANQUIA      = B.FK_FRANQUIA_HRS]]>
   </SQLQuery>
   <ViewAttribute
     Name="IdDiaria"
@@ -113,6 +124,23 @@ ORDER BY TbDiaria.ID_DIARIA]]>
     </DesignTime>
   </ViewAttribute>
   <ViewAttribute
+    Name="FkFranquiaHrs"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FK_FRANQUIA_HRS"
+    Expression="FK_FRANQUIA_HRS"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
     Name="FkOrdemDeServico"
     IsUpdateable="false"
     IsPersistent="false"
@@ -177,6 +205,86 @@ ORDER BY TbDiaria.ID_DIARIA]]>
       <Attr Name="_DisplaySize" Value="16"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewAttribute
+    Name="FkFranquiaKm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FK_FRANQUIA_KM"
+    Expression="FK_FRANQUIA_KM"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdFranquia"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ID_FRANQUIA"
+    Expression="ID_FRANQUIA"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HrFranquia"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HR_FRANQUIA"
+    Expression="HR_FRANQUIA"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdFranquiaKm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ID_FRANQUIA_KM"
+    Expression="ID_FRANQUIA_KM"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Km"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="KM"
+    Expression="KM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="IdDiaria"/>
+  </AttrArray>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>

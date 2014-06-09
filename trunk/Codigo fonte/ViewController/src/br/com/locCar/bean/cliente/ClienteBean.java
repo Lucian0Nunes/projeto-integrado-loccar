@@ -6,6 +6,8 @@ import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
 import br.com.locCar.util.ValidaCampos;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -147,7 +149,7 @@ public class ClienteBean extends ValidaCampos {
             throw e;
         }
     }
-
+    
     public void refreshTable() {
         DCIteratorBinding dcIter =
             ADFUtils.findIterator("TbClienteView1Iterator");
