@@ -6,6 +6,8 @@ import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
 import br.com.locCar.util.ValidaCampos;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -71,9 +73,14 @@ public class FuncionarioBean extends ValidaCampos{
         sn = sn.substring(0, 3);
         setVlCpf(getVlCpf().replaceAll("[^0-9]", ""));
         sn += getVlCpf().substring(0, 3);
-        System.out.println("Senha: " + sn);
 
-        criarRow.setAttribute("Senha", sn);
+        try {
+            System.out.println("Senha: " + gerarMD5(sn));
+            criarRow.setAttribute("Senha", gerarMD5(sn));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        
         criarRow.setAttribute("TbPerfilIdPerfil", this.getVlPerfil().toString());
 
         ADFUtils.executeBindingOperation("CommitTbFuncionario");

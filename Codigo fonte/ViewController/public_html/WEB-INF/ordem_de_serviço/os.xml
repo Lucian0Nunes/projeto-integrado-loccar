@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="os">
-    <default-activity id="__1">osPrincipal</default-activity>
+    <default-activity id="__19">osPrincipal</default-activity>
     <managed-bean id="__3">
       <managed-bean-name id="__4">os</managed-bean-name>
       <managed-bean-class id="__5">br.com.locCar.bean.ordemDeServico.OrdemDeServico</managed-bean-class>

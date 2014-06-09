@@ -1,5 +1,10 @@
 package br.com.locCar.util;
 
+import java.math.BigInteger;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -37,10 +42,8 @@ public abstract class ValidaCampos {
             FacesMessage msg =
                 new FacesMessage("Telefone inv\u00E1lido", "Informe um telefone v\u00E1lido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(msg);
-            
-            }
-       
+            throw new ValidatorException(msg);            
+            }       
     }
     
     public void validarNome(FacesContext facesContext,
@@ -181,4 +184,13 @@ public abstract class ValidaCampos {
         //comparar o digito verificador do cpf com o primeiro resto + o segundo resto.
         return resultado;
     }
+    
+    public String gerarMD5(String senha) throws NoSuchAlgorithmException {  
+            MessageDigest md = MessageDigest.getInstance("MD5");  
+            BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
+            String crypto = hash.toString(16);  
+            if (crypto.length() %2 != 0)  
+                crypto = "0" + crypto;  
+            return crypto;  
+        }
 }

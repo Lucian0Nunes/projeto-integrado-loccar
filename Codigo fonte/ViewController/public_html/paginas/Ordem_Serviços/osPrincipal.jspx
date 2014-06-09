@@ -42,16 +42,20 @@
                               </af:commandToolbarButton>
                               <af:commandToolbarButton
                                                        id="ctb2" text="Editar"
-                                                       icon="/imagens/application_edit.png"/>
+                                                       icon="/imagens/application_edit.png"
+                                                       disabled="#{not pageFlowScope.os.habilitaBotoes}"/>
                               <af:commandToolbarButton text="Excluir"
                                                        id="ctb3"
-                                                       icon="/imagens/application_delete.png"/>
+                                                       icon="/imagens/application_delete.png"
+                                                       disabled="#{not pageFlowScope.os.habilitaBotoes}">
+                                <af:showPopupBehavior popupId="excluirOs"/>
+                              </af:commandToolbarButton>
                             </af:toolbar>
                           </f:facet>
                           <af:table value="#{bindings.DadosOsView1.collectionModel}"
                                     var="row"
                                     rows="#{bindings.DadosOsView1.rangeSize}"
-                                    emptyText="#{bindings.DadosOsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                    emptyText="#{bindings.DadosOsView1.viewable ?'Nenhuma Ordem de serviço cadastrada.' : 'Access Denied.'}"
                                     fetchSize="#{bindings.DadosOsView1.rangeSize}"
                                     rowBandingInterval="1"
                                     filterModel="#{bindings.DadosOsView1Query.queryDescriptor}"
@@ -312,6 +316,18 @@
                               </f:facet>
                             </af:dialog>
                           </af:popup>
+                          <af:popup id="excluirOs" contentDelivery="lazyUncached"
+                                    animate="false">
+                            <af:dialog id="d4" affirmativeTextAndAccessKey="Sim"
+                                       cancelTextAndAccessKey="Não"
+                                       title="Confirmação"
+                                       inlineStyle="width:160px;"
+                                       closeIconVisible="false"
+                                       dialogListener="#{pageFlowScope.os.excluirOrdemDeServico}">
+                              <af:outputText value="Deseja realmente excluir?"
+                                             id="outputText4"/>
+                            </af:dialog>
+                          </af:popup>
                         </af:panelCollection>
                       </f:facet>
                       <f:facet name="second">
@@ -324,7 +340,7 @@
                             <af:panelSplitter id="ps2"
                                               styleClass="AFStretchWidth"
                                               orientation="vertical"
-                                              splitterPosition="280"
+                                              splitterPosition="281"
                                               partialTriggers="pc1:t1"
                                               positionedFromEnd="true">
                               <f:facet name="first">
@@ -336,7 +352,8 @@
                                                  showDisclosure="false">
                                       <f:facet name="toolbar"/>
                                       <af:panelFormLayout id="pfl2" rows="2"
-                                                          maxColumns="2">
+                                                          maxColumns="2"
+                                                          partialTriggers="pc1:t1">
                                         <af:panelLabelAndMessage label="Nome do Cliente"
                                                                  id="plam4">
                                           <af:outputText value="#{bindings.Nome.inputValue}"
@@ -363,15 +380,16 @@
                                                  showDisclosure="false">
                                       <f:facet name="toolbar"/>
                                       <af:panelFormLayout id="pfl3" rows="1"
-                                                          maxColumns="2">
+                                                          maxColumns="2"
+                                                          partialTriggers="pc1:t1">
                                         <af:panelLabelAndMessage label="Motorista"
                                                                  id="plam8">
-                                          <af:outputText value="#{pageFlowScope.os.nomeMotorista}"
+                                          <af:outputText value="#{empty pageFlowScope.os.nomeMotorista?'Não informado': pageFlowScope.os.nomeMotorista}"
                                                          id="ot15"/>
                                         </af:panelLabelAndMessage>
                                         <af:panelLabelAndMessage id="plam10"
                                                                  label="Telefone">
-                                          <af:outputText value="#{pageFlowScope.os.telefoneMotorista}"
+                                          <af:outputText value="#{empty pageFlowScope.os.telefoneMotorista? 'Não informado': pageFlowScope.os.telefoneMotorista}"
                                                          id="ot21"/>
                                         </af:panelLabelAndMessage>
                                       </af:panelFormLayout>
@@ -379,7 +397,8 @@
                                     <af:panelBox text="Veículo" id="pb6"
                                                  showDisclosure="false">
                                       <f:facet name="toolbar"/>
-                                      <af:panelFormLayout id="pfl4" rows="1">
+                                      <af:panelFormLayout id="pfl4" rows="1"
+                                                          partialTriggers="pc1:t1">
                                         <af:panelLabelAndMessage label="Modelo"
                                                                  id="plam3">
                                           <af:outputText value="#{pageFlowScope.os.modeloVeiculo}"
@@ -396,15 +415,16 @@
                                   <af:panelBox text="Geral" id="pb7">
                                     <f:facet name="toolbar"/>
                                     <af:panelFormLayout id="pfl5" rows="1"
-                                                        maxColumns="2">
+                                                        maxColumns="2"
+                                                        partialTriggers="pc2:t11 inserirDiaria">
                                       <af:panelLabelAndMessage label="Total Hrs Extras"
                                                                id="plam6">
-                                        <af:outputText value="#{bindings.TotalHrsExtra.inputValue==null ? '-' : bindings.TotalHrsExtra.inputValue }"
+                                        <af:outputText value="#{empty bindings.TotalHrsExtra.inputValue?'00:00': bindings.TotalHrsExtra.inputValue}"
                                                        id="ot17"/>
                                       </af:panelLabelAndMessage>
                                       <af:panelLabelAndMessage label="Total de Km extras"
                                                                id="plam13">
-                                        <af:outputText value="#{bindings.TotalKmExtra.inputValue==null ? '-' : bindings.TotalKmExtra.inputValue }"
+                                        <af:outputText value="#{empty bindings.TotalKmExtra.inputValue?'00': bindings.TotalKmExtra.inputValue}"
                                                        id="ot14">
                                           <af:convertNumber groupingUsed="false"
                                                             pattern="#{bindings.TotalKmExtra.format}"/>
@@ -431,31 +451,40 @@
                                                      xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
                                                      id="pgl5">
                                   <af:panelBox text="Diária" id="pb2">
-                                    <f:facet name="toolbar"/>
                                     <af:panelCollection id="pc2"
-                                                        styleClass="AFStretchWidth">
+                                                        styleClass="AFStretchWidth"
+                                                        inlineStyle="width:779px; height:247px;"
+                                                        featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
                                       <f:facet name="toolbar">
-                                        <af:toolbar id="t12">
+                                        <af:toolbar id="t12"
+                                                    partialTriggers="t11">
                                           <af:commandToolbarButton text="Inserir"
-                                                                   id="ctb15">
+                                                                   id="ctb15"
+                                                                   disabled="#{pageFlowScope.os.botaoInserirDiaria}">
                                             <af:showPopupBehavior popupId="::inserirDiaria"/>
+                                          </af:commandToolbarButton>
+                                          <af:commandToolbarButton text="Editar"
+                                                                   id="ctb18"
+                                                                   disabled="#{pageFlowScope.os.botaoEditarDiaria}">
+                                            <af:showPopupBehavior popupId="::editarDiaria"/>
                                           </af:commandToolbarButton>
                                         </af:toolbar>
                                       </f:facet>
                                       <af:table value="#{bindings.DadosDiariaView1.collectionModel}"
                                                 var="row"
                                                 rows="#{bindings.DadosDiariaView1.rangeSize}"
-                                                emptyText="#{bindings.DadosDiariaView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                emptyText="#{bindings.DadosDiariaView1.viewable ? 'Nenhuma diária cadastrada!' : 'Access Denied.'}"
                                                 fetchSize="#{bindings.DadosDiariaView1.rangeSize}"
-                                                rowBandingInterval="0"
-                                                selectedRowKeys="#{bindings.DadosDiariaView1.collectionModel.selectedRow}"
-                                                selectionListener="#{bindings.DadosDiariaView1.collectionModel.makeCurrent}"
+                                                rowBandingInterval="1"                                             
                                                 rowSelection="single" id="t11"
-                                                binding="#{pageFlowScope.os.bindGridDiaria}">
+                                                binding="#{pageFlowScope.os.bindGridDiaria}"
+                                                columnBandingInterval="0"
+                                                selectionListener="#{pageFlowScope.os.selectionListenerGridDiarias}">
                                         <af:column sortProperty="HrSaida"
                                                    sortable="false"
-                                                   headerText="Data e Hora saída"
-                                                   id="c17" width="130">
+                                                   headerText="Data e Hora Saída"
+                                                   id="c17" width="115"
+                                                   align="center">
                                           <af:outputText value="#{row.HrSaida}"
                                                          id="ot16">
                                             <af:convertDateTime pattern="#{bindings.DadosDiariaView1.hints.HrSaida.format}"/>
@@ -463,9 +492,11 @@
                                         </af:column>
                                         <af:column sortProperty="KmSaida"
                                                    sortable="false"
-                                                   headerText="Km saída"
-                                                   id="c12" width="120">
-                                          <af:outputText value="#{row.KmSaida}"
+                                                   headerText="KM Saída"
+                                                   id="c12" width="90"
+                                                   align="center"
+                                                   inlineStyle="text-align:right;">
+                                          <af:outputText value="#{row.KmSaida} #{empty row.KmSaida ? '':'KM'} "
                                                          id="ot26">
                                             <af:convertNumber groupingUsed="false"
                                                               pattern="#{bindings.DadosDiariaView1.hints.KmSaida.format}"/>
@@ -473,38 +504,65 @@
                                         </af:column>
                                         <af:column sortProperty="HrChegada"
                                                    sortable="false"
-                                                   headerText="Data e Hora chegada"
-                                                   id="c13" width="130">
+                                                   headerText="Data e Hora Chegada"
+                                                   id="c13" width="115"
+                                                   align="center">
                                           <af:outputText value="#{row.HrChegada}"
-                                                         id="ot23">
+                                                         id="ot23"
+                                                         inlineStyle="color:#{empty row.TotalHrExtDia  ? '': 'red'};">
                                             <af:convertDateTime pattern="#{bindings.DadosDiariaView1.hints.HrChegada.format}"/>
                                           </af:outputText>
                                         </af:column>
                                         <af:column sortProperty="KmChegada"
                                                    sortable="false"
-                                                   headerText="Km chegada"
-                                                   id="c15" width="120">
-                                          <af:outputText value="#{row.KmChegada}"
-                                                         id="ot24">
+                                                   headerText="KM Chegada"
+                                                   id="c15" width="90"
+                                                   align="center"
+                                                   inlineStyle="text-align:right;">
+                                          <af:outputText value="#{row.KmChegada} #{empty row.KmChegada ? '':'KM'} "
+                                                         id="ot24"
+                                                         inlineStyle="color:#{empty row.TotalKmRodado ? '': 'red'};">
                                             <af:convertNumber groupingUsed="false"
                                                               pattern="#{bindings.DadosDiariaView1.hints.KmChegada.format}"/>
                                           </af:outputText>
                                         </af:column>
+                                        <af:column id="c19"
+                                                   sortProperty="HrFranquia"
+                                                   sortable="false"
+                                                   headerText="Franquia HR"
+                                                   align="center" width="80">
+                                          <af:outputText value="#{row.HrFranquia}"
+                                                         id="outputText1"
+                                                         inlineStyle="color:#{empty row.TotalHrExtDia  ? '': 'blue'};"/>
+                                        </af:column>
                                         <af:column sortProperty="TotalHrExtDia"
                                                    sortable="false"
-                                                   headerText="Horas extras"
-                                                   id="c14" width="130"
-                                                   inlineStyle="text-align:center;">
+                                                   headerText="Hora Extra"
+                                                   id="c14" width="80"
+                                                   inlineStyle="text-align:center;"
+                                                   align="center">
                                           <af:outputText value="#{empty row.TotalHrExtDia  ? '--': row.TotalHrExtDia} "
-                                                         id="ot27"/>
+                                                         id="ot27"
+                                                         inlineStyle="font-weight:#{empty row.TotalHrExtDia  ? '':'bold'} ;"/>
+                                        </af:column>
+                                        <af:column id="c18" width="70"
+                                                   sortable="false"
+                                                   sortProperty="Km"
+                                                   headerText="Franquia KM"
+                                                   align="center">
+                                          <af:outputText value="#{row.Km}"
+                                                         id="ot13"
+                                                         inlineStyle="color:#{empty row.TotalKmRodado ? '': 'blue'};"/>
                                         </af:column>
                                         <af:column sortProperty="TotalKmRodado"
                                                    sortable="false"
-                                                   headerText="#{bindings.DadosDiariaView1.hints.TotalKmRodado.label}"
-                                                   id="c16" width="125"
-                                                   inlineStyle="text-align:center;">
+                                                   headerText="KM Extra Rodado"
+                                                   id="c16" width="95"
+                                                   inlineStyle="text-align:center;"
+                                                   align="center">
                                           <af:outputText value="#{empty row.TotalKmRodado ? '--': row.TotalKmRodado} "
-                                                         id="ot28">
+                                                         id="ot28"
+                                                         inlineStyle="font-weight:#{empty row.TotalKmRodado ? '': 'bold'} ;">
                                             <af:convertNumber groupingUsed="false"
                                                               pattern="#{bindings.DadosDiariaView1.hints.TotalKmRodado.format}"/>
                                           </af:outputText>
@@ -530,7 +588,7 @@
                                                              required="#{bindings.TbFranquiaHrsView1.hints.mandatory}"
                                                              shortDesc="#{bindings.TbFranquiaHrsView1.hints.tooltip}"
                                                              id="sor1"
-                                                             layout="horizontal"
+                                                             layout="vertical"
                                                              showRequired="true">
                                             <f:selectItems value="#{bindings.TbFranquiaHrsView1.items}"
                                                            id="si2"/>
@@ -557,25 +615,25 @@
                                           <af:spacer width="10" height="10"
                                                      id="s16"/>
                                           <af:inputDate label="Data/Hora Saída"
-                                                        required="#{bindings.HrSaida.hints.mandatory}"
-                                                        shortDesc="#{bindings.HrSaida.hints.tooltip}"
+                                                        required="true"
+                                                        shortDesc="DATA E HORA DE SAIDA"
                                                         id="id1"
                                                         value="#{pageFlowScope.os.dtHrSaida}"
-                                                        showRequired="true"
-                                                        autoSubmit="true">
+                                                        autoSubmit="true"
+                                                        validator="#{pageFlowScope.os.validarHoraSaida}">
                                             <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                           </af:inputDate>
                                           <af:spacer width="10" height="10"
                                                      id="s15"/>
                                           <af:inputText label="KM Saída"
-                                                        required="#{bindings.KmSaida.hints.mandatory}"
-                                                        columns="#{bindings.KmSaida.hints.displayWidth}"
-                                                        maximumLength="#{bindings.KmSaida.hints.precision}"
-                                                        shortDesc="#{bindings.KmSaida.hints.tooltip}"
+                                                        required="true"
+                                                        maximumLength="15"
+                                                        shortDesc="QUILOMETRAGE DE SAIDA"
                                                         id="it7"
                                                         value="#{pageFlowScope.os.kmsaida}"
-                                                        showRequired="true"
-                                                        autoSubmit="true">
+                                                        autoSubmit="true"
+                                                        validator="#{pageFlowScope.os.validarKmSaida}"
+                                                        columns="20">
                                             <f:validator binding="#{bindings.KmSaida.validator}"/>
                                             <af:convertNumber groupingUsed="false"
                                                               pattern="#{bindings.KmSaida.format}"/>
@@ -591,22 +649,21 @@
                                                         shortDesc="#{bindings.HrChegada.hints.tooltip}"
                                                         id="id2"
                                                         value="#{pageFlowScope.os.dtHrChegada}"
-                                                        immediate="true"
-                                                        autoSubmit="true">
+                                                        autoSubmit="true"
+                                                        validator="#{pageFlowScope.os.validarHoraChegada}">
                                             <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                           </af:inputDate>
                                           <af:spacer width="10" height="10"
                                                      id="s13"/>
                                           <af:inputText label="KM Chegada"
-                                                        required="#{bindings.KmChegada.hints.mandatory}"
-                                                        columns="#{bindings.KmChegada.hints.displayWidth}"
-                                                        maximumLength="#{bindings.KmChegada.hints.precision}"
+                                                        columns="20"
+                                                        maximumLength="15"
                                                         shortDesc="#{bindings.KmChegada.hints.tooltip}"
                                                         id="it11"
                                                         value="#{pageFlowScope.os.kmChegada}"
                                                         autoSubmit="true"
-                                                        immediate="true"
-                                                        validator="#{pageFlowScope.os.validarKmChegada}">
+                                                        validator="#{pageFlowScope.os.validarKmChegada}"
+                                                        rows="1">
                                             <f:validator binding="#{bindings.KmChegada.validator}"/>
                                             <af:convertNumber groupingUsed="false"
                                                               pattern="#{bindings.KmChegada.format}"/>
@@ -625,6 +682,118 @@
                                                                    actionListener="#{pageFlowScope.os.cancelPopupInserirDiaria}"
                                                                    partialSubmit="true"
                                                                    immediate="true">
+                                            <af:resetActionListener/>
+                                          </af:commandToolbarButton>
+                                        </af:toolbar>
+                                      </f:facet>
+                                    </af:dialog>
+                                  </af:popup>
+                                  <af:popup id="editarDiaria" animate="false"
+                                            contentDelivery="lazyUncached"
+                                            popupFetchListener="#{pageFlowScope.os.chamadaPopupEditarDiaria}"
+                                            binding="#{pageFlowScope.os.popupEditarDiaria}">
+                                    <af:dialog id="d5"
+                                               closeIconVisible="false"
+                                               title="Editar Diária"
+                                               type="none">
+                                      <af:spacer width="10" height="10"
+                                                 id="s18"/>
+                                      <af:panelBox id="pb12"
+                                                   showDisclosure="false">
+                                        <af:panelFormLayout id="pfl8"
+                                                            inlineStyle="width:551px;">
+                                          <af:selectOneRadio value="#{bindings.TbFranquiaHrsView1.inputValue}"
+                                                             label="Franquia por"
+                                                             required="true"
+                                                             shortDesc="#{bindings.TbFranquiaHrsView1.hints.tooltip}"
+                                                             id="sor2">
+                                            <f:selectItems value="#{bindings.TbFranquiaHrsView1.items}"
+                                                           id="si1"/>
+                                          </af:selectOneRadio>
+                                          <af:spacer width="10" height="10"
+                                                     id="s17"/>
+                                          <af:selectOneChoice value="#{bindings.TbFranquiaKmView1.inputValue}"
+                                                              label="Franquia por"
+                                                              required="true"
+                                                              shortDesc="#{bindings.TbFranquiaKmView1.hints.tooltip}"
+                                                              id="soc1">
+                                            <f:selectItems value="#{bindings.TbFranquiaKmView1.items}"
+                                                           id="si4"/>
+                                          </af:selectOneChoice>
+                                        </af:panelFormLayout>
+                                      </af:panelBox>
+                                      <af:panelBox id="pb13"
+                                                   showDisclosure="false">
+                                        <af:panelFormLayout id="pfl9" rows="3"
+                                                            maxColumns="2"
+                                                            inlineStyle="width:594px;">
+                                          <af:spacer width="10" height="10"
+                                                     id="s19"/>
+                                          <af:inputDate value="#{pageFlowScope.os.dtHrSaida}"
+                                                        label="Hora Saída"
+                                                        required="true"
+                                                        shortDesc="#{bindings.HrSaida.hints.tooltip}"
+                                                        id="id4"
+                                                        validator="#{pageFlowScope.os.validarHoraSaida}"
+                                                        autoSubmit="true">
+                                            <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                          </af:inputDate>
+                                          <af:spacer width="10" height="10"
+                                                     id="s20"/>
+                                          <af:inputText value="#{pageFlowScope.os.kmsaida}"
+                                                        label="KM Saída"
+                                                        required="true"
+                                                        columns="20"
+                                                        maximumLength="15"
+                                                        shortDesc="QUILOMETRAGEM DE SAIDA"
+                                                        id="it9"
+                                                        autoSubmit="true"
+                                                        validator="#{pageFlowScope.os.validarKmSaida}">
+                                            <f:validator binding="#{bindings.KmSaida1.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.KmSaida1.format}"/>
+                                          </af:inputText>
+                                          <af:spacer width="10" height="10"
+                                                     id="s24"/>
+                                          <af:spacer width="10" height="10"
+                                                     id="s21"/>
+                                          <af:inputDate value="#{pageFlowScope.os.dtHrChegada}"
+                                                        label="Hora Chegada"
+                                                        required="#{bindings.HrChegada1.hints.mandatory}"
+                                                        shortDesc="#{bindings.HrChegada1.hints.tooltip}"
+                                                        id="id3"
+                                                        validator="#{pageFlowScope.os.validarHoraChegada}"
+                                                        autoSubmit="true">
+                                            <af:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                          </af:inputDate>
+                                          <af:spacer width="10" height="10"
+                                                     id="s22"/>
+                                          <af:inputText value="#{pageFlowScope.os.kmChegada}"
+                                                        label="KM Chegada"
+                                                        columns="20"
+                                                        maximumLength="15"
+                                                        shortDesc="QUILOMETRAGEM DE CHEGADA"
+                                                        id="it8"
+                                                        autoSubmit="true"
+                                                        validator="#{pageFlowScope.os.validarKmChegada}">
+                                            <f:validator binding="#{bindings.KmChegada1.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.KmChegada1.format}"/>
+                                          </af:inputText>
+                                          <af:spacer width="15" height="20"
+                                                     id="s23"/>
+                                        </af:panelFormLayout>
+                                      </af:panelBox>
+                                      <f:facet name="buttonBar">
+                                        <af:toolbar id="t14">
+                                          <af:commandToolbarButton text="Gravar"
+                                                                   id="ctb20"
+                                                                   actionListener="#{pageFlowScope.os.gravarEdicaoDiaria}"/>
+                                          <af:commandToolbarButton text="Cancelar"
+                                                                   id="ctb21"
+                                                                   partialSubmit="true"
+                                                                   immediate="true"
+                                                                   actionListener="#{pageFlowScope.os.cancelPopupEditarDiaria}">
                                             <af:resetActionListener/>
                                           </af:commandToolbarButton>
                                         </af:toolbar>
