@@ -936,18 +936,23 @@ public class OrdemDeServico extends ValidaCampos {
     public void setaVariaveisParaValidacao() {       
         Row linhaAnterior = ADFUtils.findIterator(IT_DIARIA).getViewObject().previous();
         Row lastRow = ADFUtils.findIterator(IT_DIARIA).getViewObject().last();
+        Row linhaCorrente = ADFUtils.findIterator(IT_DIARIA).getCurrentRow();
         Boolean op = false;
         
         if(linhaAnterior == null && lastRow != null){
             op = true;    
         }       
-        if (linhaAnterior != null) {
-            setDataChegadaDiariaAnterior((Timestamp)linhaAnterior.getAttribute("HrChegada"));
-            setKmChegadaDiariaAnterior((Number)linhaAnterior.getAttribute("KmChegada"));
+        if (linhaAnterior != null && linhaCorrente != null) {
+            Number idCorrente = (Number)linhaCorrente.getAttribute("IdDiaria");
+            Number idAnterior = (Number)linhaAnterior.getAttribute("IdDiaria");
+            if(!(idCorrente.compareTo(idAnterior)==0)){            
+                setDataChegadaDiariaAnterior((Timestamp)linhaAnterior.getAttribute("HrChegada"));
+                setKmChegadaDiariaAnterior((Number)linhaAnterior.getAttribute("KmChegada"));
+            }
         } else if(op){
             setDataChegadaDiariaAnterior((Timestamp)lastRow.getAttribute("HrChegada"));
             setKmChegadaDiariaAnterior((Number)lastRow.getAttribute("KmChegada"));        
-         }else {
+         } else {
             setDataChegadaDiariaAnterior(null);
             setKmChegadaDiariaAnterior(null);
         }
