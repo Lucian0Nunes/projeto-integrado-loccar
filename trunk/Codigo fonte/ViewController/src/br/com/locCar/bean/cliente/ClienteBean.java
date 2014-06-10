@@ -1,6 +1,7 @@
 package br.com.locCar.bean.cliente;
 
 
+import br.com.locCar.bean.ordemDeServico.OrdemDeServico;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
@@ -16,6 +17,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.share.logging.ADFLogger;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.context.AdfFacesContext;
@@ -26,9 +28,13 @@ import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.ViewObject;
+import oracle.jbo.domain.Number;
 
 
 public class ClienteBean extends ValidaCampos {
+    
+    private static ADFLogger logger = ADFLogger.createADFLogger(ClienteBean.class);
+    
     private static final String EL_EXP_CLIENTE_CURR_ROW = "#{bindings.TbClienteView1.currentRow}";
 
     private String escolha;
@@ -140,21 +146,38 @@ public class ClienteBean extends ValidaCampos {
 
     public void excluirCliente(DialogEvent dialogEvent) throws Exception {
         try {
-            ADFUtils.executeBindingOperation("Delete");
-            List erros =  ADFUtils.executeBindingOperation("CommitTbCliente");
-
-            if(erros != null && erros.size()>0){
-                ADFUtils.executeBindingOperation("Rollback");
-                JSFUtils.addFacesErrorMessage("Não foi possível excluir!");
-                return;
+            Row rw = ADFUtils.findIterator("TbClienteView1Iterator").getCurrentRow();            
+            if(rw != null){
+                Number id = (Number)rw.getAttribute("IdCliente");                
+                if(podeExcluir(id)){
+                    ADFUtils.executeBindingOperation("Delete");
+                    ADFUtils.executeBindingOperation("CommitTbCliente");
+                    refreshTable();
+                    JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");        
+                } else {
+                    JSFUtils.addFacesWarningMessage("N\u00E3o foi poss\u00EDvel excluir!");
+                }        
             }
-            refreshTable();
-            JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");
         } catch (Exception e) {
-            ADFUtils.executeBindingOperation("Rollback");
-            JSFUtils.addFacesErrorMessage("Não foi possível excluir!"); 
+            logger.severe("Erro ao excluir ==>> "+ e.getMessage());
         }
     }
+    
+    public Boolean podeExcluir(Number id) {
+        DCIteratorBinding it = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator");
+        ViewObject view = it.getViewObject();
+        view.reset();
+        view.clearCache();
+        view.setWhereClause("FK_CLIENTE = " + id);
+        view.executeQuery();
+        RowSetIterator iterator = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator").getRowSetIterator();
+        Row rows = iterator.getCurrentRow();
+        if (rows == null) {
+            return true;            
+        } else {
+            return false;    
+        }
+    } //end
     
     public void refreshTable() {
         DCIteratorBinding dcIter =

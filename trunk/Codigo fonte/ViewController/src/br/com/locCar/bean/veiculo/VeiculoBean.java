@@ -1,6 +1,7 @@
 package br.com.locCar.bean.veiculo;
 
 
+import br.com.locCar.bean.cliente.ClienteBean;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
@@ -22,6 +23,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.share.logging.ADFLogger;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.component.rich.input.RichSelectOneChoice;
@@ -37,6 +39,8 @@ import oracle.jbo.domain.Number;
 
 
 public class VeiculoBean extends ValidaCampos {
+    private static ADFLogger logger = ADFLogger.createADFLogger(VeiculoBean.class);
+    
     private static final String EL_EXP_VEICULO_CURR_ROW = "#{bindings.VeiculoMMView1.currentRow}";
     private static final String EL_EXP_MODELO_CURR_ROW = "#{bindings.ListarModeloView1.currentRow}";
 
@@ -211,17 +215,40 @@ public class VeiculoBean extends ValidaCampos {
             view.setWhereClause("ID_VEICULO = " +
                                 veiculoSelecionado().getAttribute("IdVeiculo"));
             view.executeQuery();
-
-            ADFUtils.executeBindingOperation("Delete");
-            ADFUtils.executeBindingOperation("CommitTbVeiculo");
-            refreshTable();
-            JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");
+            
+            Row rw = ADFUtils.findIterator("TbVeiculoView1Iterator").getCurrentRow();    
+            
+            if(rw != null){
+                Number id = (Number)rw.getAttribute("IdVeiculo");                
+                if(podeExcluir(id)){
+                    ADFUtils.executeBindingOperation("Delete");
+                    ADFUtils.executeBindingOperation("CommitTbVeiculo");
+                    refreshTable();
+                    JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");        
+                } else {
+                    JSFUtils.addFacesWarningMessage("N\u00E3o foi poss\u00EDvel excluir!");
+                }
+            }
         } catch (Exception e) {
-            JSFUtils.addFacesErrorMessage("Não foi possível excluir");
-            throw e;
+            logger.severe("Não foi possível excluir ====>>>"+e.getMessage());
         }
-
     }
+    
+    public Boolean podeExcluir(Number id) {
+        DCIteratorBinding it = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator");
+        ViewObject view = it.getViewObject();
+        view.reset();
+        view.clearCache();
+        view.setWhereClause("FK_VEICULO = " + id);
+        view.executeQuery();
+        RowSetIterator iterator = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator").getRowSetIterator();
+        Row rows = iterator.getCurrentRow();
+        if (rows == null) {
+            return true;            
+        } else {
+            return false;    
+        }
+    } //end
 
     public Row veiculoSelecionado() {
         Row rw = (Row)ADFUtils.evaluateEL(EL_EXP_VEICULO_CURR_ROW);
