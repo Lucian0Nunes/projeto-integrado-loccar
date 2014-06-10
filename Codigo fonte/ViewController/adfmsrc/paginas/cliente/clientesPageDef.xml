@@ -12,6 +12,8 @@
                   id="TbClienteView1Query"/>
     <iterator id="ExisteCpfOuCnjp1Iterator" Binds="ExisteCpfOuCnjp1"
               DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="TbOrdemDeServicoView1Iterator" Binds="TbOrdemDeServicoView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="TbClienteView1Iterator" id="TbClienteView1">

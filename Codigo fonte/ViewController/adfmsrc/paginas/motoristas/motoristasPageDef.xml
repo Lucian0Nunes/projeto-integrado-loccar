@@ -17,6 +17,8 @@
               DataControl="AppModuleDataControl" RangeSize="25"/>
     <iterator Binds="TbCatHabView1" RangeSize="25"
               DataControl="AppModuleDataControl" id="TbCatHabView1Iterator"/>
+    <iterator id="TbOrdemDeServicoView1Iterator" Binds="TbOrdemDeServicoView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <action IterBinding="TbMotoristaView1Iterator" id="CommitTbMotorista"

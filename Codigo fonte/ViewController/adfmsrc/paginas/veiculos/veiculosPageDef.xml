@@ -18,6 +18,8 @@
               DataControl="AppModuleDataControl" id="ListarMarcaView1Iterator"/>
     <iterator id="ListarModeloView1Iterator" Binds="ListarModeloView1"
               DataControl="AppModuleDataControl" RangeSize="-1"/>
+    <iterator id="TbOrdemDeServicoView1Iterator" Binds="TbOrdemDeServicoView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
   </executables>
   <bindings>
     <attributeValues IterBinding="TbVeiculoView1Iterator" id="Placa">

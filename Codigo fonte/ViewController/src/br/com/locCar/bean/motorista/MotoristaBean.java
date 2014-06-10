@@ -166,17 +166,41 @@ public class MotoristaBean extends ValidaCampos {
             view.setWhereClause("ID_MOTORISTA = " +
                                 motoristaSelecionado().getAttribute("IdMotorista"));
             view.executeQuery();
-
-            ADFUtils.executeBindingOperation("Delete");
-            ADFUtils.executeBindingOperation("CommitTbMotorista");
-            refreshTable();
-            JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");
+            
+            Row rw = ADFUtils.findIterator("TbMotoristaView1Iterator").getCurrentRow();            
+            if(rw != null){
+                Number id = (Number)rw.getAttribute("IdMotorista");                
+                if(podeExcluir(id)){
+                    ADFUtils.executeBindingOperation("Delete");
+                    ADFUtils.executeBindingOperation("CommitTbMotorista");
+                    refreshTable();
+                    JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");        
+                } else {
+                    JSFUtils.addFacesWarningMessage("N\u00E3o foi poss\u00EDvel excluir!");
+                }        
+            }
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage("Não foi possível excluir");
             throw e;
         }
 
     }
+    
+    public Boolean podeExcluir(Number id) {
+        DCIteratorBinding it = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator");
+        ViewObject view = it.getViewObject();
+        view.reset();
+        view.clearCache();
+        view.setWhereClause("FK_MOTORISTA = " + id);
+        view.executeQuery();
+        RowSetIterator iterator = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator").getRowSetIterator();
+        Row rows = iterator.getCurrentRow();
+        if (rows == null) {
+            return true;            
+        } else {
+            return false;    
+        }
+    } //end
     
     public Boolean getHabilitaBotoes() {
         Row rw = (Row)ADFUtils.evaluateEL(EL_EXP_MOTORISTA_CURR_ROW);
