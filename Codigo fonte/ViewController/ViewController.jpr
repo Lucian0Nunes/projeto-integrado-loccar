@@ -63,6 +63,9 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
    <value n="defaultPackage" v="view"/>
+   <hash n="oracle.adfdtinternal.model.ide.security.SecurityPolicies">
+      <value n="grantOption" v="none"/>
+   </hash>
    <hash n="oracle.adfdtinternal.model.ide.settings.ADFMSettings">
       <hash n="adfmContentSet">
          <list n="pattern-filters">

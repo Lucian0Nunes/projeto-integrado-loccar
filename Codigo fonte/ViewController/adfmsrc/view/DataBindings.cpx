@@ -19,6 +19,7 @@
     <page path="/paginas/Ordem_Serviços/novaOs.jspx" usageId="view_novaOsPageDef"/>
     <page path="/paginas/inicial/paginaInicial.jspx"
           usageId="view_paginaInicialPageDef"/>
+    <page path="/paginaInicial.jspx" usageId="view_paginaInicialPageDef1"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="view_clientesPageDef" path="paginas.cliente.clientesPageDef"/>
@@ -36,6 +37,8 @@
     <page id="view_novaOsPageDef" path="view.pageDefs.novaOsPageDef"/>
     <page id="view_paginaInicialPageDef"
           path="paginas.inicial.paginaInicialPageDef"/>
+    <page id="view_paginaInicialPageDef1"
+          path="view.pageDefs.paginaInicialPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <BC4JDataControl id="AppModuleDataControl" Package="am"

@@ -45,7 +45,8 @@
                         </af:panelList>
                       </af:showDetailItem>
                       <af:showDetailItem text="Administrador" id="pt_sdi2"
-                                         disclosed="true">
+                                         disclosed="true"
+                                         rendered="#{securityContext.userInRole['administrador']}">
                         <af:panelList id="pt_pl2">
                           <af:goLink id="pt_gl5" text="Funcionários"
                                      destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=funcionarios&amp;adf.tfDoc=/WEB-INF/funcionarios/funcionarios.xml"/>
