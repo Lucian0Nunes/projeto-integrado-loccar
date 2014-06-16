@@ -13,7 +13,15 @@
                                  layout="vertical"/>
           </f:facet>
           <f:facet name="start"/>
-          <f:facet name="end"/>
+          <f:facet name="end">
+            <af:toolbar id="pt_t1"
+                        inlineStyle="text-align:center; vertical-align:middle;">
+              <af:spacer width="80" height="10" id="pt_s1"/>
+              <af:commandToolbarButton text="Sair"
+                                       id="pt_ctb1"
+                                       action="#{autenticacaoBean.onLogout}"/>
+            </af:toolbar>
+          </f:facet>
         </af:panelStretchLayout>
       </f:facet>
       <f:facet name="second">
