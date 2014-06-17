@@ -29,8 +29,7 @@
                     <af:panelSplitter id="ps1" splitterPosition="343">
                       <f:facet name="first">
                         <af:panelCollection id="pc1"
-                                            styleClass="AFStretchWidth"
-                                            featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
+                                            styleClass="AFStretchWidth">
                           <f:facet name="toolbar">
                             <af:toolbar id="t2">
                               <af:commandToolbarButton text="Nova Os"
@@ -55,7 +54,7 @@
                                     fetchSize="#{bindings.DadosOsView1.rangeSize}"
                                     rowBandingInterval="1"
                                     filterModel="#{bindings.DadosOsView1Query.queryDescriptor}"
-                                    queryListener="#{pageFlowScope.os.queryListener}"
+                                    queryListener="#{bindings.DadosOsView1Query.processQuery}"
                                     filterVisible="true" varStatus="vs"
                                     selectedRowKeys="#{bindings.DadosOsView1.collectionModel.selectedRow}"
                                     selectionListener="#{pageFlowScope.os.selectionListenerGridPrincipal}"
@@ -69,21 +68,10 @@
                                 <af:convertNumber groupingUsed="false"
                                                   pattern="#{bindings.DadosOsView1.hints.IdOs.format}"/>
                               </af:outputText>
-                              <f:facet name="filter">
-                                <af:inputText label="Label 2" id="it14"/>
-                              </f:facet>
                             </af:column>
                             <af:column sortProperty="DataDaOs" filterable="true"
                                        sortable="true" headerText="Data da OS"
                                        id="c9" width="81" align="center">
-                              <f:facet name="filter">
-                                <af:inputText label="Label 3" id="it15">
-                                  <af:clientListener method="applyMask"
-                                                     type="focus"/>
-                                  <af:clientAttribute name="meioMask"
-                                                      value="fixed.date"/>
-                                </af:inputText>
-                              </f:facet>
                               <af:outputText value="#{row.DataDaOs}" id="ot1">
                                 <af:convertDateTime pattern="#{bindings.DadosOsView1.hints.DataDaOs.format}"/>
                               </af:outputText>
@@ -94,9 +82,6 @@
                                        width="152" align="center"
                                        inlineStyle="text-align:left;">
                               <af:outputText value="#{row.Nome}" id="ot3"/>
-                              <f:facet name="filter">
-                                <af:inputText label="Label 4" id="it16"/>
-                              </f:facet>
                             </af:column>
                           </af:table>
                           <af:popup id="inserirDadosOS"
@@ -116,7 +101,8 @@
                                                        layout="horizontal">
                                     <af:inputText label="Nome" id="it3"
                                                   value="#{pageFlowScope.os.nomeCliPesq}"
-                                                  autoSubmit="true"/>
+                                                  autoSubmit="true"
+                                                  shortDesc="NOME"/>
                                     <af:toolbar id="t7">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb6"
@@ -158,7 +144,8 @@
                                                        layout="horizontal">
                                     <af:inputText label="Modelo" id="it4"
                                                   value="#{pageFlowScope.os.modeloPesq}"
-                                                  autoSubmit="true"/>
+                                                  autoSubmit="true"
+                                                  shortDesc="MODELO"/>
                                     <af:toolbar id="t10">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb13"
@@ -206,7 +193,8 @@
                                                        layout="horizontal">
                                     <af:inputText label="Nome" id="it5"
                                                   autoSubmit="true"
-                                                  value="#{pageFlowScope.os.nomeMotPesq}"/>
+                                                  value="#{pageFlowScope.os.nomeMotPesq}"
+                                                  shortDesc="MOTORISTA"/>
                                     <af:toolbar id="t9">
                                       <af:commandToolbarButton text="Pesquisar"
                                                                id="ctb11"
@@ -283,12 +271,14 @@
                                                 value="#{pageFlowScope.os.nomeUsuario}"
                                                 columns="40" autoSubmit="true"
                                                 validator="#{pageFlowScope.os.validarNome}"
-                                                maximumLength="60" rows="1"/>
+                                                maximumLength="60" rows="1"
+                                                shortDesc="NOME"/>
                                   <af:spacer width="10" height="10" id="s7"/>
                                   <af:inputText label="Telefone" id="it2"
                                                 value="#{pageFlowScope.os.telUsuario}"
                                                 validator="#{pageFlowScope.os.validarTelefone}"
-                                                autoSubmit="true" columns="20">
+                                                autoSubmit="true" columns="20"
+                                                shortDesc="TELEFONE">
                                     <af:clientListener method="applyMask"
                                                        type="focus"/>
                                     <af:clientAttribute name="meioMask"
@@ -537,7 +527,7 @@
                                                    id="c14" width="80"
                                                    inlineStyle="text-align:center;"
                                                    align="center">
-                                          <af:outputText value="#{empty row.TotalHrExtDia  ? '--': row.TotalHrExtDia} "
+                                          <af:outputText value="#{empty row.TotalHrExtDia  ? '0': row.TotalHrExtDia} "
                                                          id="ot27"
                                                          inlineStyle="font-weight:#{empty row.TotalHrExtDia  ? '':'bold'} ;"/>
                                         </af:column>
@@ -556,7 +546,7 @@
                                                    id="c16" width="95"
                                                    inlineStyle="text-align:center;"
                                                    align="center">
-                                          <af:outputText value="#{empty row.TotalKmRodado ? '--': row.TotalKmRodado} "
+                                          <af:outputText value="#{empty row.TotalKmRodado ? '0': row.TotalKmRodado} "
                                                          id="ot28"
                                                          inlineStyle="font-weight:#{empty row.TotalKmRodado ? '': 'bold'} ;">
                                             <af:convertNumber groupingUsed="false"

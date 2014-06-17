@@ -226,7 +226,7 @@ public class VeiculoBean extends ValidaCampos {
                     refreshTable();
                     JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");        
                 } else {
-                    JSFUtils.addFacesWarningMessage("N\u00E3o foi poss\u00EDvel excluir!");
+                    JSFUtils.addFacesWarningMessage("Ve\u00EDculo vinculado a uma OS. Proibida a exclus\u00E3o.");
                 }
             }
         } catch (Exception e) {
