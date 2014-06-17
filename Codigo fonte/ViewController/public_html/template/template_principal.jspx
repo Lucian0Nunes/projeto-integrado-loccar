@@ -13,15 +13,7 @@
                                  layout="vertical"/>
           </f:facet>
           <f:facet name="start"/>
-          <f:facet name="end">
-            <af:toolbar id="pt_t1"
-                        inlineStyle="text-align:center; vertical-align:middle;">
-              <af:spacer width="80" height="10" id="pt_s1"/>
-              <af:commandToolbarButton text="Sair"
-                                       id="pt_ctb1"
-                                       action="#{autenticacaoBean.onLogout}"/>
-            </af:toolbar>
-          </f:facet>
+          <f:facet name="end"/>
         </af:panelStretchLayout>
       </f:facet>
       <f:facet name="second">
@@ -58,6 +50,13 @@
                         <af:panelList id="pt_pl2">
                           <af:goLink id="pt_gl5" text="Funcionários"
                                      destination="#{usuarioBean.contextPath}/faces/adf.task-flow?adf.tfId=funcionarios&amp;adf.tfDoc=/WEB-INF/funcionarios/funcionarios.xml"/>
+                        </af:panelList>
+                      </af:showDetailItem>
+                      <af:showDetailItem id="pt_sdi4" disclosed="true"
+                                         inflexibleHeight="50" text="Menu">
+                        <af:panelList id="pt_pl4">
+                          <af:commandLink text="Sair da aplicação" id="pt_cl1"
+                                          action="#{autenticacaoBean.onLogout}"/>
                         </af:panelList>
                       </af:showDetailItem>
                     </af:panelAccordion>

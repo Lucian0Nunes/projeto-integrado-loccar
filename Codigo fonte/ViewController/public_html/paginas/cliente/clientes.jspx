@@ -34,8 +34,7 @@
                           <af:panelSplitter id="ps1" splitterPosition="382">
                             <f:facet name="first">
                               <af:panelCollection id="pc1"
-                                                  styleClass="AFStretchWidth"
-                                                  featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
+                                                  styleClass="AFStretchWidth">
                                 <f:facet name="toolbar">
                                   <af:toolbar id="t2">
                                     <af:commandToolbarButton text="Inserir novo"
@@ -364,7 +363,7 @@
                                             <af:outputText value="#{bindings.Email.inputValue==null ? 'Não informado' : bindings.Email.inputValue}"
                                                            id="ot6"/>
                                           </af:panelLabelAndMessage>
-                                          <af:panelLabelAndMessage label="#{bindings.Endereco.hints.label}"
+                                          <af:panelLabelAndMessage label="Endereço"
                                                                    id="plam4"
                                                                    labelStyle="font-weight:bold; color:black;font-size:x-large; font-family:Verdana;">
                                             <af:outputText value="#{bindings.Endereco.inputValue==null ? 'Não informado' : bindings.Endereco.inputValue}"

@@ -29,8 +29,7 @@
                     <af:panelSplitter id="ps1" splitterPosition="417">
                       <f:facet name="first">
                         <af:panelCollection id="pc1"
-                                            styleClass="AFStretchWidth"
-                                            featuresOff="detach viewMenu statusBar secondaryToolbar afterToolbar menus wrapMenuItem showAsTopMenuItem">
+                                            styleClass="AFStretchWidth">
                           <f:facet name="toolbar">
                             <af:toolbar id="t2">
                               <af:commandToolbarButton text="Inserir novo"
