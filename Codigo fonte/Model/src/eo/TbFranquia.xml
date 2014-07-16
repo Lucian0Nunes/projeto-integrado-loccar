@@ -55,13 +55,6 @@
       <Attr Name="_DisplaySize" Value="16"/>
     </DesignTime>
   </Attribute>
-  <AccessorAttribute
-    Name="TbDiaria"
-    Association="eo.FkFranquia1Assoc"
-    AssociationEnd="eo.FkFranquia1Assoc.TbDiaria"
-    AssociationOtherEnd="eo.FkFranquia1Assoc.TbFranquia"
-    Type="oracle.jbo.RowIterator"
-    IsUpdateable="false"/>
   <Key
     Name="SysC0012571">
     <DesignTime>

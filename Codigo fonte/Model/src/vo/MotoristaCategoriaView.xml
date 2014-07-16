@@ -20,6 +20,10 @@
         ResId="vo.MotoristaCategoriaView_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="nome"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <SQLQuery>
     <![CDATA[SELECT B.ID_MOTORISTA,
   B.NOME,
@@ -178,6 +182,43 @@ WHERE A.ID_CAT = B.FK_CAT_HAB]]>
       <Attr Name="_DisplaySize" Value="15"/>
     </DesignTime>
   </ViewAttribute>
+  <ViewCriteria
+    Name="BuscarMotoristaVC"
+    ViewObjectName="vo.MotoristaCategoriaView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow27"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Nome"
+        ViewAttribute="Nome"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":nome"
+        GenerateIsNullClauseForBindVars="false"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ResourceBundle>
     <PropertiesBundle
       PropertiesFile="model.ModelBundle"/>
