@@ -6,53 +6,18 @@
          name="linkStyle">Direct</property>
    </OverallProperties>
    <View
-      id="View4">
+      id="View3">
       <property
-         name="activityId">view1</property>
+         name="activityId">paginaInicial</property>
       <property
-         name="page">/paginas/inicial/paginaInicial.jspx</property>
+         name="page">/paginaInicial.jspx</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>view1&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">97.90137</property>
-      <property
-         name="x">135.0</property>
-   </View>
-   <View
-      id="View7">
-      <property
-         name="activityId">login</property>
-      <property
-         name="page">/login.jspx</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>login&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>paginaInicial&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">98.37012</property>
+         name="y">291.79883</property>
       <property
-         name="x">-76.0</property>
+         name="x">-411.64258</property>
    </View>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase9"
-      from="View7"
-      to="View4">
-      <property
-         name="fromOutcome">inicio</property>
-      <property
-         name="sdm:polyPoints">R50,-35.0,98.01953,94.0,97.55078,L50</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase10"
-      from="View7"
-      to="View7">
-      <property
-         name="fromOutcome">erro</property>
-      <property
-         name="sdm:polyPoints">T44,-79.5,44.01953,-72.5,44.01953,T56</property>
-   </ControlFlowCase>
 </SDM>

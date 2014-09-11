@@ -4,9 +4,6 @@
                 Package="view.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="TbFuncionarioView1" RangeSize="25"
-              DataControl="AppModuleDataControl"
-              id="TbFuncionarioView1Iterator"/>
     <variableIterator id="variables">
       <variable Type="int" Name="autenticarUsuario_return" IsQueriable="false"
                 IsUpdateable="0"

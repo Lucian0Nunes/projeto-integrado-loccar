@@ -120,7 +120,6 @@
       <param-name>success_url</param-name>
       <param-value>/faces/paginaInicial.jspx</param-value>
     </init-param>
-    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -166,6 +165,9 @@
     <extension>swf</extension>
     <mime-type>application/x-shockwave-flash</mime-type>
   </mime-mapping>
+  <welcome-file-list>
+    <welcome-file>/paginaInicial.jspx</welcome-file>
+  </welcome-file-list>
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsff</url-pattern>

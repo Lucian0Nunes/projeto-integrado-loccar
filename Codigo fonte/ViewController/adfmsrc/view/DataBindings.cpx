@@ -10,16 +10,11 @@
           usageId="view_motoristasPageDef"/>
     <page path="/paginas/funcionarios/funcionario.jspx"
           usageId="view_funcionarioPageDef"/>
-    <page path="/paginas/auntenticacao/login.jsff" usageId="view_loginPageDef"/>
-    <page path="/login.jspx" usageId="view_loginPageDef1"/>
     <page path="/template/template_principal.jspx"
           usageId="view_template_principalPageDef"/>
     <page path="/paginas/Ordem_Serviços/osPrincipal.jspx"
           usageId="view_osPrincipalPageDef"/>
-    <page path="/paginas/Ordem_Serviços/novaOs.jspx" usageId="view_novaOsPageDef"/>
-    <page path="/paginas/inicial/paginaInicial.jspx"
-          usageId="view_paginaInicialPageDef"/>
-    <page path="/paginaInicial.jspx" usageId="view_paginaInicialPageDef1"/>
+    <page path="/paginaInicial.jspx" usageId="view_paginaInicialPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="view_clientesPageDef" path="paginas.cliente.clientesPageDef"/>
@@ -28,16 +23,11 @@
           path="paginas.motoristas.motoristasPageDef"/>
     <page id="view_funcionarioPageDef"
           path="paginas.funcionarios.funcionarioPageDef"/>
-    <page id="view_loginPageDef" path="paginas.auntenticacao.loginPageDef"/>
-    <page id="view_loginPageDef1" path="view.pageDefs.loginPageDef"/>
     <page id="view_template_principalPageDef"
           path="template.template_principalPageDef"/>
     <page id="view_osPrincipalPageDef"
           path="paginas.Ordem_Serviços.osPrincipalPageDef"/>
-    <page id="view_novaOsPageDef" path="view.pageDefs.novaOsPageDef"/>
     <page id="view_paginaInicialPageDef"
-          path="paginas.inicial.paginaInicialPageDef"/>
-    <page id="view_paginaInicialPageDef1"
           path="view.pageDefs.paginaInicialPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
@@ -47,14 +37,6 @@
                      SupportsRangesize="true" SupportsResetState="true"
                      SupportsSortCollection="true"
                      Configuration="AppModuleLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="ADF11gPTSAppModuleDataControl" Package="am"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
-                     SupportsTransactions="true" SupportsFindMode="true"
-                     SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true"
-                     Configuration="ADF11gPTSAppModuleLocal"
-                     syncMode="Immediate"
                      xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
   </dataControlUsages>
 </Application>

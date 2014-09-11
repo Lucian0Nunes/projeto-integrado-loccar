@@ -27,7 +27,7 @@ public class AutenticarUsuarioBean {
     public String onLogout() {        
           ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
           HttpServletResponse response = (HttpServletResponse) ectx.getResponse();
-          String url = ectx.getRequestContextPath() + "/adfAuthentication?logout=true&end_url=/faces/paginas/inicial/paginaInicial.jspx";
+          String url = ectx.getRequestContextPath() + "/adfAuthentication?logout=true&end_url=/faces/paginaInicial.jspx";
           HttpSession session = (HttpSession) ectx.getSession(false);
           //close session
           session.invalidate();
