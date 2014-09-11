@@ -7,7 +7,8 @@
   <f:view>
     <af:document id="d1">
       <af:form id="f1">
-        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1">
+        <af:pageTemplate viewId="/template/template_principal.jspx" id="pt1"
+                         value="#{bindings.pt1}">
           <f:facet name="corpo">
             <af:panelStretchLayout id="psl1">
               <f:facet name="bottom"/>
@@ -25,10 +26,10 @@
                          
                       </p>
                       <p>
-                         
+                         Página Inicial da aplicação
                       </p>
                       <p>
-                        <af:outputText value="Pacheco" id="ot1"
+                        <af:outputText value="Bem vindo!" id="ot1"
                                        inlineStyle="font-size:xx-large; font-family:Pristina; font-weight:bold; border-color:Gray;">
                           <p>
                              
