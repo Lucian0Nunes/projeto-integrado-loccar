@@ -11,12 +11,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 
-public abstract class ValidaCampos {
+public abstract class ValidarUtil {
     
     //Essa classe só poderá conter métodos de validação que não necessitem
     //de um iterator para buscar informações no banco, Ex: verificar se um CPF já consta na base. 
     //
-    public ValidaCampos() {
+    public ValidarUtil() {
         super();
     }
     
@@ -186,11 +186,11 @@ public abstract class ValidaCampos {
     }
     
     public String gerarMD5(String senha) throws NoSuchAlgorithmException {  
-            MessageDigest md = MessageDigest.getInstance("MD5");  
-            BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
-            String crypto = hash.toString(16);  
-            if (crypto.length() %2 != 0)  
-                crypto = "0" + crypto;  
-            return crypto;  
-        }
+        MessageDigest md = MessageDigest.getInstance("MD5");  
+        BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
+        String crypto = hash.toString(16);  
+        if (crypto.length() %2 != 0)  
+            crypto = "0" + crypto;  
+        return crypto;  
+    }
 }

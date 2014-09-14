@@ -88,6 +88,43 @@ public final class GenericTableSelectionHandler {
         } //end if
     } //end method
     
+    public static void marcarUltimaLinha(final RichTable tabela) {
+        marcarUltimaLinha(tabela, false);
+    } //end method
+    
+    public static void marcarUltimaLinha(final RichTable tabela, final boolean ignorePartialTrigger) {
+        if (tabela != null) {
+            CollectionModel tableModel;
+            JUCtrlHierBinding adfTableBinding;
+            DCIteratorBinding iterator;
+            Row last;
+            List lskey;
+            RowKeySetImpl newSelection;
+            
+            tableModel = (CollectionModel) tabela.getValue();
+            adfTableBinding = (JUCtrlHierBinding) tableModel.getWrappedData();
+            iterator = adfTableBinding.getDCIteratorBinding();
+            
+            if (iterator != null && iterator.getAllRowsInRange() != null && iterator.getAllRowsInRange().length > 0) {
+                lskey = new ArrayList();
+                newSelection = new RowKeySetImpl();
+                
+                last = iterator.getRowSetIterator().last();
+                
+                lskey.add(last.getKey());
+                newSelection.add(lskey);
+                
+                tabela.setActiveRowKey(lskey);
+                tabela.setDisplayRowKey(lskey);
+                tabela.setSelectedRowKeys(newSelection);
+                
+                if (!ignorePartialTrigger) {
+                    AdfFacesContext.getCurrentInstance().addPartialTarget(tabela);
+                } //end if
+            } //end if
+        } //end if
+    } //end method
+    
     public static void setFocusOnLine(String iteratorName, RichTable tabela, String attribute2verify, String attributeValue, UIXComponentBase component2focus) {
         DCIteratorBinding iterator;
         RowSetIterator rsi;

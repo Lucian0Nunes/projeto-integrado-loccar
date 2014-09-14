@@ -4,7 +4,7 @@ package br.com.locCar.bean.motorista;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-import br.com.locCar.util.ValidaCampos;
+import br.com.locCar.util.ValidarUtil;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -27,10 +27,11 @@ import oracle.jbo.ViewObject;
 import oracle.jbo.domain.Number;
 
 
-public class MotoristaBean extends ValidaCampos {
+public class MotoristaBean extends ValidarUtil {
     
     private static final String EL_EXP_MOTORISTA_CURR_ROW = "#{bindings.MotoristaCategoriaView1.currentRow}";
     private static final String EL_EXP_CATEGORIA_CURR_ROW = "#{bindings.TbCatHabView1.currentRow}";
+    private static final String EMPTY = "";
 
     private String vlNome;
     private String vlCpf;
@@ -47,17 +48,16 @@ public class MotoristaBean extends ValidaCampos {
 
     public void chamadaPopupInclusao(PopupFetchEvent popupFetchEvent) {
         refreshComboCategoria();
-        this.setVlNome("");
-        this.setVlCpf("");
-        this.setVlTelefone("");
-        this.setVlEmail("");
-        this.setVlEndereco("");
+        this.setVlNome(EMPTY);
+        this.setVlCpf(EMPTY);
+        this.setVlTelefone(EMPTY);
+        this.setVlEmail(EMPTY);
+        this.setVlEndereco(EMPTY);
     }
 
     public void inserirNovoMotorista(ActionEvent actionEvent) {
 
-        RowSetIterator iteratorMotorista =
-            ADFUtils.findIterator("TbMotoristaView1Iterator").getRowSetIterator();
+        RowSetIterator iteratorMotorista = ADFUtils.findIterator("TbMotoristaView1Iterator").getRowSetIterator();
 
         Row rw = (Row)ADFUtils.evaluateEL(EL_EXP_CATEGORIA_CURR_ROW);
 
@@ -93,22 +93,18 @@ public class MotoristaBean extends ValidaCampos {
     public void chamadaPopupEdicao(PopupFetchEvent popupFetchEvent) throws Exception {
         try {
             
-            DCIteratorBinding it =
-                ADFUtils.findIterator("TbMotoristaView1Iterator");
+            DCIteratorBinding it = ADFUtils.findIterator("TbMotoristaView1Iterator");
             ViewObject view = it.getViewObject();
             view.reset();
             view.clearCache();
-            view.setWhereClause("ID_MOTORISTA = " +
-                                motoristaSelecionado().getAttribute("IdMotorista"));
+            view.setWhereClause("ID_MOTORISTA = " + motoristaSelecionado().getAttribute("IdMotorista"));
             view.executeQuery();
             
-            Number idCategoria =
-                (Number)motoristaSelecionado().getAttribute("IdCat");
+            Number idCategoria = (Number)motoristaSelecionado().getAttribute("IdCat");
          
             Number idCat;
 
-            RowSetIterator iteratorCategoria =
-                ADFUtils.findIterator("TbCatHabView1Iterator").getRowSetIterator();
+            RowSetIterator iteratorCategoria = ADFUtils.findIterator("TbCatHabView1Iterator").getRowSetIterator();
 
             Row[] linhas = iteratorCategoria.getAllRowsInRange();
 

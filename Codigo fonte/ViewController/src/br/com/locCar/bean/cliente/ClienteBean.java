@@ -1,13 +1,10 @@
 package br.com.locCar.bean.cliente;
 
 
-import br.com.locCar.bean.ordemDeServico.OrdemDeServico;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-import br.com.locCar.util.ValidaCampos;
-
-import java.util.List;
+import br.com.locCar.util.ValidarUtil;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -31,11 +28,12 @@ import oracle.jbo.ViewObject;
 import oracle.jbo.domain.Number;
 
 
-public class ClienteBean extends ValidaCampos {
+public class ClienteBean extends ValidarUtil {
     
     private static ADFLogger logger = ADFLogger.createADFLogger(ClienteBean.class);
     
     private static final String EL_EXP_CLIENTE_CURR_ROW = "#{bindings.TbClienteView1.currentRow}";
+    private static final String EMPTY = "";
 
     private String escolha;
     private String nome;
@@ -50,25 +48,26 @@ public class ClienteBean extends ValidaCampos {
     private String vlEmail;
     private String vlEndereco;
     
+    
 
     public ClienteBean() {
+        super();
     }
 
     public void chamadaPopupInclusao(PopupFetchEvent popupFetchEvent) {
         labelEMaskCpf();
-        this.setVlCpfCnpj("");
-        this.setVlNome("");
-        this.setVlTelefone("");
-        this.setVlEndereco("");
-        this.setVlEmail("");
+        this.setVlCpfCnpj(EMPTY);
+        this.setVlNome(EMPTY);
+        this.setVlTelefone(EMPTY);
+        this.setVlEndereco(EMPTY);
+        this.setVlEmail(EMPTY);
     }
 
 
-    public void incluirNovo(ActionEvent actionEvent) throws Exception {
+    public void incluirNovo(ActionEvent actionEvent){
         try {
-            RowSetIterator iteratorCliente =
-                ADFUtils.findIterator("TbClienteView1Iterator").getRowSetIterator();
-            Row criarRow = iteratorCliente.createRow();
+            final RowSetIterator iteratorCliente = ADFUtils.findIterator("TbClienteView1Iterator").getRowSetIterator();
+            final Row criarRow = iteratorCliente.createRow();
             criarRow.setNewRowState(Row.STATUS_INITIALIZED);
 
             criarRow.setAttribute("Nome", this.getVlNome());
@@ -91,35 +90,30 @@ public class ClienteBean extends ValidaCampos {
             JSFUtils.addFacesConfirmationMessage("Dados gravados com sucesso!");
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage("Não foi possível gravar!");
-            throw e;
-        }
-
-    }
+            logger.warning("Erro ao incluir ==>> "+ e.getMessage());
+        }//end try... catch
+    }//end method
 
     public void cancelarNovo(ActionEvent actionEvent) {
         popupInserir.cancel();
-    }
+    }//end method
 
     public void chamadaPopupEditar(PopupFetchEvent popupFetchEvent) {
-        Row row = (Row)ADFUtils.evaluateEL(EL_EXP_CLIENTE_CURR_ROW);
+        final Row row = (Row)ADFUtils.evaluateEL(EL_EXP_CLIENTE_CURR_ROW);
         String valor = (String)row.getAttribute("CpfCnpj");
         valor = valor.replaceAll("[^0-9]", "");
         if (valor.length() == 11) {
             labelEMaskCpf();
         } else {
             labelEMaskCnpj();
+        }//end if
+    }//end method
 
-        }
-    }
-
-    public void gravarEdicao(ActionEvent actionEvent) throws Exception {
-        try {
-            
-            Row rw =
-                    ADFUtils.findIterator("TbClienteView1Iterator").getCurrentRow();            
+    public void gravarEdicao(ActionEvent actionEvent){
+        try {        
+            final Row rw = ADFUtils.findIterator("TbClienteView1Iterator").getCurrentRow();            
 
             ADFUtils.executeBindingOperation("CommitTbCliente");    
-            
             refreshTable();
             GenericTableSelectionHandler.setFocusOnLine("TbClienteView1Iterator",
                                                             gridCliente,
@@ -127,28 +121,25 @@ public class ClienteBean extends ValidaCampos {
                                                             rw.getAttribute("IdCliente").toString(),
                                                             null);
                               
-            JSFUtils.addPartialTriggerWithIdFromUiRoot("t1");
-            JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl3");
-
+            JSFUtils.addPartialTriggerWithIdFromUiRoot("t1","pfl3");
             popupEditar.cancel();
-
             JSFUtils.addFacesConfirmationMessage("Dados alterados com sucesso!");
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage("Não foi possível gravar os dados alterados!");
-            throw e;
-        }
-    }
+            logger.warning("Erro ao gravar ==>> "+ e.getMessage());
+        }//end try... catch
+    }//end method
 
     public void cancelarEdicao(ActionEvent actionEvent) {
         popupEditar.cancel();
-    }
+    }//end method
 
 
-    public void excluirCliente(DialogEvent dialogEvent) throws Exception {
+    public void excluirCliente(DialogEvent dialogEvent){
         try {
             Row rw = ADFUtils.findIterator("TbClienteView1Iterator").getCurrentRow();            
             if(rw != null){
-                Number id = (Number)rw.getAttribute("IdCliente");                
+                final Number id = (Number)rw.getAttribute("IdCliente");                
                 if(podeExcluir(id)){
                     ADFUtils.executeBindingOperation("Delete");
                     ADFUtils.executeBindingOperation("CommitTbCliente");
@@ -156,74 +147,69 @@ public class ClienteBean extends ValidaCampos {
                     JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");        
                 } else {
                     JSFUtils.addFacesWarningMessage("Cliente vinculado a uma OS. Proibida a exclus\u00E3o!");
-                }        
-            }
+                }//end if        
+            }//end if
         } catch (Exception e) {
             logger.severe("Erro ao excluir ==>> "+ e.getMessage());
-        }
-    }
+        }//end try... catch
+    }//end  method
     
-    public Boolean podeExcluir(Number id) {
-        DCIteratorBinding it = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator");
-        ViewObject view = it.getViewObject();
+    public Boolean podeExcluir(final Number id) {
+        final DCIteratorBinding it = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator");
+        final ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
         view.setWhereClause("FK_CLIENTE = " + id);
         view.executeQuery();
-        RowSetIterator iterator = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator").getRowSetIterator();
-        Row rows = iterator.getCurrentRow();
+        final RowSetIterator iterator = ADFUtils.findIterator("TbOrdemDeServicoView1Iterator").getRowSetIterator();
+        final Row rows = iterator.getCurrentRow();
         if (rows == null) {
             return true;            
         } else {
             return false;    
-        }
+        }//end if
     } //end
     
     public void refreshTable() {
-        DCIteratorBinding dcIter =
-            ADFUtils.findIterator("TbClienteView1Iterator");
+        final DCIteratorBinding dcIter = ADFUtils.findIterator("TbClienteView1Iterator");
         dcIter.executeQuery();
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.getGridCliente());
         this.getGridCliente().processUpdates(FacesContext.getCurrentInstance());
         //Este comando atualiza o toolbar que contem os bot�es, (T2) � o id do toolbar
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("t2");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl3");
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("t2","pfl3");
     }
 
     public Boolean getHabilitaBotoes() {
         Row rw = (Row)ADFUtils.evaluateEL(EL_EXP_CLIENTE_CURR_ROW);
         if (rw == null) {
             return false;
-        }
+        }//end if
         return true;
-    }
+    }//end method
 
 
     public void setaMaskCpfCnpj(ValueChangeEvent vce) {
-        String valor = (String)vce.getNewValue();
-        if (valor.equals("CPF")) {
+        final String valor = (String)vce.getNewValue();
+        if ("CPF".equals(valor)) {
             labelEMaskCpf();
-
         } else {
             labelEMaskCnpj();
-        }
-    }
+        }//end if
+    }//end method
 
 
     public void validaCpfECnpj(FacesContext facesContext,
                                UIComponent uIComponent, Object object) {
         String opcao = (String)object;
 
-        DCIteratorBinding it =
-            ADFUtils.findIterator("ExisteCpfOuCnjp1Iterator");
+        DCIteratorBinding it = ADFUtils.findIterator("ExisteCpfOuCnjp1Iterator");
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
         view.setNamedWhereClauseParam("cpf", opcao);
         view.executeQuery();
 
-        RowIterator rsi =
-            ADFUtils.findIterator("ExisteCpfOuCnjp1Iterator").getRowSetIterator();
+        final RowIterator rsi = ADFUtils.findIterator("ExisteCpfOuCnjp1Iterator").getRowSetIterator();
 
         Row row = null;
 
@@ -233,53 +219,46 @@ public class ClienteBean extends ValidaCampos {
             if ((opcao.length() == 11) && (this.validaCPF(opcao) == true)) {
                 row = rsi.getCurrentRow();
                 if (row != null) {
-                    FacesMessage msg =
-                        new FacesMessage("CPF inv\u00E1lido", "CPF informado ja consta na base");
+                    final FacesMessage msg =  new FacesMessage("CPF inv\u00E1lido", "CPF informado ja consta na base");
                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                     throw new ValidatorException(msg);
                 }
             } else {
-                FacesMessage msg =
-                    new FacesMessage("CPF inv\u00E1lido", "Informe um CPF \nv\u00E1lido");
+                FacesMessage msg = new FacesMessage("CPF inv\u00E1lido", "Informe um CPF \nv\u00E1lido");
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(msg);
-            }
+            }//end if
 
         } else {
             if ((opcao.length() == 14) && (this.validaCnpj(opcao) == true)) {
                 row = rsi.getCurrentRow();
                 if (row != null) {
-                    FacesMessage msg =
-                        new FacesMessage("CNPJ inv\u00E1lido", "CNPJ informado ja consta na base");
+                    FacesMessage msg = new FacesMessage("CNPJ inv\u00E1lido", "CNPJ informado ja consta na base");
                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                     throw new ValidatorException(msg);
-                }
+                }//end if
             } else {
-                FacesMessage msg =
-                    new FacesMessage("CNPJ inv\u00E1lido", "Informe um CNPJ \nv\u00E1lido");
+                FacesMessage msg = new FacesMessage("CNPJ inv\u00E1lido", "Informe um CNPJ \nv\u00E1lido");
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(msg);
-            }
-        }
-    }
+            }//end if
+        }//end if
+    }//end method
 
 
     public void labelEMaskCpf() {
         this.setNome("Nome completo");
         this.setEscolha("CPF");
         this.setMascara("fixed.cpf");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("it1");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("it2");
-
-    }
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("it1","it2");
+    }//end method
 
     public void labelEMaskCnpj() {
         this.setNome("Raz\u00E3o Social");
         this.setEscolha("CNPJ");
         this.setMascara("fixed.cnpj");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("it1");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("it2");
-    }
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("it1","it2");
+    }//end mehtod
 
     public void setGridCliente(RichTable gridCliente) {
         this.gridCliente = gridCliente;
