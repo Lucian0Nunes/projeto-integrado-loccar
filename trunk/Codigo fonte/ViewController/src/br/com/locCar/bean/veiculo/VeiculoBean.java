@@ -5,7 +5,7 @@ import br.com.locCar.bean.cliente.ClienteBean;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-import br.com.locCar.util.ValidaCampos;
+import br.com.locCar.util.ValidarUtil;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -38,7 +38,7 @@ import oracle.jbo.ViewObject;
 import oracle.jbo.domain.Number;
 
 
-public class VeiculoBean extends ValidaCampos {
+public class VeiculoBean extends ValidarUtil {
     private static ADFLogger logger = ADFLogger.createADFLogger(VeiculoBean.class);
     
     private static final String EL_EXP_VEICULO_CURR_ROW = "#{bindings.VeiculoMMView1.currentRow}";

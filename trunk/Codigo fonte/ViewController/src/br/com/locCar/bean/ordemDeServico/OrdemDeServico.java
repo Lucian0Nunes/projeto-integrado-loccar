@@ -4,7 +4,7 @@ package br.com.locCar.bean.ordemDeServico;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-import br.com.locCar.util.ValidaCampos;
+import br.com.locCar.util.ValidarUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +42,7 @@ import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 
 
-public class OrdemDeServico extends ValidaCampos {
+public class OrdemDeServico extends ValidarUtil {
 
     private static ADFLogger logger = ADFLogger.createADFLogger(OrdemDeServico.class);
 
@@ -132,6 +132,7 @@ public class OrdemDeServico extends ValidaCampos {
         } else {
             setModeloVeiculo(null);
         } //end if else
+        
         habitarInserirDiaria();
         habilitarEdicaoDiaria();
         JSFUtils.addPartialTriggerWithIdFromUiRoot("t11");
@@ -1102,7 +1103,9 @@ public class OrdemDeServico extends ValidaCampos {
                 getDtHrChegada().compareTo(diferenca) == 1) {
                 String result = subtrairHoras(diferenca, getDtHrChegada());
                 setTotalHrsDia(result);
-            } //end if
+            } else {
+                setTotalHrsDia(null); 
+            }//end if
         } else {
             setTotalHrsDia(null);
         }
@@ -1118,10 +1121,12 @@ public class OrdemDeServico extends ValidaCampos {
                 Number result =
                     new Number(getKmChegada().intValue() - diferenca);
                 setTotalKmDia(result);
-            } //end if
+            } else {
+                setTotalKmDia(null);
+            }
         } else {
             setTotalKmDia(null);
-        }
+        }//end if
     } //end
 
     public String subtrairHoras(Timestamp inicio, Timestamp fim) {

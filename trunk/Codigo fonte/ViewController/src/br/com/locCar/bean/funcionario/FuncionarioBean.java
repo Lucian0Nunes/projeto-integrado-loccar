@@ -1,10 +1,11 @@
 package br.com.locCar.bean.funcionario;
 
 
+import br.com.locCar.bean.cliente.ClienteBean;
 import br.com.locCar.util.ADFUtils;
 import br.com.locCar.util.GenericTableSelectionHandler;
 import br.com.locCar.util.JSFUtils;
-import br.com.locCar.util.ValidaCampos;
+import br.com.locCar.util.ValidarUtil;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -15,6 +16,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.validator.ValidatorException;
 
 import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.share.logging.ADFLogger;
 import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.data.RichTable;
 import oracle.adf.view.rich.context.AdfFacesContext;
@@ -28,8 +30,12 @@ import oracle.jbo.ViewObject;
 import oracle.jbo.domain.Number;
 
 
-public class FuncionarioBean extends ValidaCampos{
+public class FuncionarioBean extends ValidarUtil{
+    
+    private static ADFLogger logger = ADFLogger.createADFLogger(FuncionarioBean.class);
+    
     private static final String EL_EXP_FUNCIONARIO_CURR_ROW = "#{bindings.TbFuncionarioView1.currentRow}";
+    private static final String EMPTY = "";
     private String vlNome;
     private String vlCpf;
     private String vlTelefone;
@@ -47,17 +53,16 @@ public class FuncionarioBean extends ValidaCampos{
 
     public void chamadaPopupInclusao(PopupFetchEvent popupFetchEvent) {
         this.setVlPerfil("2");
-        this.setVlNome("");
-        this.setVlCpf("");
-        this.setVlTelefone("");
-        this.setVlEmail("");
-        this.setVlEndereco("");
-        this.setVlSna("");
+        this.setVlNome(EMPTY);
+        this.setVlCpf(EMPTY);
+        this.setVlTelefone(EMPTY);
+        this.setVlEmail(EMPTY);
+        this.setVlEndereco(EMPTY);
+        this.setVlSna(EMPTY);
     }
 
     public void inserirNovoFuncionario(ActionEvent actionEvent) {
-        RowSetIterator iteratorFuncionario =
-            ADFUtils.findIterator("TbFuncionarioView1Iterator").getRowSetIterator();
+        RowSetIterator iteratorFuncionario = ADFUtils.findIterator("TbFuncionarioView1Iterator").getRowSetIterator();
 
         Row criarRow = iteratorFuncionario.createRow();
         criarRow.setNewRowState(Row.STATUS_INITIALIZED);
@@ -78,8 +83,9 @@ public class FuncionarioBean extends ValidaCampos{
             System.out.println("Senha: " + gerarMD5(sn));
             criarRow.setAttribute("Senha", gerarMD5(sn));
         } catch (NoSuchAlgorithmException e) {
+            logger.warning(e.getMessage());
             e.printStackTrace();
-        }
+        }//end try... catch
         
         criarRow.setAttribute("TbPerfilIdPerfil", this.getVlPerfil().toString());
 
@@ -92,7 +98,7 @@ public class FuncionarioBean extends ValidaCampos{
                                                     null);  
         popupInserir.cancel();
         JSFUtils.addFacesConfirmationMessage("Dados gravados com sucesso!");
-    }
+    }//end method
     
     
     public void cancelarRegistro(ActionEvent actionEvent) {
@@ -106,14 +112,12 @@ public class FuncionarioBean extends ValidaCampos{
             this.setVlPerfil("1");
         } else {
             this.setVlPerfil("2");
-
-        }
-    }
+        }//end if
+    }//end method
     
     public void gravarEdicao(ActionEvent actionEvent) throws Exception {
         try {            
-            Row rw =
-                    ADFUtils.findIterator("TbFuncionarioView1Iterator").getCurrentRow();
+            Row rw = ADFUtils.findIterator("TbFuncionarioView1Iterator").getCurrentRow();
             rw.setAttribute("TbPerfilIdPerfil", this.getVlPerfil().toString());
 
             ADFUtils.executeBindingOperation("CommitTbFuncionario");    
@@ -125,21 +129,21 @@ public class FuncionarioBean extends ValidaCampos{
                                                             rw.getAttribute("IdFuncionario").toString(),
                                                             null);
                               
-            JSFUtils.addPartialTriggerWithIdFromUiRoot("t1");
-            JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl3");
+            JSFUtils.addPartialTriggerWithIdFromUiRoot("t1","pfl3");
             popupEditar.cancel();
             JSFUtils.addFacesConfirmationMessage("Dados alterados com sucesso!");
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage("Não foi possível gravar os dados alterados!");
-            throw e;
-        }
-    }
+            logger.warning(e.getMessage());
+            e.printStackTrace();
+        }//end try... catch
+    }//end
     
     public void cancelarEdicao(ActionEvent actionEvent) {
         popupEditar.cancel();
-    }
+    }//end method
     
-    public void excluirFuncionario(DialogEvent dialogEvent) throws Exception {
+    public void excluirFuncionario(DialogEvent dialogEvent){
         try {
             ADFUtils.executeBindingOperation("Delete");
             ADFUtils.executeBindingOperation("CommitTbFuncionario");
@@ -147,44 +151,40 @@ public class FuncionarioBean extends ValidaCampos{
             JSFUtils.addFacesInformationMessage("Exclu\u00EDdo com sucesso!");
         } catch (Exception e) {
             JSFUtils.addFacesErrorMessage("Não foi possível excluir");
-            throw e;
-        }
-
-    }
+            logger.warning(e.getMessage());
+            e.printStackTrace();
+        }//end try... catch
+    }//end method
 
     public void refreshTable() {
-        DCIteratorBinding dcIter =
-            ADFUtils.findIterator("TbFuncionarioView1Iterator");
+        DCIteratorBinding dcIter = ADFUtils.findIterator("TbFuncionarioView1Iterator");
         dcIter.executeQuery();
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.getGridFuncionarios());
         this.getGridFuncionarios().processUpdates(FacesContext.getCurrentInstance());
         //Este comando atualiza o toolbar que contem os bot�es, (T2) � o id do toolbar
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("t2");
-        JSFUtils.addPartialTriggerWithIdFromUiRoot("pfl3");
-    }
+        JSFUtils.addPartialTriggerWithIdFromUiRoot("t2","pfl3");
+    }//end method
 
     public Boolean getHabilitaBotoes() {
         Row rw = (Row)ADFUtils.evaluateEL(EL_EXP_FUNCIONARIO_CURR_ROW);
         if (rw == null) {
             return false;
-        }
+        }//end if
         return true;
-    }
+    }//end method
     
     public void verficarValidarCpf(FacesContext facesContext,
                                    UIComponent uIComponent, Object object) {
         String opcao = (String)object;
 
-        DCIteratorBinding it =
-            ADFUtils.findIterator("ExisteCpfTbFuncionario1Iterator");
+        DCIteratorBinding it = ADFUtils.findIterator("ExisteCpfTbFuncionario1Iterator");
         ViewObject view = it.getViewObject();
         view.reset();
         view.clearCache();
         view.setNamedWhereClauseParam("cpf", opcao);
         view.executeQuery();
 
-        RowIterator rsi =
-            ADFUtils.findIterator("ExisteCpfTbFuncionario1Iterator").getRowSetIterator();
+        RowIterator rsi = ADFUtils.findIterator("ExisteCpfTbFuncionario1Iterator").getRowSetIterator();
 
         Row row = null;
 
@@ -193,19 +193,16 @@ public class FuncionarioBean extends ValidaCampos{
         if (this.validaCPF(opcao) == true) {
             row = rsi.getCurrentRow();
             if (row != null) {
-                FacesMessage msg =
-                    new FacesMessage("CPF inv\u00E1lido", "CPF informado ja consta na base");
+                FacesMessage msg = new FacesMessage("CPF inv\u00E1lido", "CPF informado ja consta na base");
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(msg);
-            }
+            }//end if
         } else {
-            FacesMessage msg =
-                new FacesMessage("CPF inv\u00E1lido", "Informe um CPF \nv\u00E1lido");
+            FacesMessage msg = new FacesMessage("CPF inv\u00E1lido", "Informe um CPF \nv\u00E1lido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
-        }
-
-    }
+        }//end if
+    }//end method
     
     public void setPopupInserir(RichPopup popupInserir) {
         this.popupInserir = popupInserir;
