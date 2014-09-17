@@ -1,0 +1,16 @@
+#labels Critériaprogramaticamente
+    private Row[] getCnae(FenixAppModuleImpl appModule, Number idProjeto) {
+        ViewObjectImpl view = appModule.getTbFnxProjetoCnaeView1();
+        view.reset();
+        ViewCriteria vc = view.createViewCriteria();
+        ViewCriteriaRow vcRow = vc.createViewCriteriaRow();
+        vcRow.setAttribute("IdProjeto", idProjeto);
+        vcRow.setAttribute("InStatusProjetoCnae", "A");
+        vc.addRow(vcRow);
+        view.applyViewCriteria(vc);
+        view.setRangeSize(-1);
+        view.executeQuery();
+        Row[] linhas = view.getAllRowsInRange();
+        view.applyViewCriteria(null);
+        return linhas;
+    }
