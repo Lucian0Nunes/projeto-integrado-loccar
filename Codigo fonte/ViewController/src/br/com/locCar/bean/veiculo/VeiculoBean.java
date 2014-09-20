@@ -12,7 +12,10 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -158,8 +161,8 @@ public class VeiculoBean extends ValidarUtil {
     }
 
     public void gravarEdicao(ActionEvent actionEvent) throws Exception {
-        try {
-            DCIteratorBinding it =
+        try {            
+          /*  DCIteratorBinding it =
                 ADFUtils.findIterator("TbVeiculoView1Iterator");
             ViewObject view = it.getViewObject();
             view.reset();
@@ -169,8 +172,13 @@ public class VeiculoBean extends ValidarUtil {
             view.executeQuery();
 
             Row row =
-                ADFUtils.findIterator("TbVeiculoView1Iterator").getCurrentRow();
-
+                ADFUtils.findIterator("TbVeiculoView1Iterator").getCurrentRow(); */
+            
+            final Map<String,Object> param = new HashMap<String,Object>();
+            param.put("IdVeiculo", veiculoSelecionado().getAttribute("IdVeiculo"));
+            
+            Row[] rows = ADFUtils.findViewCritByIterAndMap("TbVeiculoView1Iterator", param);
+            Row row  = rows[0];
             row.setAttribute("Ano", getVlAno());
             row.setAttribute("Placa", getVlPlaca());
             row.setAttribute("Proprietario", getVlProprietario());

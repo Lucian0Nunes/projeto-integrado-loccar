@@ -3,6 +3,7 @@ package br.com.locCar.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -28,6 +29,8 @@ import oracle.binding.OperationBinding;
 import oracle.jbo.ApplicationModule;
 import oracle.jbo.Key;
 import oracle.jbo.Row;
+import oracle.jbo.ViewCriteria;
+import oracle.jbo.ViewCriteriaRow;
 import oracle.jbo.ViewObject;
 import oracle.jbo.uicli.binding.JUCtrlValueBinding;
 
@@ -138,6 +141,41 @@ public class ADFUtils {
      */
     public static AttributeBinding findControlBinding(String attributeName) {
         return findControlBinding(getBindingContainer(), attributeName);
+    }
+    
+    public static Row[] findViewCritByIterAndMap(final String iter, Map<String, Object> value){
+        DCIteratorBinding iterator;
+        ViewObject view;
+        ViewCriteria vc;
+        ViewCriteriaRow vcRow;
+        
+        iterator = ADFUtils.findIterator(iter);
+        
+        if(Bean.isNull(iterator)){
+            throw new RuntimeException("Iterator '" + iter + "' not found");    
+        }//end if
+        
+        if(Bean.isNull(value) && value.isEmpty()){
+            throw new RuntimeException("Mapa de parametros nulo ou vazio");    
+        }//end if
+        view =  iterator.getViewObject();
+        view.clearCache();
+        view.reset();
+        vc = view.createViewCriteria();
+        vcRow =  vc.createViewCriteriaRow();
+
+        for(final Entry<String, Object> entry : value.entrySet()){        
+            vcRow.setAttribute(entry.getKey(), entry.getValue());         
+        }//end for
+
+        if(Bean.isNotNull(vcRow)){
+            vc.add(vcRow);
+            view.applyViewCriteria(vc);
+            view.executeQuery();
+            view.applyViewCriteria(null);
+        }//end if
+  
+        return view.getAllRowsInRange();
     }
 
     /**
